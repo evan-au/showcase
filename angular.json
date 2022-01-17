@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projects": {
+    "showcase-app": {
+      "projectType": "application",
+      "root": "apps/showcase-app",
+      "sourceRoot": "apps/showcase-app/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/showcase-app",
+            "index": "apps/showcase-app/src/index.html",
+            "main": "apps/showcase-app/src/main.ts",
+            "polyfills": "apps/showcase-app/src/polyfills.ts",
+            "tsConfig": "apps/showcase-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/showcase-app/src/favicon.ico",
+              "apps/showcase-app/src/assets"
+            ],
+            "styles": ["apps/showcase-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/showcase-app/src/environments/environment.ts",
+                  "with": "apps/showcase-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "showcase-app:build:production"
+            },
+            "development": {
+              "browserTarget": "showcase-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "showcase-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/showcase-app/src/**/*.ts",
+              "apps/showcase-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/showcase-app"],
+          "options": {
+            "jestConfig": "apps/showcase-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "showcase-app-e2e": {
+      "root": "apps/showcase-app-e2e",
+      "sourceRoot": "apps/showcase-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/showcase-app-e2e/cypress.json",
+            "devServerTarget": "showcase-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "showcase-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/showcase-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["showcase-app"]
+    }
+  }
+}
