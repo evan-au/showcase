@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'showcase-ws-root',
+  selector: 'showcase-app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
