@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ECommerceFacade } from '..';
+import { ECommerceFacade } from './application/e-commerce.facade';
 
 @NgModule({
   imports: [CommonModule],
