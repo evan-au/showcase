@@ -6,7 +6,14 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: IntroPageComponent,
+  },
+  {
+    path: 'e-commerce-app',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('@showcase-ws/e-commerce-lib').then((m) => m.ECommerceLibModule),
   },
 ];
 

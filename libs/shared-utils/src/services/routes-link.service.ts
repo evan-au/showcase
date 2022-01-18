@@ -12,7 +12,7 @@ const links: Link[] = [
     linkLabel: 'Intro',
   },
   {
-    routerLink: 'e-commerce',
+    routerLink: 'e-commerce-app',
     linkLabel: 'E-commerce',
   },
   {
