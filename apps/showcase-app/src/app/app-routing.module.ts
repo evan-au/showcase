@@ -10,22 +10,30 @@ const routes: Routes = [
     component: IntroPageComponent,
   },
   {
-    path: 'budget-app',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
-  },
-  {
     path: 'e-commerce-app',
     pathMatch: 'full',
     loadChildren: () =>
       import('@showcase-ws/e-commerce-lib').then((m) => m.ECommerceLibModule),
   },
   {
+    path: 'music-player-app',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('@showcase-ws/music-player-lib').then(
+        (m) => m.MusicPlayerLibModule
+      ),
+  },
+  {
     path: 'chat-app',
     pathMatch: 'full',
     loadChildren: () =>
       import('@showcase-ws/chat-lib').then((m) => m.ChatLibModule),
+  },
+  {
+    path: 'budget-app',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
   },
 ];
 
