@@ -1,6 +1,346 @@
 {
   "version": 1,
   "projects": {
+    "budget-data": {
+      "projectType": "library",
+      "root": "libs/budget-data",
+      "sourceRoot": "libs/budget-data/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/budget-data"],
+          "options": {
+            "project": "libs/budget-data/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/budget-data/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/budget-data/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/budget-data"],
+          "options": {
+            "jestConfig": "libs/budget-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/budget-data/src/**/*.ts",
+              "libs/budget-data/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "budget-lib": {
+      "projectType": "library",
+      "root": "libs/budget-lib",
+      "sourceRoot": "libs/budget-lib/src",
+      "prefix": "budget",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/budget-lib"],
+          "options": {
+            "project": "libs/budget-lib/ng-package.json",
+            "tailwindConfig": "libs/budget-lib/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/budget-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/budget-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/budget-lib"],
+          "options": {
+            "jestConfig": "libs/budget-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/budget-lib/src/**/*.ts",
+              "libs/budget-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "chat-data": {
+      "projectType": "library",
+      "root": "libs/chat-data",
+      "sourceRoot": "libs/chat-data/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/chat-data"],
+          "options": {
+            "project": "libs/chat-data/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/chat-data/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/chat-data/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/chat-data"],
+          "options": {
+            "jestConfig": "libs/chat-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/chat-data/src/**/*.ts",
+              "libs/chat-data/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "chat-lib": {
+      "projectType": "library",
+      "root": "libs/chat-lib",
+      "sourceRoot": "libs/chat-lib/src",
+      "prefix": "chat",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/chat-lib"],
+          "options": {
+            "project": "libs/chat-lib/ng-package.json",
+            "tailwindConfig": "libs/chat-lib/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/chat-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/chat-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/chat-lib"],
+          "options": {
+            "jestConfig": "libs/chat-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/chat-lib/src/**/*.ts",
+              "libs/chat-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-commerce-data": {
+      "projectType": "library",
+      "root": "libs/e-commerce-data",
+      "sourceRoot": "libs/e-commerce-data/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/e-commerce-data"],
+          "options": {
+            "project": "libs/e-commerce-data/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/e-commerce-data/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/e-commerce-data/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-commerce-data"],
+          "options": {
+            "jestConfig": "libs/e-commerce-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-commerce-data/src/**/*.ts",
+              "libs/e-commerce-data/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-commerce-lib": {
+      "projectType": "library",
+      "root": "libs/e-commerce-lib",
+      "sourceRoot": "libs/e-commerce-lib/src",
+      "prefix": "e-commerce",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/e-commerce-lib"],
+          "options": {
+            "project": "libs/e-commerce-lib/ng-package.json",
+            "tailwindConfig": "libs/e-commerce-lib/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/e-commerce-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/e-commerce-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-commerce-lib"],
+          "options": {
+            "jestConfig": "libs/e-commerce-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-commerce-lib/src/**/*.ts",
+              "libs/e-commerce-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "music-player-data": {
+      "projectType": "library",
+      "root": "libs/music-player-data",
+      "sourceRoot": "libs/music-player-data/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/music-player-data"],
+          "options": {
+            "project": "libs/music-player-data/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/music-player-data/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/music-player-data/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/music-player-data"],
+          "options": {
+            "jestConfig": "libs/music-player-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/music-player-data/src/**/*.ts",
+              "libs/music-player-data/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "music-player-lib": {
+      "projectType": "library",
+      "root": "libs/music-player-lib",
+      "sourceRoot": "libs/music-player-lib/src",
+      "prefix": "music-player",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/music-player-lib"],
+          "options": {
+            "project": "libs/music-player-lib/ng-package.json",
+            "tailwindConfig": "libs/music-player-lib/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/music-player-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/music-player-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/music-player-lib"],
+          "options": {
+            "jestConfig": "libs/music-player-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/music-player-lib/src/**/*.ts",
+              "libs/music-player-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-ui": {
       "projectType": "library",
       "root": "libs/shared-ui",

@@ -15,6 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@showcase-ws/budget-data": ["libs/budget-data/src/index.ts"],
+      "@showcase-ws/budget-lib": ["libs/budget-lib/src/index.ts"],
+      "@showcase-ws/chat-data": ["libs/chat-data/src/index.ts"],
+      "@showcase-ws/chat-lib": ["libs/chat-lib/src/index.ts"],
+      "@showcase-ws/e-commerce-data": ["libs/e-commerce-data/src/index.ts"],
+      "@showcase-ws/e-commerce-lib": ["libs/e-commerce-lib/src/index.ts"],
+      "@showcase-ws/music-player-data": ["libs/music-player-data/src/index.ts"],
+      "@showcase-ws/music-player-lib": ["libs/music-player-lib/src/index.ts"],
       "@showcase-ws/shared-ui": ["libs/shared-ui/src/index.ts"],
       "@showcase-ws/shared-utils": ["libs/shared-utils/src/index.ts"]
     }
