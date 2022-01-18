@@ -7,14 +7,13 @@ import { Observable, map, Subject } from 'rxjs';
 })
 export class RoutingService {
   private _routeState = new Subject<string>();
-
   public routeUrl$: Observable<string> = this._routeState.asObservable();
 
   constructor(private _router: Router) {
     this._retrieveUrl();
   }
 
-  private _retrieveUrl() {
+  private _retrieveUrl(): void {
     this._router.events
       .pipe(
         map((data) => {

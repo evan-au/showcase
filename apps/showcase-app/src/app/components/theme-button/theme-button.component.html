@@ -1,0 +1,7 @@
+<button class="theme-button" mat-icon-button (click)="toggleTheme()">
+  <ng-container *ngIf="theme$ | async; else darkIcon"
+    ><mat-icon>light_mode</mat-icon></ng-container
+  >
+</button>
+
+<ng-template #darkIcon><mat-icon>dark_mode</mat-icon></ng-template>

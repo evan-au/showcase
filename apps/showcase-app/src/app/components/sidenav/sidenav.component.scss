@@ -1,0 +1,41 @@
+.sidenav {
+  @apply h-full px-4 grid grid-rows-[100px_300px_100px] lg:grid-rows-[100px_1fr_100px];
+
+  .sidenav__top-section {
+    @apply flex flex-col justify-end;
+  }
+
+  .sidenav__viewport {
+    @apply h-[80%] lg:h-[90%];
+  }
+
+  .sidenav__active-link {
+    @apply text-accent;
+  }
+
+  .sidenav__link {
+    @apply transition-colors duration-500;
+  }
+
+  .sidenav__label {
+    @apply text-xs text-gray-400;
+  }
+
+  .sidenav__line-divider {
+    @apply lg:w-4/5 my-4 bg-gray-400;
+  }
+}
+
+// Style scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  @apply bg-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent;
+  -webkit-border-radius: 2rem;
+}
+::-webkit-scrollbar-corner {
+  border-radius: 50%;
+}

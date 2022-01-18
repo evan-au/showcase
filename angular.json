@@ -73,7 +73,7 @@
       "projectType": "application",
       "root": "apps/showcase-app",
       "sourceRoot": "apps/showcase-app/src",
-      "prefix": "showcase-ws",
+      "prefix": "showcase-app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

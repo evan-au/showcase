@@ -1,1 +1,21 @@
-<header>Header works!</header>
+<header
+  class="header w-full h-full flex justify-between items-center px-2 lg:px-8 lg:py-8"
+>
+  <showcase-app-logo></showcase-app-logo>
+
+  <div class="header__route-label lg:hidden text-dark dark:text-light">
+    {{ routeUrl$ | async }}
+  </div>
+
+  <showcase-app-theme-button
+    class="header__button-theme hidden lg:block"
+  ></showcase-app-theme-button>
+
+  <button
+    class="header__button-menu"
+    mat-icon-button
+    (click)="openBottomSheetMenu()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+</header>

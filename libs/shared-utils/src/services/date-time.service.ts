@@ -5,16 +5,16 @@ import { map, Observable, of, share, timer } from 'rxjs';
   providedIn: 'root',
 })
 export class DateTimeService {
-  public time$!: Observable<number>;
-  public date$!: Observable<Date>;
+  public time$ = this._initCurrentTime();
+  public date$ = this._initCurrentDate();
 
-  public initCurrentTime() {
-    this.time$ = timer(0, 1000).pipe(
+  private _initCurrentTime(): Observable<number> {
+    return timer(0, 1000).pipe(
       map(() => new Date().getTime()),
       share()
     );
   }
-  public initCurrentDate() {
-    this.date$ = of(new Date()).pipe(share());
+  private _initCurrentDate(): Observable<Date> {
+    return of(new Date()).pipe(share());
   }
 }

@@ -1,1 +1,39 @@
-<p>sidenav works!</p>
+<mat-selection-list [multiple]="false" class="sidenav">
+  <div class="sidenav__top-section">
+    <mat-list-option
+      *ngFor="let link of transformedLinks$ | async"
+      class="sidenav__link"
+      [routerLink]="link.routerLink"
+      routerLinkActive="sidenav__active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >{{ link.linkLabel }}
+    </mat-list-option>
+  </div>
+  <div class="sidenav__middle-section">
+    <mat-divider class="sidenav__line-divider"></mat-divider>
+    <span class="sidenav__label">Micro apps</span>
+
+    <cdk-virtual-scroll-viewport
+      appendOnly
+      itemSize="50"
+      class="sidenav__viewport"
+    >
+      <mat-list-option
+        class="sidenav__link"
+        *cdkVirtualFor="let link of linkCollection$ | async"
+        [routerLink]="link.routerLink"
+        routerLinkActive="sidenav__active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >{{ link.linkLabel }}
+      </mat-list-option>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <div class="sidenav__bottom-section">
+    <mat-divider class="sidenav__line-divider"></mat-divider>
+    <span class="sidenav__label">Contacts</span>
+    <mat-list-option class="sidenav__link">
+      <a href="#" target="_blank" rel="noopener noreferrer">Discover</a>
+    </mat-list-option>
+  </div>
+</mat-selection-list>

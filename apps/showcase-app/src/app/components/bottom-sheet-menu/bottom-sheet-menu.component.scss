@@ -1,0 +1,10 @@
+.bottom-sheet-menu {
+  @apply relative lg:hidden;
+  .bottom-sheet-menu__button-close {
+    @apply absolute top-0 right-0;
+  }
+
+  // .bottom-sheet-menu__button-theme {
+  //   @apply absolute top-0 left-0;
+  // }
+}

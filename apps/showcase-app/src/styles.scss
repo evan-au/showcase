@@ -40,6 +40,14 @@ $showcase-app-theme: mat.define-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 
-html {
+html,
+.mat-list-option,
+.mat-bottom-sheet-container {
   font-family: 'Fira code', monospace, 'Helvetica Neue', sans-serif;
+}
+
+// Style Angular material components
+.mat-bottom-sheet-container,
+.mat-list-option {
+  @apply bg-light dark:bg-dark text-dark dark:text-light transition-colors duration-500;
 }
