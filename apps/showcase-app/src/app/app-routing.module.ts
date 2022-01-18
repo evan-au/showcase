@@ -6,7 +6,13 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: IntroPageComponent,
+  },
+  {
+    path: 'budget-app',
+    loadChildren: () =>
+      import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
   },
 ];
 
