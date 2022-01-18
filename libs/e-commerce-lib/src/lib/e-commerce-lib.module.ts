@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Modules
+import { ECommerceDataModule } from '@showcase-ws/e-commerce-data';
+
 // Components
 import { FeatHomeComponent } from './features/feat-home/feat-home.component';
-import { ECommerceDataModule } from '@showcase-ws/e-commerce-data';
 
 @NgModule({
   declarations: [FeatHomeComponent],

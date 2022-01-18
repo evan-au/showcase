@@ -21,6 +21,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('@showcase-ws/e-commerce-lib').then((m) => m.ECommerceLibModule),
   },
+  {
+    path: 'chat-app',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('@showcase-ws/chat-lib').then((m) => m.ChatLibModule),
+  },
 ];
 
 @NgModule({
