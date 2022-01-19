@@ -6,6 +6,7 @@
       [routerLink]="link.routerLink"
       routerLinkActive="sidenav__active-link"
       [routerLinkActiveOptions]="{ exact: true }"
+      (click)="dismissBottomSheet()"
       >{{ link.linkLabel }}
     </mat-list-option>
   </div>
@@ -24,6 +25,7 @@
         [routerLink]="link.routerLink"
         routerLinkActive="sidenav__active-link"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="dismissBottomSheet()"
         >{{ link.linkLabel }}
       </mat-list-option>
     </cdk-virtual-scroll-viewport>

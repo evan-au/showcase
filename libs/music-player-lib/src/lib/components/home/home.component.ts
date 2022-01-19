@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MusicPlayerFacade } from '@showcase-ws/music-player-data';
 
 @Component({
-  selector: 'music-player-feat-home',
-  templateUrl: './feat-home.component.html',
-  styleUrls: ['./feat-home.component.scss'],
+  selector: 'music-player-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
-export class FeatHomeComponent implements OnInit {
+export class HomeComponent implements OnInit {
   music$ = this._musicPlayerFacade.music$;
 
   constructor(private _musicPlayerFacade: MusicPlayerFacade) {}

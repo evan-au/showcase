@@ -1,0 +1,34 @@
+<main class="h-full grid grid-rows-[2rem_1fr_2rem] text-center">
+  <header class="flex items-center justify-center text-lg mt-2">
+    Music player
+  </header>
+  <body class="flex items-center">
+    <div class="flex flex-col justify-around h-1/2 w-full mx-8">
+      <p>Play music from one of the platform</p>
+      <button
+        mat-raised-button
+        class="bg-red-400 dark:bg-red-600"
+        routerLink="youtube"
+      >
+        Youtube
+      </button>
+      <button
+        mat-raised-button
+        class="bg-green-300 dark:bg-green-700"
+        routerLink="spotify"
+      >
+        Spotify
+      </button>
+      <button
+        mat-raised-button
+        class="bg-yellow-300 dark:bg-yellow-600"
+        routerLink="local-library"
+      >
+        Local library
+      </button>
+    </div>
+  </body>
+  <footer class="flex items-center justify-center text-xs">
+    Made using update later!!
+  </footer>
+</main>

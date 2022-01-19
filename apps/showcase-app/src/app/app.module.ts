@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +31,12 @@ import { ThemeButtonComponent } from './components/theme-button/theme-button.com
     LogoComponent,
     ThemeButtonComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedUiModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    SharedUiModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

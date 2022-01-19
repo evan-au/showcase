@@ -42,6 +42,7 @@ $showcase-app-theme: mat.define-light-theme(
 
 html,
 .mat-list-option,
+.mat-button-wrapper,
 .mat-bottom-sheet-container {
   font-family: 'Fira code', monospace, 'Helvetica Neue', sans-serif;
 }
@@ -50,4 +51,8 @@ html,
 .mat-bottom-sheet-container,
 .mat-list-option {
   @apply bg-light dark:bg-dark text-dark dark:text-light transition-colors duration-500;
+}
+
+.mat-button-wrapper {
+  @apply text-dark dark:text-light;
 }

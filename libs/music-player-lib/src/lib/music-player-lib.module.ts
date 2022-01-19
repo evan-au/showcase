@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // Modules
 import { MusicPlayerDataModule } from '@showcase-ws/music-player-data';
+import { MusicPlayerRoutingModule } from './music-player-routing.module';
+import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 // Components
-import { FeatHomeComponent } from './features/feat-home/feat-home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [FeatHomeComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: FeatHomeComponent },
-    ]),
     MusicPlayerDataModule,
+    MusicPlayerRoutingModule,
+    SharedUiModule,
   ],
 })
 export class MusicPlayerLibModule {}
