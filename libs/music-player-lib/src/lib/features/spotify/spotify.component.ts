@@ -4,4 +4,9 @@ import { Component } from '@angular/core';
   templateUrl: './spotify.component.html',
   styleUrls: ['./spotify.component.scss'],
 })
-export class SpotifyComponent {}
+export class SpotifyComponent {
+  // constructor(private _navigationService: NavigationService) {}
+  // goBack() {
+  //   this._navigationService.back();
+  // }
+}

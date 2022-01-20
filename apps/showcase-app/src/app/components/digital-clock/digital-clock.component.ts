@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateTimeService } from '@showcase-ws/shared-utils';
+import { DateTimeService } from '@showcase-ws/utils';
 
 @Component({
   selector: 'showcase-app-digital-clock',

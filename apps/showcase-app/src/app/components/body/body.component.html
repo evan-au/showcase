@@ -1,12 +1,13 @@
 <body class="body h-full px-2 flex lg:grid lg:grid-cols-[360px_minmax(0,1fr)]">
   <section
-    class="body__sidenav-wrapper hidden self-center h-[90%] border-r border-r-dark dark:border-r-light lg:block"
+    class="body__sidenav hidden self-center h-[90%] border-r border-r-dark dark:border-r-light lg:block"
   >
     <showcase-app-sidenav></showcase-app-sidenav>
   </section>
   <section
-    class="body__outlet-wrapper h-[82vh] w-full m-2 shadow-lg bg-[#cccccc] dark:bg-[#404040] rounded-md justify-self-center self-center lg:w-[90%] lg:h-[700px]"
+    [@routeAnim]="prepareRoute(outlet)"
+    class="body__outlet h-[82vh] w-full m-2 shadow-lg bg-[#cccccc] overflow-hidden dark:bg-[#404040] rounded-md justify-self-center self-center lg:w-[90%] lg:h-[700px]"
   >
-    <router-outlet></router-outlet>
+    <router-outlet #outlet="outlet"></router-outlet>
   </section>
 </body>

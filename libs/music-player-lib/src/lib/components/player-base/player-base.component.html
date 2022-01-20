@@ -1,0 +1,27 @@
+<main
+  class="music-player h-full grid grid-rows-[3rem_1fr_4rem] bg-gradient-to-tr"
+  [ngClass]="changeStyle('main')"
+>
+  <header
+    class="music-player__header flex items-center justify-between w-full px-4"
+    [ngClass]="changeStyle('header')"
+  >
+    <button mat-icon-button utilsBackButton>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div class="text-xl">
+      <ng-content select="[header-label]"></ng-content>
+    </div>
+
+    <music-player-menu [playerTypeInput]="playerType"></music-player-menu>
+  </header>
+
+  <body class="music-player__body">
+    <ng-content select="[body-content]"></ng-content>
+  </body>
+
+  <footer class="youtube__footer" [ngClass]="changeStyle('footer')">
+    <ng-content select="[footer-content]"></ng-content>
+  </footer>
+</main>

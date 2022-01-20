@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { RoutesLinkService } from '@showcase-ws/shared-utils';
+import { RoutesLinkService } from '@showcase-ws/utils';
 
 @Component({
   selector: 'showcase-app-sidenav',

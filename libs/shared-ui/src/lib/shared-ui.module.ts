@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatMenuModule } from '@angular/material/menu';
 
 const angularMaterialModules = [
   MatButtonModule,
@@ -16,6 +17,7 @@ const angularMaterialModules = [
   MatBottomSheetModule,
   MatListModule,
   ScrollingModule,
+  MatMenuModule,
 ];
 
 @NgModule({

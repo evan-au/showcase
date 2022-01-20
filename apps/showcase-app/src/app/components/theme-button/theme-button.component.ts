@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ThemeService } from '@showcase-ws/shared-utils';
+import { ThemeService } from '@showcase-ws/utils';
 
 @Component({
   selector: 'showcase-app-theme-button',

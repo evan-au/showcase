@@ -5,7 +5,7 @@
       class="sidenav__link"
       [routerLink]="link.routerLink"
       routerLinkActive="sidenav__active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
+      [routerLinkActiveOptions]="{ exact: false }"
       (click)="dismissBottomSheet()"
       >{{ link.linkLabel }}
     </mat-list-option>
@@ -24,7 +24,7 @@
         *cdkVirtualFor="let link of linkCollection$ | async"
         [routerLink]="link.routerLink"
         routerLinkActive="sidenav__active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{ exact: false }"
         (click)="dismissBottomSheet()"
         >{{ link.linkLabel }}
       </mat-list-option>
