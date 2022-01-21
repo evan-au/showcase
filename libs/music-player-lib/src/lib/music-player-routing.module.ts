@@ -9,11 +9,6 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'youtube',
-    loadChildren: () =>
-      import('./features/youtube/youtube.module').then((m) => m.YoutubeModule),
-  },
-  {
     path: 'spotify',
     loadChildren: () =>
       import('./features/spotify/spotify.module').then((m) => m.SpotifyModule),

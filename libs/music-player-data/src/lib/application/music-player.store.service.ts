@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, distinctUntilChanged } from 'rxjs';
 
 class PlayerState {
-  music: string[] = [];
+  music = '';
 }
 
 @Injectable({
@@ -19,7 +19,7 @@ export class MusicPlayerStoreService {
     distinctUntilChanged()
   );
 
-  public saveMusic(music: string[]) {
+  public saveMusic(music: string) {
     this._playerStore.next((this._state = { ...this._state, music }));
   }
 }

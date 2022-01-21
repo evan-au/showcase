@@ -14,7 +14,7 @@ export class MusicPlayerFacade {
   ) {}
 
   public loadMusic() {
-    this._musicPlayerDataService.loadData().subscribe((music) => {
+    this._musicPlayerDataService.getData().subscribe((music) => {
       this._musicPlayerStoreService.saveMusic(music);
     });
   }

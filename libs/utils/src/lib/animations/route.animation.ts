@@ -11,13 +11,13 @@ export const routeAnimation: AnimationTriggerMetadata[] = [
     transition('* => *', [
       style({
         opacity: 0,
-        transform: 'translateY(50px)',
+        transform: 'translateX(-30px)',
       }),
       animate(
         '700ms ease-in-out',
         style({
           opacity: 1,
-          transform: 'translateY(0)',
+          transform: 'translateX(0)',
         })
       ),
     ]),

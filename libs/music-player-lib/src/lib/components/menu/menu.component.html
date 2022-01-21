@@ -1,24 +1,4 @@
 <div [ngSwitch]="playerTypeInput">
-  <div *ngSwitchCase="'youtube'">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="../" class="menu-item-home">
-        Home
-      </button>
-      <button mat-menu-item routerLink="../spotify" class="menu-item-spotify">
-        Spotify player
-      </button>
-      <button
-        mat-menu-item
-        routerLink="../local-library"
-        class="menu-item-local"
-      >
-        Local player
-      </button>
-    </mat-menu>
-  </div>
   <div *ngSwitchCase="'spotify'">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -27,9 +7,7 @@
       <button mat-menu-item routerLink="../" class="menu-item-home">
         Home
       </button>
-      <button mat-menu-item routerLink="../youtube" class="menu-item-youtube">
-        Youtube player
-      </button>
+
       <button
         mat-menu-item
         routerLink="../local-library"
@@ -47,9 +25,7 @@
       <button mat-menu-item routerLink="../" class="menu-item-home">
         Home
       </button>
-      <button mat-menu-item routerLink="../youtube" class="menu-item-youtube">
-        Youtube player
-      </button>
+
       <button mat-menu-item routerLink="../spotify" class="menu-item-spotify">
         Spotify player
       </button>
