@@ -1,10 +1,26 @@
 <music-player-base-component playerType="spotify">
   <p header-label>Spotify</p>
-  <section body-content>
-    There will be a playlist, a search component and a wavy component
-    {{ music$ | async }}
+
+  <section body-content class="h-full">
+    <shared-ui-search
+      class="flex justify-center w-full"
+      [inputSearchField]="(selectorSearchField$ | async) || defaultSearchTerm"
+      (outputClearQuery)="actionClearSearchQuery()"
+    ></shared-ui-search>
+
+    <music-player-track-list
+      (outputSelectedTrack)="actionDisplaySelectedTrack($event)"
+      [inputTrackList$]="selectorTrackList$"
+    ></music-player-track-list>
   </section>
+
   <section footer-content>
-    The music player controls will be displayed here
+    <music-player-controls
+      [inputTrackName$]="selectorTrackName$"
+      [inputHasSkipNext]="false"
+      [inputHasSkipPrevious]="false"
+      [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"
+      (outputPlayPauseButton)="actionSetPlayingStatus($event)"
+    ></music-player-controls>
   </section>
 </music-player-base-component>

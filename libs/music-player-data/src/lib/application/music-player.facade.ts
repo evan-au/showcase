@@ -1,21 +1,35 @@
 import { Injectable } from '@angular/core';
-import { MusicPlayerDataService } from '../services/music-player-data.service';
+
 import { MusicPlayerStoreService } from './music-player.store.service';
 
 @Injectable({
   providedIn: 'any',
 })
 export class MusicPlayerFacade {
-  public music$ = this._musicPlayerStoreService.storeMusic$;
+  public searchField$ = this._musicPlayerStore.searchField$;
+  public trackList$ = this._musicPlayerStore.trackList$;
+  public trackName$ = this._musicPlayerStore.trackName$;
 
-  constructor(
-    private _musicPlayerDataService: MusicPlayerDataService,
-    private _musicPlayerStoreService: MusicPlayerStoreService
-  ) {}
+  public isSpotifyTrackPlaying$ = this._musicPlayerStore.isSpotifyTrackPlaying$;
+  public isLocalTrackPlaying$ = this._musicPlayerStore.isLocalTrackPlaying$;
 
-  public loadMusic() {
-    this._musicPlayerDataService.getData().subscribe((music) => {
-      this._musicPlayerStoreService.saveMusic(music);
-    });
+  constructor(private _musicPlayerStore: MusicPlayerStoreService) {}
+
+  public setSpotifyTrackPlayingStatus(playingStatus: boolean) {
+    this._musicPlayerStore.saveSpotifyTrackStatus(playingStatus);
+  }
+  public setLocalTrackPlayingStatus(playingStatus: boolean) {
+    this._musicPlayerStore.saveLocalTrackStatus(playingStatus);
+  }
+
+  public getAllTracks() {
+    this._musicPlayerStore.getAllTracks();
+  }
+
+  public clearTrackList() {
+    this._musicPlayerStore.clearTrackList();
+  }
+  public addTrackName(trackName: string) {
+    this._musicPlayerStore.saveTrackName(trackName);
   }
 }

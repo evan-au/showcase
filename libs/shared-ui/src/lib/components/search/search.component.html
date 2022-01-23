@@ -1,0 +1,13 @@
+<mat-form-field appearance="standard" color="accent" class="w-[80%] lg:w-1/2">
+  <mat-label>Search Music</mat-label>
+  <input matInput type="search" [formControl]="inputSearchField" />
+  <button
+    *ngIf="inputSearchField.value"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="clearQuery()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

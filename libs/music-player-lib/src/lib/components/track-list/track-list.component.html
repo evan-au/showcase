@@ -1,0 +1,21 @@
+<ng-container *ngIf="inputTrackList$ | async as trackList">
+  <mat-selection-list [multiple]="false" class="track-list h-full">
+    <cdk-virtual-scroll-viewport
+      appendOnly
+      itemSize="50"
+      class="track-list__viewport h-[80%] lg:w-1/2"
+      [@listAnimation]="trackList.length"
+    >
+      <mat-list-option
+        class="mb-2"
+        *ngFor="let track of trackList"
+        [value]="track"
+        (click)="selectTrack(track.title)"
+      >
+        <span #item class="truncate w-[250px]">
+          {{ track.title }}
+        </span>
+      </mat-list-option>
+    </cdk-virtual-scroll-viewport>
+  </mat-selection-list>
+</ng-container>
