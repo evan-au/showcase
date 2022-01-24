@@ -7,15 +7,16 @@ import {
 } from '@angular/animations';
 import { BehaviorSubject } from 'rxjs';
 
-export const fadeSlideInOutAnimation: AnimationTriggerMetadata[] = [
-  trigger('fadeSlideInOut', [
+export const fadeSlideInOutAnimation: AnimationTriggerMetadata = trigger(
+  'fadeSlideInOut',
+  [
     transition(':enter', [
       style({
         opacity: 0,
-        transform: 'translateX(30px)',
+        transform: 'translateY(60px)',
       }),
       animate(
-        '500ms ease-in-out',
+        '700ms ease-in-out',
         style({
           opacity: 1,
           transform: 'translateY(0)',
@@ -24,15 +25,15 @@ export const fadeSlideInOutAnimation: AnimationTriggerMetadata[] = [
     ]),
     transition(':leave', [
       animate(
-        '500ms ease-in-out',
+        '700ms ease-in-out',
         style({
           opacity: 0,
-          transform: 'translateX(30px)',
+          transform: 'translateY(60px)',
         })
       ),
     ]),
-  ]),
-];
+  ]
+);
 
 export class FadeSlideInOutState {
   private _fadeInOutStateSubject$ = new BehaviorSubject<boolean>(true);

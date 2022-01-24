@@ -1,4 +1,4 @@
-export interface Track {
+export interface SpotifyTrack {
   id: number;
   title: string;
   price: number;

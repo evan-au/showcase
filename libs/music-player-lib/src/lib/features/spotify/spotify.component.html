@@ -9,14 +9,14 @@
     ></shared-ui-search>
 
     <music-player-track-list
-      (outputSelectedTrack)="actionDisplaySelectedTrack($event)"
+      (outputSelectedTrack)="actionSelectTrack($event)"
       [inputTrackList$]="selectorTrackList$"
     ></music-player-track-list>
   </section>
 
   <section footer-content>
     <music-player-controls
-      [inputTrackName$]="selectorTrackName$"
+      [inputTrack$]="selectorTrack$"
       [inputHasSkipNext]="false"
       [inputHasSkipPrevious]="false"
       [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"

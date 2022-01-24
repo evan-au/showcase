@@ -10,7 +10,7 @@
         class="mb-2"
         *ngFor="let track of trackList"
         [value]="track"
-        (click)="selectTrack(track.title)"
+        (click)="selectTrack(track)"
       >
         <span #item class="truncate w-[250px]">
           {{ track.title }}

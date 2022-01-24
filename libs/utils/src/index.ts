@@ -14,3 +14,4 @@ export * from './lib/directives/back-button.directive';
 // Animations
 export * from './lib/animations/route.animation';
 export * from './lib/animations/list.animation';
+export * from './lib/animations/fade-slide-in-out.animation';

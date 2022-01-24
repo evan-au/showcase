@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
+import { SpotifyTrack } from '../model/spotify-track';
 
-import { MusicPlayerStoreService } from './music-player.store.service';
+import { SpotifyStoreService } from './spotify.store.service';
 
 @Injectable({
   providedIn: 'any',
 })
 export class MusicPlayerFacade {
-  public searchField$ = this._musicPlayerStore.searchField$;
-  public trackList$ = this._musicPlayerStore.trackList$;
-  public trackName$ = this._musicPlayerStore.trackName$;
+  public spotifySearchField$ = this._spotifyStore.searchField$;
+  public spotifyTrackList$ = this._spotifyStore.trackList$;
+  public spotifyTrack$ = this._spotifyStore.track$;
 
-  public isSpotifyTrackPlaying$ = this._musicPlayerStore.isSpotifyTrackPlaying$;
-  public isLocalTrackPlaying$ = this._musicPlayerStore.isLocalTrackPlaying$;
+  public isSpotifyTrackPlaying$ = this._spotifyStore.isSpotifyTrackPlaying$;
+  public isLocalTrackPlaying$ = this._spotifyStore.isLocalTrackPlaying$;
 
-  constructor(private _musicPlayerStore: MusicPlayerStoreService) {}
+  constructor(private _spotifyStore: SpotifyStoreService) {}
 
   public setSpotifyTrackPlayingStatus(playingStatus: boolean) {
-    this._musicPlayerStore.saveSpotifyTrackStatus(playingStatus);
+    this._spotifyStore.saveSpotifyTrackStatus(playingStatus);
   }
   public setLocalTrackPlayingStatus(playingStatus: boolean) {
-    this._musicPlayerStore.saveLocalTrackStatus(playingStatus);
+    this._spotifyStore.saveLocalTrackStatus(playingStatus);
   }
 
-  public getAllTracks() {
-    this._musicPlayerStore.getAllTracks();
+  public getAllSpotifyTracks() {
+    this._spotifyStore.getAllTracks();
   }
 
-  public clearTrackList() {
-    this._musicPlayerStore.clearTrackList();
+  public clearSpotifyTrackList() {
+    this._spotifyStore.clearTrackList();
   }
-  public addTrackName(trackName: string) {
-    this._musicPlayerStore.saveTrackName(trackName);
+  public selectTrack(track: SpotifyTrack) {
+    this._spotifyStore.saveSelectedTrack(track);
   }
 }

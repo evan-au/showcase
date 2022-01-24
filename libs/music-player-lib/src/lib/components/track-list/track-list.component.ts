@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Track } from '@showcase-ws/music-player-data';
-// import { Track } from '@showcase-ws/music-player-data';
+import { SpotifyTrack } from '@showcase-ws/music-player-data';
 import { listAnimation } from '@showcase-ws/utils';
 import { Observable, of } from 'rxjs';
 
@@ -11,12 +10,11 @@ import { Observable, of } from 'rxjs';
   animations: [listAnimation],
 })
 export class TrackListComponent {
-  @Input() inputTrackList$: Observable<Track[]> = of([]);
-  @Output() outputSelectedTrack: EventEmitter<string> = new EventEmitter();
+  @Input() inputTrackList$: Observable<SpotifyTrack[]> = of([]);
+  @Output() outputSelectedTrack: EventEmitter<SpotifyTrack> =
+    new EventEmitter();
 
-  // @ViewChild('item') item!: ElementRef;
-
-  selectTrack(trackName: string) {
-    this.outputSelectedTrack.emit(trackName);
+  selectTrack(track: SpotifyTrack) {
+    this.outputSelectedTrack.emit(track);
   }
 }

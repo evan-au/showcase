@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SpotifyTrack } from '@showcase-ws/music-player-data';
+import { fadeSlideInOutAnimation } from '@showcase-ws/utils';
 import { first, Observable } from 'rxjs';
 
 @Component({
   selector: 'music-player-controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.scss'],
+  animations: [fadeSlideInOutAnimation],
 })
 export class ControlsComponent {
-  // private _trackSubject$ = new BehaviorSubject<boolean>(false);
-  // status = false;
   @Input() inputTrackPlayingStatus$!: Observable<boolean>;
-  @Input() inputTrackName$!: Observable<string>;
+  @Input() inputTrack$!: Observable<SpotifyTrack>;
   @Input() inputHasSkipNext = true;
   @Input() inputHasSkipPrevious = true;
   @Output() outputPlayPauseButton: EventEmitter<boolean> = new EventEmitter();

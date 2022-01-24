@@ -10,27 +10,27 @@ import {
   debounceTime,
   tap,
 } from 'rxjs';
-import { Track } from '../model/track';
-import { MusicPlayerDataService } from '../services/music-player-data.service';
+import { SpotifyTrack } from '../model/spotify-track';
+import { SpotifyDataService } from '../services/spotify-data.service';
 
-class PlayerState {
+class SpotifyPlayerState {
   isSpotifyTrackPlaying = false;
   isLocalTrackPlaying = false;
   searchField = new FormControl('');
-  trackName = '';
-  trackList: Track[] = [];
+  track!: SpotifyTrack;
+  trackList: SpotifyTrack[] = [];
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class MusicPlayerStoreService {
-  private _state = new PlayerState();
-  private _playerStore = new BehaviorSubject<PlayerState>(this._state);
-  private _playerState$: Observable<PlayerState> =
+export class SpotifyStoreService {
+  private _state = new SpotifyPlayerState();
+  private _playerStore = new BehaviorSubject<SpotifyPlayerState>(this._state);
+  private _playerState$: Observable<SpotifyPlayerState> =
     this._playerStore.asObservable();
 
-  constructor(private _musicPlayerDataService: MusicPlayerDataService) {}
+  constructor(private _spotifyDataService: SpotifyDataService) {}
 
   // Selectors
   public isSpotifyTrackPlaying$ = this._playerState$.pipe(
@@ -45,8 +45,8 @@ export class MusicPlayerStoreService {
     map((state) => state.searchField),
     distinctUntilChanged()
   );
-  public trackName$ = this._playerState$.pipe(
-    map((state) => state.trackName),
+  public track$ = this._playerState$.pipe(
+    map((state) => state.track),
     distinctUntilChanged()
   );
   public trackList$ = this._playerState$.pipe(
@@ -65,17 +65,17 @@ export class MusicPlayerStoreService {
       (this._state = { ...this._state, isLocalTrackPlaying })
     );
   }
-  public saveTrackName(trackName: string) {
-    this._playerStore.next((this._state = { ...this._state, trackName }));
+  public saveSelectedTrack(track: SpotifyTrack) {
+    this._playerStore.next((this._state = { ...this._state, track }));
   }
 
   public clearTrackList() {
     this._playerStore.next((this._state = { ...this._state, trackList: [] }));
   }
 
-  public findTracksBySearch() {
+  private _findTracksBySearch() {
     const search$ = this._manipulateSearchField();
-    const trackList$ = this._musicPlayerDataService.trackList$;
+    const trackList$ = this._spotifyDataService.trackList$;
 
     search$
       .pipe(
@@ -123,7 +123,7 @@ export class MusicPlayerStoreService {
   }
 
   public getAllTracks() {
-    this._musicPlayerDataService.getAllTracks();
-    this.findTracksBySearch();
+    this._spotifyDataService.getAllTracks();
+    this._findTracksBySearch();
   }
 }
