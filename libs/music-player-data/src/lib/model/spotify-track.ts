@@ -1,12 +1,22 @@
 export interface SpotifyTrack {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
+  id: string;
+  name: string;
+  duration: number;
+  artist_id: string;
+  artist_name: string;
+  artist_idstr: string;
+  album_name: string;
+  album_id: string;
+  license_ccurl: string;
+  position: number;
+  releasedate: string;
+  album_image: string;
+  audio: string;
+  audiodownload: string;
+  prourl: string;
+  shorturl: string;
+  shareurl: string;
+  waveform: string;
   image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  audiodownload_allowed: boolean;
 }

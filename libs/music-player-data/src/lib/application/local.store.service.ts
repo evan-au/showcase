@@ -10,32 +10,31 @@ import {
   debounceTime,
   tap,
 } from 'rxjs';
-import { SpotifyTrack } from '../model/spotify-track';
-import { SpotifyDataService } from '../services/spotify-data.service';
+import { LocalTrack } from '../model/local-track';
+import { LocalDataService } from '../services/local-data.service';
 
-class SpotifyPlayerState {
-  isSpotifyTrackPlaying = false;
+class LocalPlayerState {
+  isLocalTrackPlaying = false;
   searchField = new FormControl('');
-  track!: SpotifyTrack;
-  trackList: SpotifyTrack[] = [];
+  track!: LocalTrack;
+  trackList: LocalTrack[] = [];
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class SpotifyStoreService {
-  private _state = new SpotifyPlayerState();
-  private _playerStore = new BehaviorSubject<SpotifyPlayerState>(this._state);
-  private _playerState$: Observable<SpotifyPlayerState> =
+export class LocalStoreService {
+  private _state = new LocalPlayerState();
+  private _playerStore = new BehaviorSubject<LocalPlayerState>(this._state);
+  private _playerState$: Observable<LocalPlayerState> =
     this._playerStore.asObservable();
 
-  constructor(private _spotifyDataService: SpotifyDataService) {}
+  constructor(private _localDataService: LocalDataService) {}
 
-  public isSpotifyTrackPlaying$ = this._playerState$.pipe(
-    map((state) => state.isSpotifyTrackPlaying),
+  public isLocalTrackPlaying$ = this._playerState$.pipe(
+    map((state) => state.isLocalTrackPlaying),
     distinctUntilChanged()
   );
-
   public searchField$ = this._playerState$.pipe(
     map((state) => state.searchField),
     distinctUntilChanged()
@@ -49,13 +48,12 @@ export class SpotifyStoreService {
     distinctUntilChanged()
   );
 
-  public saveSpotifyTrackStatus(isSpotifyTrackPlaying: boolean) {
+  public saveLocalTrackStatus(isLocalTrackPlaying: boolean) {
     this._playerStore.next(
-      (this._state = { ...this._state, isSpotifyTrackPlaying })
+      (this._state = { ...this._state, isLocalTrackPlaying })
     );
   }
-
-  public saveSelectedTrack(track: SpotifyTrack) {
+  public saveSelectedTrack(track: LocalTrack) {
     this._playerStore.next((this._state = { ...this._state, track }));
   }
 
@@ -65,7 +63,7 @@ export class SpotifyStoreService {
 
   private _findTracksBySearch() {
     const search$ = this._manipulateSearchField();
-    const trackList$ = this._spotifyDataService.trackList$;
+    const trackList$ = this._localDataService.trackList$;
 
     search$
       .pipe(
@@ -113,7 +111,7 @@ export class SpotifyStoreService {
   }
 
   public getAllTracks() {
-    this._spotifyDataService.getAllTracks();
+    this._localDataService.getAllTracks();
     this._findTracksBySearch();
   }
 }

@@ -4,12 +4,10 @@ import {
   MusicPlayerFacade,
   SpotifyTrack,
 } from '@showcase-ws/music-player-data';
-// import { fadeSlideInOutAnimation } from '@showcase-ws/utils';
 
 @Component({
   templateUrl: './spotify.component.html',
   styleUrls: ['./spotify.component.scss'],
-  // animations: [fadeSlideInOutAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpotifyComponent implements OnInit {
@@ -35,6 +33,6 @@ export class SpotifyComponent implements OnInit {
   }
 
   public actionSelectTrack(track: SpotifyTrack): void {
-    this._musicPlayerFacade.selectTrack(track);
+    this._musicPlayerFacade.selectSpotifyTrack(track);
   }
 }

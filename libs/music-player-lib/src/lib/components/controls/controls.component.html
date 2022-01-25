@@ -1,11 +1,11 @@
 <ng-container *ngIf="inputTrack$ | async as track">
   <div class="flex flex-col items-center py-2" [@fadeSlideInOut]>
     <div class="text-center text-light">
-      {{ track.title === '' ? 'No songs selected' : track.title }}
+      {{ track.name === '' ? 'No songs selected' : track.name }}
     </div>
 
     <mat-slider
-      [disabled]="track.title === ''"
+      [disabled]="track.name === ''"
       class="w-[90%]"
       aria-label="unit(s)"
     ></mat-slider>
@@ -18,7 +18,7 @@
         <mat-icon class="text-light">skip_previous</mat-icon>
       </button>
       <button
-        [disabled]="track.title === ''"
+        [disabled]="track.name === ''"
         mat-fab
         [color]="(inputTrackPlayingStatus$ | async) ? 'warn' : 'primary'"
         (click)="togglePlayPause()"

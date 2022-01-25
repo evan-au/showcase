@@ -451,6 +451,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "browserTarget": "showcase-app:build:development",
             "proxyConfig": "apps/showcase-app/proxy.conf.json"
           }
         },

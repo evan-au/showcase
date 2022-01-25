@@ -5,6 +5,7 @@ export * from './lib/application/music-player.facade';
 
 // Services
 export * from './lib/services/spotify-data.service';
+export * from './lib/services/local-data.service';
 
 // Models
 export * from './lib/model/spotify-track';

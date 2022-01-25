@@ -1,11 +1,25 @@
 <music-player-base-component playerType="local">
   <p header-label>Local music</p>
-  <section body-content>
-    There will be a playlist, a search component and a wavy component
+  <section body-content class="h-full">
+    <shared-ui-search
+      class="flex justify-center w-full"
+      [inputSearchField]="(selectorSearchField$ | async) || defaultSearchTerm"
+      (outputClearQuery)="actionClearSearchQuery()"
+    ></shared-ui-search>
+
+    <music-player-track-list
+      (outputLocalSelectedTrack)="actionSelectTrack($event)"
+      [inputLocalTrackList$]="selectorTrackList$"
+    ></music-player-track-list>
   </section>
+
   <section footer-content>
     <music-player-controls
-      (outputPlayPauseButton)="setPlayingStatus($event)"
+      [inputTrack$]="selectorTrack$"
+      [inputHasSkipNext]="false"
+      [inputHasSkipPrevious]="false"
+      [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"
+      (outputPlayPauseButton)="actionSetPlayingStatus($event)"
     ></music-player-controls>
   </section>
 </music-player-base-component>
