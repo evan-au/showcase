@@ -8,7 +8,6 @@ import {
   switchMap,
   filter,
   debounceTime,
-  tap,
 } from 'rxjs';
 import { LocalTrack } from '../model/local-track';
 import { LocalDataService } from '../services/local-data.service';
@@ -16,6 +15,7 @@ import { LocalDataService } from '../services/local-data.service';
 class LocalPlayerState {
   isLocalTrackPlaying = false;
   searchField = new FormControl('');
+  playerType = 'local';
   track!: LocalTrack;
   trackList: LocalTrack[] = [];
 }
@@ -37,6 +37,10 @@ export class LocalStoreService {
   );
   public searchField$ = this._playerState$.pipe(
     map((state) => state.searchField),
+    distinctUntilChanged()
+  );
+  public playerType$ = this._playerState$.pipe(
+    map((state) => state.playerType),
     distinctUntilChanged()
   );
   public track$ = this._playerState$.pipe(
@@ -83,8 +87,7 @@ export class LocalStoreService {
               })
             )
           )
-        ),
-        tap(console.log)
+        )
       )
       .subscribe((trackList) =>
         this._playerStore.next((this._state = { ...this._state, trackList }))

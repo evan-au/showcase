@@ -1,4 +1,6 @@
-<music-player-base-component playerType="local">
+<music-player-base-component
+  [inputPlayerType]="(selectorPlayerType$ | async) || ''"
+>
   <p header-label>Local music</p>
   <section body-content class="h-full">
     <shared-ui-search
@@ -8,8 +10,9 @@
     ></shared-ui-search>
 
     <music-player-track-list
-      (outputLocalSelectedTrack)="actionSelectTrack($event)"
+      [inputPlayerListType]="(selectorPlayerType$ | async) || ''"
       [inputLocalTrackList$]="selectorTrackList$"
+      (outputLocalSelectedTrack)="actionSelectTrack($event)"
     ></music-player-track-list>
   </section>
 

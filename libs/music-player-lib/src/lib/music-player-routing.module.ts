@@ -9,9 +9,9 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'spotify',
+    path: 'jamendo',
     loadChildren: () =>
-      import('./features/spotify/spotify.module').then((m) => m.SpotifyModule),
+      import('./features/jamendo/jamendo.module').then((m) => m.JamendoModule),
   },
   {
     path: 'local-library',

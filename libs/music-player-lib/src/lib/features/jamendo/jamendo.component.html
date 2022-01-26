@@ -1,5 +1,7 @@
-<music-player-base-component playerType="spotify">
-  <p header-label>Spotify</p>
+<music-player-base-component
+  [inputPlayerType]="(selectorPlayerType$ | async) || ''"
+>
+  <p header-label>Jamendo</p>
 
   <section body-content class="h-full">
     <shared-ui-search
@@ -9,8 +11,9 @@
     ></shared-ui-search>
 
     <music-player-track-list
-      (outputSpotifySelectedTrack)="actionSelectTrack($event)"
-      [inputSpotifyTrackList$]="selectorTrackList$"
+      [inputPlayerListType]="(selectorPlayerType$ | async) || ''"
+      [inputJamendoTrackList$]="selectorTrackList$"
+      (outputJamendoSelectedTrack)="actionSelectTrack($event)"
     ></music-player-track-list>
   </section>
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LocalTrack, SpotifyTrack } from '@showcase-ws/music-player-data';
+import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
 import { fadeSlideInOutAnimation } from '@showcase-ws/utils';
 import { first, Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { first, Observable } from 'rxjs';
 })
 export class ControlsComponent {
   @Input() inputTrackPlayingStatus$!: Observable<boolean>;
-  @Input() inputTrack$!: Observable<SpotifyTrack | LocalTrack>;
+  @Input() inputTrack$!: Observable<JamendoTrack | LocalTrack>;
   @Input() inputHasSkipNext = true;
   @Input() inputHasSkipPrevious = true;
   @Output() outputPlayPauseButton: EventEmitter<boolean> = new EventEmitter();

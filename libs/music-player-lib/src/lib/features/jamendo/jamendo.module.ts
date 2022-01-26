@@ -6,18 +6,19 @@ import { RouterModule } from '@angular/router';
 import { PlayerBaseModule } from '../../components/player-base/player-base.module';
 import { ControlsModule } from '../../components/controls/controls.module';
 import { TrackListModule } from '../../components/track-list/track-list.module';
+import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 // Components
-import { SpotifyComponent } from './spotify.component';
-import { SharedUiModule } from '@showcase-ws/shared-ui';
+import { JamendoComponent } from './jamendo.component';
+
 @NgModule({
-  declarations: [SpotifyComponent],
+  declarations: [JamendoComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: SpotifyComponent,
+        component: JamendoComponent,
       },
     ]),
     PlayerBaseModule,
@@ -26,4 +27,4 @@ import { SharedUiModule } from '@showcase-ws/shared-ui';
     SharedUiModule,
   ],
 })
-export class SpotifyModule {}
+export class JamendoModule {}

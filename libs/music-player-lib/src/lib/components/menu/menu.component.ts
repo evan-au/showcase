@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-  @Input() playerTypeInput!: string;
+  @Input() inputPlayerType = '';
 }

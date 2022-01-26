@@ -1,5 +1,5 @@
-<div [ngSwitch]="playerTypeInput">
-  <div *ngSwitchCase="'spotify'">
+<div [ngSwitch]="inputPlayerType">
+  <div *ngSwitchCase="'jamendo'">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -26,8 +26,8 @@
         Home
       </button>
 
-      <button mat-menu-item routerLink="../spotify" class="menu-item-spotify">
-        Spotify player
+      <button mat-menu-item routerLink="../jamendo" class="menu-item-jamendo">
+        Jamendo player
       </button>
     </mat-menu>
   </div>

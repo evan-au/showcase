@@ -8,6 +8,7 @@ import { LocalTrack, MusicPlayerFacade } from '@showcase-ws/music-player-data';
 })
 export class LocalMusicComponent implements OnInit {
   public defaultSearchTerm = new FormControl();
+  public selectorPlayerType$ = this._musicPlayerFacade.localPlayerType$;
   public selectorTrack$ = this._musicPlayerFacade.localTrack$;
   public selectorSearchField$ = this._musicPlayerFacade.localSearchField$;
   public selectorIsTrackPlaying$ = this._musicPlayerFacade.isLocalTrackPlaying$;

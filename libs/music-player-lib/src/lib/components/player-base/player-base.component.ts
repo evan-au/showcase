@@ -7,6 +7,6 @@ import { of } from 'rxjs';
   styleUrls: ['./player-base.component.scss'],
 })
 export class PlayerBaseComponent {
-  @Input() playerType = '';
+  @Input() inputPlayerType = '';
   isTrackSelected$ = of(!true);
 }

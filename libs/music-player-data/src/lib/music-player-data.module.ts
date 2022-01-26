@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MusicPlayerFacade } from './application/music-player.facade';
 import { HttpClientModule } from '@angular/common/http';
-import { SpotifyDataService } from './services/spotify-data.service';
-import { SpotifyStoreService } from './application/spotify.store.service';
+import { JamendoDataService } from './services/jamendo-data.service';
+import { JamendoStoreService } from './application/jamendo.store.service';
 import { LocalDataService } from './services/local-data.service';
 import { LocalStoreService } from './application/local.store.service';
 
@@ -11,8 +11,8 @@ import { LocalStoreService } from './application/local.store.service';
   imports: [CommonModule, HttpClientModule],
   providers: [
     MusicPlayerFacade,
-    SpotifyDataService,
-    SpotifyStoreService,
+    JamendoDataService,
+    JamendoStoreService,
     LocalDataService,
     LocalStoreService,
   ],

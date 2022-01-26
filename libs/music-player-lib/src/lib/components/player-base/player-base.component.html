@@ -1,16 +1,16 @@
 <main
   class="music-player h-full grid grid-rows-[3rem_1fr] bg-gradient-to-tr"
   [ngClass]="{
-    'from-green-900 to-green-500': playerType === 'spotify',
-    'from-cyan-900 to-cyan-500': playerType === 'local',
+    'from-green-900 to-green-500': inputPlayerType === 'jamendo',
+    'from-cyan-900 to-cyan-500': inputPlayerType === 'local',
     'grid-rows-[3rem_1fr_10rem]': isTrackSelected$ | async
   }"
 >
   <header
     class="music-player__header flex items-center justify-between w-full px-4"
     [ngClass]="{
-      'bg-green-500': playerType === 'spotify',
-      'bg-cyan-500': playerType === 'local'
+      'bg-green-500': inputPlayerType === 'jamendo',
+      'bg-cyan-500': inputPlayerType === 'local'
     }"
   >
     <button mat-icon-button utilsBackButton>
@@ -21,7 +21,7 @@
       <ng-content select="[header-label]"></ng-content>
     </div>
 
-    <music-player-menu [playerTypeInput]="playerType"></music-player-menu>
+    <music-player-menu [inputPlayerType]="inputPlayerType"></music-player-menu>
   </header>
 
   <body class="music-player__body">

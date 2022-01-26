@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LocalTrack, SpotifyTrack } from '@showcase-ws/music-player-data';
+import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
 import { listAnimation } from '@showcase-ws/utils';
 import { Observable, of } from 'rxjs';
 
@@ -10,15 +10,16 @@ import { Observable, of } from 'rxjs';
   animations: [listAnimation],
 })
 export class TrackListComponent {
-  @Input() inputSpotifyTrackList$: Observable<SpotifyTrack[]> = of([]);
+  @Input() inputPlayerListType = '';
+  @Input() inputJamendoTrackList$: Observable<JamendoTrack[]> = of([]);
   @Input() inputLocalTrackList$: Observable<LocalTrack[]> = of([]);
-  @Output() outputSpotifySelectedTrack: EventEmitter<SpotifyTrack> =
+  @Output() outputJamendoSelectedTrack: EventEmitter<JamendoTrack> =
     new EventEmitter();
   @Output() outputLocalSelectedTrack: EventEmitter<LocalTrack> =
     new EventEmitter();
 
-  selectSpotifyTrack(track: SpotifyTrack) {
-    this.outputSpotifySelectedTrack.emit(track);
+  selectJamendoTrack(track: JamendoTrack) {
+    this.outputJamendoSelectedTrack.emit(track);
   }
   selectLocalTrack(track: LocalTrack) {
     this.outputLocalSelectedTrack.emit(track);

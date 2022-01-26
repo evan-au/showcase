@@ -1,4 +1,4 @@
-export interface SpotifyTrack {
+export interface JamendoTrack {
   id: string;
   name: string;
   duration: number;
