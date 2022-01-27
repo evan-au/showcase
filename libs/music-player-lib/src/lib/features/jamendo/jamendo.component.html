@@ -1,17 +1,15 @@
-<music-player-base-component
-  [inputPlayerType]="(selectorPlayerType$ | async) || ''"
->
+<music-player-base-component [inputPlayerType$]="selectorPlayerType$">
   <p header-label>Jamendo</p>
 
   <section body-content class="h-full">
     <shared-ui-search
       class="flex justify-center w-full"
-      [inputSearchField]="(selectorSearchField$ | async) || defaultSearchTerm"
+      [inputSearchField$]="selectorSearchField$"
       (outputClearQuery)="actionClearSearchQuery()"
     ></shared-ui-search>
 
     <music-player-track-list
-      [inputPlayerListType]="(selectorPlayerType$ | async) || ''"
+      [inputPlayerListType$]="selectorPlayerType$"
       [inputJamendoTrackList$]="selectorTrackList$"
       (outputJamendoSelectedTrack)="actionSelectTrack($event)"
     ></music-player-track-list>
@@ -19,11 +17,17 @@
 
   <section footer-content>
     <music-player-controls
+      [inputControllerSize$]="selectorControllerSize$"
+      [inputIsTrackSelected$]="selectorIsTrackSelected$"
       [inputTrack$]="selectorTrack$"
-      [inputHasSkipNext]="false"
-      [inputHasSkipPrevious]="false"
+      [inputDisplayNextButton$]="selectorDisplayNextButton$"
+      [inputDisplayPreviousButton$]="selectorDisplayPreviousButton$"
       [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"
-      (outputPlayPauseButton)="actionSetPlayingStatus($event)"
+      (outputOnClickPlayPause)="actionSetPlayingStatus($event)"
+      (outputOnClickSkipTrack)="actionSkipTrack($event)"
+      (outputOnClickHide)="actionHideController()"
+      (outputOnClickMinimise)="actionMinimiseController()"
+      (outputOnClickMaximise)="actionMaximiseController()"
     ></music-player-controls>
   </section>
 </music-player-base-component>

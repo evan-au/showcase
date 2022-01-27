@@ -1,4 +1,4 @@
-<div [ngSwitch]="inputPlayerType">
+<div [ngSwitch]="inputPlayerType$ | async">
   <div *ngSwitchCase="'jamendo'">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>

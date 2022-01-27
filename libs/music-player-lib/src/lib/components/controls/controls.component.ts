@@ -1,32 +1,50 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
-import { fadeSlideInOutAnimation } from '@showcase-ws/utils';
+import { fadeSlideUpDownAnimation } from '@showcase-ws/utils';
 import { first, Observable } from 'rxjs';
 
 @Component({
   selector: 'music-player-controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.scss'],
-  animations: [fadeSlideInOutAnimation],
+  animations: [fadeSlideUpDownAnimation],
 })
 export class ControlsComponent {
+  @Input() inputControllerSize$!: Observable<string>;
   @Input() inputTrackPlayingStatus$!: Observable<boolean>;
+  @Input() inputIsTrackSelected$!: Observable<boolean>;
   @Input() inputTrack$!: Observable<JamendoTrack | LocalTrack>;
-  @Input() inputHasSkipNext = true;
-  @Input() inputHasSkipPrevious = true;
-  @Output() outputPlayPauseButton: EventEmitter<boolean> = new EventEmitter();
+  @Input() inputDisplayNextButton$!: Observable<boolean>;
+  @Input() inputDisplayPreviousButton$!: Observable<boolean>;
+  @Output() outputOnClickPlayPause: EventEmitter<boolean> = new EventEmitter();
+  @Output() outputOnClickHide = new EventEmitter();
+  @Output() outputOnClickMinimise = new EventEmitter();
+  @Output() outputOnClickMaximise = new EventEmitter();
 
-  public togglePlayPause() {
-    console.log('Play/pause');
-    this.inputTrackPlayingStatus$.pipe(first()).subscribe((status) => {
-      this.outputPlayPauseButton.emit((status = !status));
-    });
+  @Output() outputOnClickSkipTrack: EventEmitter<boolean> = new EventEmitter();
+
+  public playPauseTrack() {
+    this.inputTrackPlayingStatus$
+      .pipe(first())
+      .subscribe((value) => this.outputOnClickPlayPause.emit((value = !value)));
   }
 
-  skipToNext() {
-    console.log('Skip next');
+  public skipTrack(skipStatus: boolean) {
+    if (skipStatus) {
+      this.outputOnClickSkipTrack.emit(skipStatus);
+    } else {
+      this.outputOnClickSkipTrack.emit(skipStatus);
+    }
   }
-  skipToPrevious() {
-    console.log('Skip previous');
+
+  public hideController() {
+    this.outputOnClickHide.emit();
+  }
+
+  public minimiseController() {
+    this.outputOnClickMinimise.emit();
+  }
+  public maximiseController() {
+    this.outputOnClickMaximise.emit();
   }
 }

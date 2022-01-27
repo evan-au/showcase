@@ -1,14 +1,14 @@
-<ng-container *ngIf="inputPlayerListType === 'local'; else jamendo">
+<ng-container *ngIf="(inputPlayerListType$ | async) === 'local'; else jamendo">
   <ng-container *ngIf="inputLocalTrackList$ | async as trackList">
     <mat-selection-list
-      *ngIf="trackList.length > 0; else empty"
+      *ngIf="trackList.length > 0; else emptyList"
       [multiple]="false"
       class="track-list h-full"
     >
       <cdk-virtual-scroll-viewport
         appendOnly
         itemSize="50"
-        class="track-list__viewport h-[80%] lg:w-1/2"
+        class="track-list__viewport h-[80%] lg:w-1/2 mx-2"
         [@listAnimation]="trackList.length"
       >
         <mat-list-option
@@ -23,24 +23,28 @@
         </mat-list-option>
       </cdk-virtual-scroll-viewport>
     </mat-selection-list>
-    <ng-template #empty>
-      <div class="h-full grid place-content-center place-items-center">
-        <div class="text-xl w-4/5">Search a song from the API</div>
+    <ng-template #emptyList>
+      <div
+        [@customEmptyList]
+        class="h-full grid place-content-center place-items-center transition-all duration-500"
+      >
+        <div class="text-xl w-4/5">Browse through your songs</div>
       </div>
     </ng-template>
   </ng-container>
 </ng-container>
+
 <ng-template #jamendo>
   <ng-container *ngIf="inputJamendoTrackList$ | async as trackList">
     <mat-selection-list
-      *ngIf="trackList.length > 0; else empty"
+      *ngIf="trackList.length > 0; else emptyList"
       [multiple]="false"
       class="track-list h-full"
     >
       <cdk-virtual-scroll-viewport
         appendOnly
         itemSize="50"
-        class="track-list__viewport h-[80%] lg:w-1/2"
+        class="track-list__viewport h-[80%] lg:w-1/2 mx-2"
         [@listAnimation]="trackList.length"
       >
         <mat-list-option
@@ -55,9 +59,12 @@
         </mat-list-option>
       </cdk-virtual-scroll-viewport>
     </mat-selection-list>
-    <ng-template #empty>
-      <div class="h-full grid place-content-center place-items-center">
-        <div class="text-xl w-4/5">Search a song from the API</div>
+    <ng-template #emptyList>
+      <div
+        [@customEmptyList]
+        class="h-full grid place-content-center place-items-center transition-all duration-500"
+      >
+        <div class="text-xl w-4/5">Search a song from the Jamendo platform</div>
       </div>
     </ng-template>
   </ng-container>

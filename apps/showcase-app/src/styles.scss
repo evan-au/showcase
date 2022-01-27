@@ -56,14 +56,19 @@ html,
   @apply bg-light dark:bg-dark text-dark dark:text-light transition-colors duration-500;
 }
 
-.mat-button-wrapper {
-  @apply text-dark dark:text-light;
+.mat-form-field-appearance-standard .mat-form-field-underline {
+  @apply bg-dark dark:bg-light transition-colors duration-500;
+}
+
+.mat-button-wrapper,
+.mat-form-field-label {
+  @apply text-dark dark:text-light transition-colors duration-500;
 }
 
 .mat-slider-track-wrapper {
-  @apply bg-light;
+  @apply bg-light transition-colors duration-500;
 }
 
 .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
-  @apply border border-light;
+  @apply border border-light transition-colors duration-500;
 }

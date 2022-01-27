@@ -7,8 +7,8 @@ import {
 } from '@angular/animations';
 import { BehaviorSubject } from 'rxjs';
 
-export const fadeSlideInOutAnimation: AnimationTriggerMetadata = trigger(
-  'fadeSlideInOut',
+export const fadeSlideUpDownAnimation: AnimationTriggerMetadata = trigger(
+  'fadeSlideUpDown',
   [
     transition(':enter', [
       style({

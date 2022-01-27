@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'music-player-base-component',
@@ -7,6 +7,5 @@ import { of } from 'rxjs';
   styleUrls: ['./player-base.component.scss'],
 })
 export class PlayerBaseComponent {
-  @Input() inputPlayerType = '';
-  isTrackSelected$ = of(!true);
+  @Input() inputPlayerType$!: Observable<string>;
 }

@@ -13,13 +13,8 @@
 // Style scrollbar
 ::-webkit-scrollbar {
   width: 6px;
-  @apply bg-[#3effff54];
+  @apply bg-[#f4d7ff54];
 }
-
 ::-webkit-scrollbar-thumb {
   @apply bg-dark;
-  -webkit-border-radius: 2rem;
-}
-::-webkit-scrollbar-corner {
-  border-radius: 50%;
 }

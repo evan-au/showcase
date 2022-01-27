@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'shared-ui-search',
@@ -7,11 +8,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  @Input() inputSearchField!: FormControl;
+  @Input() inputSearchField$!: Observable<FormControl>;
   @Output() outputClearQuery: EventEmitter<void> = new EventEmitter();
 
   public clearQuery() {
     this.outputClearQuery.emit();
-    this.inputSearchField.setValue('');
+    this.inputSearchField$.subscribe((field) => field.setValue(''));
   }
 }

@@ -13,11 +13,15 @@ import { LocalTrack } from '../model/local-track';
 import { LocalDataService } from '../services/local-data.service';
 
 class LocalPlayerState {
-  isLocalTrackPlaying = false;
+  isTrackPlaying = false;
+  isTrackSelected = !true;
   searchField = new FormControl('');
   playerType = 'local';
   track!: LocalTrack;
   trackList: LocalTrack[] = [];
+  hasNextButton = true;
+  hasPreviousButton = true;
+  controllerSize = 'full';
 }
 
 @Injectable({
@@ -30,9 +34,17 @@ export class LocalStoreService {
     this._playerStore.asObservable();
 
   constructor(private _localDataService: LocalDataService) {}
-
-  public isLocalTrackPlaying$ = this._playerState$.pipe(
-    map((state) => state.isLocalTrackPlaying),
+  // Up-stream
+  public controllerSize$ = this._playerState$.pipe(
+    map((state) => state.controllerSize),
+    distinctUntilChanged()
+  );
+  public isTrackPlaying$ = this._playerState$.pipe(
+    map((state) => state.isTrackPlaying),
+    distinctUntilChanged()
+  );
+  public isTrackSelected$ = this._playerState$.pipe(
+    map((state) => state.isTrackSelected),
     distinctUntilChanged()
   );
   public searchField$ = this._playerState$.pipe(
@@ -51,47 +63,89 @@ export class LocalStoreService {
     map((state) => state.trackList),
     distinctUntilChanged()
   );
+  public hasPreviousButton$ = this._playerState$.pipe(
+    map((state) => state.hasPreviousButton),
+    distinctUntilChanged()
+  );
+  public hasNextButton$ = this._playerState$.pipe(
+    map((state) => state.hasNextButton),
+    distinctUntilChanged()
+  );
 
-  public saveLocalTrackStatus(isLocalTrackPlaying: boolean) {
-    this._playerStore.next(
-      (this._state = { ...this._state, isLocalTrackPlaying })
-    );
+  public playPauseTrack(isTrackPlaying: boolean) {
+    if (isTrackPlaying) {
+      console.log(isTrackPlaying, 'Playing track in local store');
+    } else {
+      console.log(isTrackPlaying, 'Pausing track in local store');
+    }
+
+    this._playerStore.next((this._state = { ...this._state, isTrackPlaying }));
   }
-  public saveSelectedTrack(track: LocalTrack) {
+
+  public setSelectedTrack(track: LocalTrack) {
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackSelected: true })
+    );
     this._playerStore.next((this._state = { ...this._state, track }));
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'full' })
+    );
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackPlaying: false })
+    );
   }
 
   public clearTrackList() {
     this._playerStore.next((this._state = { ...this._state, trackList: [] }));
   }
 
+  public hideController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackSelected: false })
+    );
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackPlaying: false })
+    );
+  }
+
+  public minimiseController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'mini' })
+    );
+  }
+
+  public maximiseController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'full' })
+    );
+  }
+
   private _findTracksBySearch() {
     const search$ = this._manipulateSearchField();
     const trackList$ = this._localDataService.trackList$;
 
-    search$
-      .pipe(
-        switchMap((filteredQuery) =>
-          trackList$.pipe(
-            map((tracks) =>
-              tracks.filter((track) => {
-                if (filteredQuery) {
-                  return (
-                    track.name
-                      .toLowerCase()
-                      .indexOf(filteredQuery.toLowerCase()) !== -1
-                  );
-                } else {
-                  return track.name.toLowerCase();
-                }
-              })
-            )
+    return search$.pipe(
+      switchMap((filteredQuery) =>
+        trackList$.pipe(
+          map((tracks) =>
+            tracks.filter((track: LocalTrack) => {
+              if (filteredQuery) {
+                return (
+                  track.name
+                    .toLowerCase()
+                    .indexOf(filteredQuery.toLowerCase()) !== -1
+                );
+              } else {
+                return track.name.toLowerCase();
+              }
+            })
           )
         )
-      )
-      .subscribe((trackList) =>
-        this._playerStore.next((this._state = { ...this._state, trackList }))
-      );
+      ),
+      map((trackList) => {
+        this._playerStore.next((this._state = { ...this._state, trackList }));
+      })
+    );
   }
 
   private _manipulateSearchField() {
@@ -115,6 +169,10 @@ export class LocalStoreService {
 
   public getAllTracks() {
     this._localDataService.getAllTracks();
-    this._findTracksBySearch();
+    return this._findTracksBySearch();
+  }
+
+  public skipTrack(skipStatus: boolean) {
+    console.log(skipStatus, 'Skipping track in Local store');
   }
 }

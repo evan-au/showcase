@@ -8,16 +8,21 @@ import {
   switchMap,
   filter,
   debounceTime,
+  concatMap,
 } from 'rxjs';
 import { JamendoTrack } from '../model/jamendo-track';
 import { JamendoDataService } from '../services/jamendo-data.service';
 
 class JamendoPlayerState {
-  isJamendoTrackPlaying = false;
+  isTrackPlaying = false;
+  isTrackSelected = true;
   searchField = new FormControl('');
   playerType = 'jamendo';
   track!: JamendoTrack;
   trackList: JamendoTrack[] = [];
+  hasNextButton = false;
+  hasPreviousButton = false;
+  controllerSize = 'full';
 }
 
 @Injectable({
@@ -32,11 +37,20 @@ export class JamendoStoreService {
 
   constructor(private _jamendoDataService: JamendoDataService) {}
 
-  public isJamendoTrackPlaying$ = this._playerState$.pipe(
-    map((state) => state.isJamendoTrackPlaying),
+  // Up-stream
+  public controllerSize$ = this._playerState$.pipe(
+    map((state) => state.controllerSize),
     distinctUntilChanged()
   );
 
+  public isTrackPlaying$ = this._playerState$.pipe(
+    map((state) => state.isTrackPlaying),
+    distinctUntilChanged()
+  );
+  public isTrackSelected$ = this._playerState$.pipe(
+    map((state) => state.isTrackSelected),
+    distinctUntilChanged()
+  );
   public searchField$ = this._playerState$.pipe(
     map((state) => state.searchField),
     distinctUntilChanged()
@@ -53,24 +67,61 @@ export class JamendoStoreService {
     map((state) => state.trackList),
     distinctUntilChanged()
   );
+  public hasPreviousButton$ = this._playerState$.pipe(
+    map((state) => state.hasPreviousButton),
+    distinctUntilChanged()
+  );
+  public hasNextButton$ = this._playerState$.pipe(
+    map((state) => state.hasNextButton),
+    distinctUntilChanged()
+  );
 
-  public saveJamendoTrackStatus(isJamendoTrackPlaying: boolean) {
+  public playPauseTrack(isTrackPlaying: boolean) {
+    if (isTrackPlaying) {
+      console.log(isTrackPlaying, 'Playing track in Jamendo store');
+    } else {
+      console.log(isTrackPlaying, 'Pausing track in Jamendo store');
+    }
+
+    this._playerStore.next((this._state = { ...this._state, isTrackPlaying }));
+  }
+
+  public setSelectedTrack(track: JamendoTrack) {
     this._playerStore.next(
-      (this._state = { ...this._state, isJamendoTrackPlaying })
+      (this._state = { ...this._state, isTrackSelected: true })
     );
-  }
-
-  public saveSelectedTrack(track: JamendoTrack) {
     this._playerStore.next((this._state = { ...this._state, track }));
-  }
-
-  public initTrackList() {
-    this._jamendoDataService.trackList$.subscribe((trackList) =>
-      this._playerStore.next((this._state = { ...this._state, trackList }))
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'full' })
+    );
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackPlaying: false })
     );
   }
+
   public clearTrackList() {
     this._playerStore.next((this._state = { ...this._state, trackList: [] }));
+  }
+
+  public hideController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackSelected: false })
+    );
+    this._playerStore.next(
+      (this._state = { ...this._state, isTrackPlaying: false })
+    );
+  }
+
+  public minimiseController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'mini' })
+    );
+  }
+
+  public maximiseController() {
+    this._playerStore.next(
+      (this._state = { ...this._state, controllerSize: 'full' })
+    );
   }
 
   private _manipulateSearchField() {
@@ -96,20 +147,23 @@ export class JamendoStoreService {
     const search$ = this._manipulateSearchField();
     const trackList$ = this._jamendoDataService.trackList$;
 
-    search$
-      .pipe(
-        map((query) => {
-          this._jamendoDataService.searchByTrack(query);
-        })
-      )
-      .subscribe();
-
-    trackList$
-      .pipe(
-        map((trackList) =>
-          this._playerStore.next((this._state = { ...this._state, trackList }))
+    return search$.pipe(
+      map((query) => {
+        this._jamendoDataService.searchByTrack(query);
+      }),
+      concatMap(() =>
+        trackList$.pipe(
+          map((trackList) =>
+            this._playerStore.next(
+              (this._state = { ...this._state, trackList })
+            )
+          )
         )
       )
-      .subscribe();
+    );
+  }
+
+  public skipTrack(skipStatus: boolean) {
+    console.log(skipStatus, 'Skipping track in Jamendo store');
   }
 }
