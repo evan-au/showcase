@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ThemeService } from '@showcase-ws/utils';
 
@@ -6,6 +6,7 @@ import { ThemeService } from '@showcase-ws/utils';
   selector: 'showcase-app-theme-button',
   templateUrl: './theme-button.component.html',
   styleUrls: ['./theme-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeButtonComponent {
   public theme$ = this._themeService.theme$;

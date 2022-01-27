@@ -1,26 +1,32 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { LocalTrack } from '@showcase-ws/music-player-data';
 import { fadeSlideUpDownAnimation } from '@showcase-ws/utils';
-import { first, Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 @Component({
-  selector: 'music-player-controls',
-  templateUrl: './controls.component.html',
-  styleUrls: ['./controls.component.scss'],
+  selector: 'music-player-local-controller',
+  templateUrl: './local-controller.component.html',
+  styleUrls: ['./local-controller.component.scss'],
   animations: [fadeSlideUpDownAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ControlsComponent {
-  @Input() inputControllerSize$!: Observable<string>;
+export class LocalControllerComponent {
   @Input() inputTrackPlayingStatus$!: Observable<boolean>;
+  @Input() inputLocalTrack$!: Observable<LocalTrack>;
   @Input() inputIsTrackSelected$!: Observable<boolean>;
-  @Input() inputTrack$!: Observable<JamendoTrack | LocalTrack>;
-  @Input() inputDisplayNextButton$!: Observable<boolean>;
   @Input() inputDisplayPreviousButton$!: Observable<boolean>;
+  @Input() inputDisplayNextButton$!: Observable<boolean>;
+
   @Output() outputOnClickPlayPause: EventEmitter<boolean> = new EventEmitter();
   @Output() outputOnClickHide = new EventEmitter();
   @Output() outputOnClickMinimise = new EventEmitter();
   @Output() outputOnClickMaximise = new EventEmitter();
-
   @Output() outputOnClickSkipTrack: EventEmitter<boolean> = new EventEmitter();
 
   public playPauseTrack() {

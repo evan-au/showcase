@@ -1,11 +1,11 @@
 export interface LocalTrack {
-  id?: number;
+  id: number;
   name: string;
-  price?: number;
-  description?: string;
-  category?: string;
-  image?: string;
-  rating?: {
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
     rate: number;
     count: number;
   };

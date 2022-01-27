@@ -1,0 +1,48 @@
+<div [ngSwitch]="inputControllerSize$ | async">
+  <div *ngSwitchCase="'full'">
+    <div [ngSwitch]="inputPlayerType$ | async">
+      <div *ngSwitchCase="'jamendo'">
+        <music-player-jamendo-controller
+          [inputDisplayNextButton$]="inputDisplayNextButton$"
+          [inputDisplayPreviousButton$]="inputDisplayPreviousButton$"
+          [inputIsTrackSelected$]="inputIsTrackSelected$"
+          [inputJamendoTrack$]="inputJamendoTrack$"
+          [inputTrackPlayingStatus$]="inputTrackPlayingStatus$"
+          (outputOnClickHide)="hideController()"
+          (outputOnClickPlayPause)="playPauseTrack()"
+          (outputOnClickMaximise)="maximiseController()"
+          (outputOnClickMinimise)="minimiseController()"
+          (outputOnClickSkipTrack)="skipTrack($event)"
+        ></music-player-jamendo-controller>
+      </div>
+      <div *ngSwitchCase="'local'">
+        <music-player-local-controller
+          [inputDisplayNextButton$]="inputDisplayNextButton$"
+          [inputDisplayPreviousButton$]="inputDisplayPreviousButton$"
+          [inputIsTrackSelected$]="inputIsTrackSelected$"
+          [inputLocalTrack$]="inputLocalTrack$"
+          [inputTrackPlayingStatus$]="inputTrackPlayingStatus$"
+          (outputOnClickHide)="hideController()"
+          (outputOnClickPlayPause)="playPauseTrack()"
+          (outputOnClickMaximise)="maximiseController()"
+          (outputOnClickMinimise)="minimiseController()"
+          (outputOnClickSkipTrack)="skipTrack($event)"
+        ></music-player-local-controller>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchCase="'mini'">
+    <ng-container *ngIf="inputIsTrackSelected$ | async">
+      <div [@fadeSlideUpDown] class="flex flex-col items-center py-4">
+        <div class="w-full flex justify-between items-center px-2">
+          <button mat-icon-button (click)="maximiseController()">
+            <mat-icon class="text-light">expand_less</mat-icon>
+          </button>
+          <button mat-icon-button (click)="hideController()">
+            <mat-icon class="text-light">close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -16,10 +16,11 @@
   </section>
 
   <section footer-content>
-    <music-player-controls
+    <music-player-controller
       [inputControllerSize$]="selectorControllerSize$"
       [inputIsTrackSelected$]="selectorIsTrackSelected$"
-      [inputTrack$]="selectorTrack$"
+      [inputJamendoTrack$]="selectorTrack$"
+      [inputPlayerType$]="selectorPlayerType$"
       [inputDisplayNextButton$]="selectorDisplayNextButton$"
       [inputDisplayPreviousButton$]="selectorDisplayPreviousButton$"
       [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"
@@ -28,6 +29,6 @@
       (outputOnClickHide)="actionHideController()"
       (outputOnClickMinimise)="actionMinimiseController()"
       (outputOnClickMaximise)="actionMaximiseController()"
-    ></music-player-controls>
+    ></music-player-controller>
   </section>
 </music-player-base-component>

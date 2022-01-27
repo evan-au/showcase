@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -8,9 +13,10 @@ import { BottomSheetMenuComponent } from '../bottom-sheet-menu/bottom-sheet-menu
   selector: 'showcase-app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private _breakpointSubscription!: Subscription;
+  private _subscription!: Subscription;
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -18,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._breakpointSubscription = this._breakpointObserver
+    this._subscription = this._breakpointObserver
       .observe(Breakpoints.Large)
       .subscribe(() => {
         this._bottomSheet.dismiss();
@@ -30,6 +36,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._breakpointSubscription.unsubscribe();
+    this._subscription.unsubscribe();
   }
 }

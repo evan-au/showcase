@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 // Modules
 import { PlayerBaseModule } from '../../components/player-base/player-base.module';
-import { ControlsModule } from '../../components/controls/controls.module';
+import { ControllerBaseModule } from '../../components/controller-base/controller-base.module';
 import { TrackListModule } from '../../components/track-list/track-list.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 
@@ -22,7 +22,7 @@ import { JamendoComponent } from './jamendo.component';
       },
     ]),
     PlayerBaseModule,
-    ControlsModule,
+    ControllerBaseModule,
     TrackListModule,
     SharedUiModule,
   ],

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
 import { customEmptyListAnimation, listAnimation } from '@showcase-ws/utils';
 import { Observable, of } from 'rxjs';
@@ -8,6 +14,7 @@ import { Observable, of } from 'rxjs';
   templateUrl: './track-list.component.html',
   styleUrls: ['./track-list.component.scss'],
   animations: [listAnimation, customEmptyListAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackListComponent {
   @Input() inputPlayerListType$!: Observable<string>;

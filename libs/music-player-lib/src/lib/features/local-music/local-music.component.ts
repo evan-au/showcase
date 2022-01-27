@@ -1,10 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { LocalTrack, MusicPlayerFacade } from '@showcase-ws/music-player-data';
 import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './local-music.component.html',
   styleUrls: ['./local-music.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocalMusicComponent implements OnInit, OnDestroy {
   private _subscription!: Subscription;

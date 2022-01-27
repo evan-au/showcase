@@ -5,18 +5,17 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { BehaviorSubject } from 'rxjs';
 
 export const fadeSlideUpDownAnimation: AnimationTriggerMetadata = trigger(
   'fadeSlideUpDown',
   [
     transition(':enter', [
       style({
-        opacity: 0,
+        opacity: 0.7,
         transform: 'translateY(60px)',
       }),
       animate(
-        '700ms ease-in-out',
+        '200ms ease-in-out',
         style({
           opacity: 1,
           transform: 'translateY(0)',
@@ -25,7 +24,7 @@ export const fadeSlideUpDownAnimation: AnimationTriggerMetadata = trigger(
     ]),
     transition(':leave', [
       animate(
-        '700ms ease-in-out',
+        '200ms ease-in-out',
         style({
           opacity: 0,
           transform: 'translateY(60px)',
@@ -34,12 +33,3 @@ export const fadeSlideUpDownAnimation: AnimationTriggerMetadata = trigger(
     ]),
   ]
 );
-
-export class FadeSlideInOutState {
-  private _fadeInOutStateSubject$ = new BehaviorSubject<boolean>(true);
-  public fadeInOutState$ = this._fadeInOutStateSubject$.asObservable();
-
-  public fadeInOutState() {
-    this._fadeInOutStateSubject$.next(!this._fadeInOutStateSubject$.value);
-  }
-}
