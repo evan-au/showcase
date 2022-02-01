@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { shareReplay, map, BehaviorSubject } from 'rxjs';
+import { shareReplay, map, BehaviorSubject, catchError, of } from 'rxjs';
 import { JamendoResponse } from '../model/jamendo-response';
 import { JamendoTrack } from '../model/jamendo-track';
 
@@ -26,6 +26,7 @@ export class JamendoDataService {
       )
       .pipe(
         map(({ results }) => this._trackListSubject.next(results)),
+        catchError((error) => of(error)),
         shareReplay()
       )
       .subscribe();

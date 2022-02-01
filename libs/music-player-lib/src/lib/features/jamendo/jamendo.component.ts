@@ -20,9 +20,11 @@ export class JamendoComponent implements OnInit, OnDestroy {
 
   public selectorControllerSize$ =
     this._musicPlayerFacade.jamendoControllerSize$;
-  public selectorPlayerType$ = this._musicPlayerFacade.jamendoPlayerType$;
+  public selectorPlatform$ = this._musicPlayerFacade.jamendoPlatform$;
 
-  public selectorTrack$ = this._musicPlayerFacade.jamendoTrack$;
+  public selectorTrackDuration$ = this._musicPlayerFacade.jamendoTrackDuration$;
+  public selectorActiveTrack$ = this._musicPlayerFacade.jamendoActiveTrack$;
+  public selectorTrackProgress$ = this._musicPlayerFacade.jamendoTrackProgress$;
 
   public selectorDisplayNextButton$ =
     this._musicPlayerFacade.jamendoDisplayNextButton$;
@@ -45,15 +47,18 @@ export class JamendoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._subscription = this._musicPlayerFacade
       .searchJamendoTracks()
-      .subscribe();
+      .subscribe((value) => console.log(value, 'From jamendo component'));
   }
 
   public actionClearSearchQuery(): void {
     this._musicPlayerFacade.clearJamendoTrackList();
   }
 
-  public actionSetPlayingStatus(status: boolean): void {
-    this._musicPlayerFacade.setJamendoTrackPlayingStatus(status);
+  public actionPlayPauseTrack(): void {
+    this._musicPlayerFacade.playPauseJamendoTrack();
+  }
+  public actionSeekTrack(sliderValue: number): void {
+    this._musicPlayerFacade.seekJamendoTrack(sliderValue);
   }
 
   public actionSelectTrack(track: JamendoTrack): void {
@@ -64,8 +69,8 @@ export class JamendoComponent implements OnInit, OnDestroy {
     this._musicPlayerFacade.skipJamendoTrack(skipStatus);
   }
 
-  public actionHideController() {
-    this._musicPlayerFacade.hideJamendoController();
+  public actionCloseController() {
+    this._musicPlayerFacade.closeJamendoController();
   }
   public actionMinimiseController() {
     this._musicPlayerFacade.minimiseJamendoController();

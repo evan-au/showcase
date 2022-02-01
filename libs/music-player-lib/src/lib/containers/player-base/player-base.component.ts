@@ -8,5 +8,5 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerBaseComponent {
-  @Input() inputPlayerType$!: Observable<string>;
+  @Input() inputPlatform$!: Observable<string>;
 }

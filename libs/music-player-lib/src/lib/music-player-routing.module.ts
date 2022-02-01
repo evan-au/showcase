@@ -13,13 +13,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/jamendo/jamendo.module').then((m) => m.JamendoModule),
   },
-  {
-    path: 'local-library',
-    loadChildren: () =>
-      import('./features/local-music/local-music.module').then(
-        (m) => m.LocalMusicModule
-      ),
-  },
 ];
 
 @NgModule({

@@ -1,15 +1,13 @@
 <main
   class="music-player h-full grid grid-rows-[3rem_1fr] bg-gradient-to-tr"
   [ngClass]="{
-    'from-pink-900 to-pink-500': (inputPlayerType$ | async) === 'jamendo',
-    'from-cyan-900 to-cyan-500': (inputPlayerType$ | async) === 'local'
+    'from-pink-900 to-pink-500': (inputPlatform$ | async) === 'jamendo'
   }"
 >
   <header
     class="music-player__header flex items-center justify-between w-full px-4"
     [ngClass]="{
-      'bg-pink-500': (inputPlayerType$ | async) === 'jamendo',
-      'bg-cyan-500': (inputPlayerType$ | async) === 'local'
+      'bg-pink-500': (inputPlatform$ | async) === 'jamendo'
     }"
   >
     <button mat-icon-button utilsBackButton>
@@ -20,16 +18,14 @@
       <ng-content select="[header-label]"></ng-content>
     </div>
 
-    <music-player-menu
-      [inputPlayerType$]="inputPlayerType$"
-    ></music-player-menu>
+    <music-player-menu [inputPlatform$]="inputPlatform$"></music-player-menu>
   </header>
 
   <body class="music-player__body">
     <ng-content select="[body-content]"></ng-content>
   </body>
 
-  <footer class="music-player__footer bg-[rgba(0,0,0,0.15)]">
+  <footer class="music-player__footer">
     <ng-content select="[footer-content]"></ng-content>
   </footer>
 </main>

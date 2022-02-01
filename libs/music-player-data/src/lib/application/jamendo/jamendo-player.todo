@@ -1,0 +1,4 @@
+// TODO 
+
+# 1 - Implement push based architectecture - done
+# 2 - Refactor push based architecture to NgRx store architecture

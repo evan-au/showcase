@@ -5,9 +5,9 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { LocalTrack, JamendoTrack } from '@showcase-ws/music-player-data';
+import { JamendoTrack } from '@showcase-ws/music-player-data';
 import { fadeSlideUpDownAnimation } from '@showcase-ws/utils';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'music-player-controller',
@@ -17,38 +17,38 @@ import { first, Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControllerBaseComponent {
-  @Input() inputJamendoTrack$!: Observable<JamendoTrack>;
-  @Input() inputLocalTrack$!: Observable<LocalTrack>;
+  @Input() inputTrackDuration$!: Observable<number>;
+  @Input() inputTrackProgress$!: Observable<number>;
+  @Input() inputTrackList$!: Observable<JamendoTrack[]>;
+  @Input() inputJamendoActiveTrack$!: Observable<JamendoTrack>;
   @Input() inputControllerSize$!: Observable<string>;
-  @Input() inputPlayerType$!: Observable<string>;
   @Input() inputTrackPlayingStatus$!: Observable<boolean>;
   @Input() inputIsTrackSelected$!: Observable<boolean>;
   @Input() inputDisplayNextButton$!: Observable<boolean>;
   @Input() inputDisplayPreviousButton$!: Observable<boolean>;
 
-  @Output() outputOnClickPlayPause: EventEmitter<boolean> = new EventEmitter();
-  @Output() outputOnClickHide = new EventEmitter();
+  @Output() outputOnClickPlayPause = new EventEmitter();
+  @Output() outputOnClickClose = new EventEmitter();
   @Output() outputOnClickMinimise = new EventEmitter();
   @Output() outputOnClickMaximise = new EventEmitter();
+  @Output() outputOnSlideSeekTrack: EventEmitter<number> = new EventEmitter();
 
   @Output() outputOnClickSkipTrack: EventEmitter<boolean> = new EventEmitter();
 
   public playPauseTrack() {
-    this.inputTrackPlayingStatus$
-      .pipe(first())
-      .subscribe((value) => this.outputOnClickPlayPause.emit((value = !value)));
+    this.outputOnClickPlayPause.emit();
+  }
+
+  public seekTrack(sliderValue: number) {
+    this.outputOnSlideSeekTrack.emit(sliderValue);
   }
 
   public skipTrack(skipStatus: boolean) {
-    if (skipStatus) {
-      this.outputOnClickSkipTrack.emit(skipStatus);
-    } else {
-      this.outputOnClickSkipTrack.emit(skipStatus);
-    }
+    this.outputOnClickSkipTrack.emit(skipStatus);
   }
 
-  public hideController() {
-    this.outputOnClickHide.emit();
+  public closeController() {
+    this.outputOnClickClose.emit();
   }
 
   public minimiseController() {

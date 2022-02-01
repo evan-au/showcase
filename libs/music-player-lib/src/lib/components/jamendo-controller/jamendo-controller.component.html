@@ -1,54 +1,95 @@
 <ng-container *ngIf="inputIsTrackSelected$ | async">
   <div
+    #controlBg
     [@fadeSlideUpDown]
-    class="flex flex-col items-center py-4 transition-all"
-    *ngIf="inputJamendoTrack$ | async as track"
+    class="flex flex-col relative text-light items-center mt-2 overflow-hidden bg-[rgba(0,0,0,0.15)]"
+    *ngIf="inputActiveTrack$ | async as track"
   >
-    <div class="w-full flex justify-between items-center">
-      <button mat-icon-button (click)="minimiseController()">
-        <mat-icon class="text-light">expand_more</mat-icon>
-      </button>
-      <button mat-icon-button (click)="hideController()">
-        <mat-icon class="text-light">close</mat-icon>
-      </button>
+    <div class="absolute min-h-full min-w-full">
+      <img
+        class="blur-sm w-full object-cover rounded-md transition-all duration-500"
+        [src]="track.album_image"
+      />
     </div>
 
-    <div class="text-center text-light">
-      {{ track.name }}
-    </div>
+    <div
+      class="bg-[rgba(0,0,0,0.35)] flex flex-col items-center z-20 w-full h-full"
+    >
+      <div class="w-full flex justify-between items-center z-20">
+        <button mat-icon-button (click)="minimiseController()">
+          <mat-icon class="text-light">expand_more</mat-icon>
+        </button>
+        <button mat-icon-button (click)="closeController()">
+          <mat-icon class="text-light">close</mat-icon>
+        </button>
+      </div>
 
-    <mat-slider
-      [disabled]="track.name === ''"
-      thumbLabel
-      class="w-[90%]"
-      aria-label="unit(s)"
-    ></mat-slider>
+      <div class="text-center flex flex-col items-center">
+        <span class="text-lg lg:text-xl w-[300px] lg:w-full truncate">
+          {{ track.name | titlecase }}
+        </span>
+        <span class="text-md lg:text-lg w-[300px] lg:w-full truncate">
+          {{ track.artist_name | titlecase }}
+        </span>
+        <span class="text-sm w-[300px] lg:w-full truncate">
+          {{ track.album_name | titlecase }}
+        </span>
+      </div>
 
-    <div class="w-8/12 xl:w-1/3 flex items-center justify-around self-center">
-      <button
-        *ngIf="inputDisplayPreviousButton$ | async"
-        mat-icon-button
-        (click)="skipTrack(false)"
+      <div class="flex flex-col items-center w-[90%]">
+        <ng-container *ngIf="inputTrackList$ | async as trackList">
+          <div class="self-end text-xs lg:text-sm">
+            {{
+              trackList.length > 0
+                ? trackList.indexOf(track) < 0
+                  ? 'New playlist'
+                  : trackList.indexOf(track) + 1 + '/' + trackList.length
+                : 'No playlist'
+            }}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="inputTrackDuration$ | async as duration">
+          <mat-slider
+            color="primary"
+            class="w-full"
+            (change)="seekTrack($event)"
+            [ngModel]="inputTrackProgress$ | async"
+            thumbLabel
+            [displayWith]="formatLabel"
+          ></mat-slider>
+          <div class="self-end text-lg">
+            -{{ duration * 1000 | date: 'm:ss' }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div
+        class="w-8/12 xl:w-1/3 flex items-center justify-around self-center mb-4"
       >
-        <mat-icon class="text-light">skip_previous</mat-icon>
-      </button>
-      <button
-        [disabled]="track.name === ''"
-        mat-fab
-        [color]="(inputTrackPlayingStatus$ | async) ? 'warn' : 'primary'"
-        (click)="playPauseTrack()"
-      >
-        <mat-icon class="text-light">{{
-          (inputTrackPlayingStatus$ | async) ? 'pause_arrow' : 'play_arrow'
-        }}</mat-icon>
-      </button>
-      <button
-        *ngIf="inputDisplayNextButton$ | async"
-        mat-icon-button
-        (click)="skipTrack(true)"
-      >
-        <mat-icon class="text-light">skip_next</mat-icon>
-      </button>
+        <button
+          *ngIf="inputDisplayPreviousButton$ | async"
+          mat-icon-button
+          (click)="skipTrack(false)"
+        >
+          <mat-icon class="text-light">skip_previous</mat-icon>
+        </button>
+        <button
+          mat-fab
+          [color]="(inputTrackPlayingStatus$ | async) ? 'warn' : 'primary'"
+          (click)="playPauseTrack()"
+        >
+          <mat-icon class="text-light">{{
+            (inputTrackPlayingStatus$ | async) ? 'pause_arrow' : 'play_arrow'
+          }}</mat-icon>
+        </button>
+        <button
+          *ngIf="inputDisplayNextButton$ | async"
+          mat-icon-button
+          (click)="skipTrack(true)"
+        >
+          <mat-icon class="text-light">skip_next</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </ng-container>

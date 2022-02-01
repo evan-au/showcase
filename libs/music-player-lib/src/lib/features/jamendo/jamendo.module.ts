@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Modules
-import { PlayerBaseModule } from '../../components/player-base/player-base.module';
-import { ControllerBaseModule } from '../../components/controller-base/controller-base.module';
-import { TrackListModule } from '../../components/track-list/track-list.module';
+import { PlayerBaseModule } from '../../containers/player-base/player-base.module';
+import { ControllerBaseModule } from '../../containers/controller-base/controller-base.module';
+import { TrackListBaseModule } from '../../containers/track-list-base/track-list-base.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 // Components
@@ -23,7 +23,7 @@ import { JamendoComponent } from './jamendo.component';
     ]),
     PlayerBaseModule,
     ControllerBaseModule,
-    TrackListModule,
+    TrackListBaseModule,
     SharedUiModule,
   ],
 })

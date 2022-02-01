@@ -1,4 +1,4 @@
-<div [ngSwitch]="inputPlayerType$ | async">
+<div [ngSwitch]="inputPlatform$ | async">
   <div *ngSwitchCase="'jamendo'">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -6,28 +6,6 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="../" class="menu-item-home">
         Home
-      </button>
-
-      <button
-        mat-menu-item
-        routerLink="../local-library"
-        class="menu-item-local"
-      >
-        Local player
-      </button>
-    </mat-menu>
-  </div>
-  <div *ngSwitchCase="'local'">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="../" class="menu-item-home">
-        Home
-      </button>
-
-      <button mat-menu-item routerLink="../jamendo" class="menu-item-jamendo">
-        Jamendo player
       </button>
     </mat-menu>
   </div>

@@ -1,5 +1,5 @@
-<music-player-base-component [inputPlayerType$]="selectorPlayerType$">
-  <p header-label>Jamendo</p>
+<music-player-base-component [inputPlatform$]="selectorPlatform$">
+  <p header-label class="text-sm lg:text-lg">Jamendo music player</p>
 
   <section body-content class="h-full">
     <shared-ui-search
@@ -9,7 +9,8 @@
     ></shared-ui-search>
 
     <music-player-track-list
-      [inputPlayerListType$]="selectorPlayerType$"
+      [inputJamendoActiveTrack$]="selectorActiveTrack$"
+      [inputIsTrackSelected$]="selectorIsTrackPlaying$"
       [inputJamendoTrackList$]="selectorTrackList$"
       (outputJamendoSelectedTrack)="actionSelectTrack($event)"
     ></music-player-track-list>
@@ -17,16 +18,19 @@
 
   <section footer-content>
     <music-player-controller
+      [inputTrackProgress$]="selectorTrackProgress$"
+      [inputTrackDuration$]="selectorTrackDuration$"
       [inputControllerSize$]="selectorControllerSize$"
       [inputIsTrackSelected$]="selectorIsTrackSelected$"
-      [inputJamendoTrack$]="selectorTrack$"
-      [inputPlayerType$]="selectorPlayerType$"
+      [inputTrackList$]="selectorTrackList$"
       [inputDisplayNextButton$]="selectorDisplayNextButton$"
       [inputDisplayPreviousButton$]="selectorDisplayPreviousButton$"
+      [inputJamendoActiveTrack$]="selectorActiveTrack$"
       [inputTrackPlayingStatus$]="selectorIsTrackPlaying$"
-      (outputOnClickPlayPause)="actionSetPlayingStatus($event)"
+      (outputOnClickPlayPause)="actionPlayPauseTrack()"
+      (outputOnSlideSeekTrack)="actionSeekTrack($event)"
       (outputOnClickSkipTrack)="actionSkipTrack($event)"
-      (outputOnClickHide)="actionHideController()"
+      (outputOnClickClose)="actionCloseController()"
       (outputOnClickMinimise)="actionMinimiseController()"
       (outputOnClickMaximise)="actionMaximiseController()"
     ></music-player-controller>

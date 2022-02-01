@@ -1,0 +1,61 @@
+<ng-container *ngIf="inputTrackList$ | async as trackList">
+  <mat-selection-list
+    #trackListSelection
+    *ngIf="trackList.length > 0; else emptyList"
+    [multiple]="false"
+    class="track-list h-full"
+  >
+    <cdk-virtual-scroll-viewport
+      appendOnly
+      itemSize="50"
+      class="track-list__viewport h-[80%] mx-2 lg:w-1/2 overflow-x-hidden"
+      [@listAnimation]="trackList.length"
+    >
+      <mat-list-option
+        class="mb-2"
+        *ngFor="let track of trackList; let i = index"
+        [value]="track"
+        (click)="selectTrack(track)"
+      >
+        <img [src]="track.image" mat-list-avatar class="shadow-md" />
+        <div
+          class="text-ellipsis text-sm transition-all duration-500"
+          mat-line
+          [ngClass]="{
+            'text-light dark:text-dark': track === (inputActiveTrack$ | async)
+          }"
+        >
+          <span class="text-xs"> {{ i + 1 }}.</span
+          ><span> {{ track.name | titlecase }} </span>
+        </div>
+
+        <div mat-line>
+          {{ track.album_name }}
+        </div>
+        <div mat-line>
+          {{ track.artist_name }}
+        </div>
+      </mat-list-option>
+    </cdk-virtual-scroll-viewport>
+  </mat-selection-list>
+  <ng-template #emptyList>
+    <div
+      [@customEmptyList]
+      class="h-full grid place-content-center place-items-center transition-all duration-500"
+    >
+      <div class="text-xl w-4/5">
+        Search for independent music from
+        <span>
+          <a
+            href="https://www.jamendo.com/start"
+            class="text-light dark:text-dark underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ 'Jamendo' | uppercase }}</a
+          >
+        </span>
+        music
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
