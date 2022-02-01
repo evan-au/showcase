@@ -47,7 +47,7 @@ export class JamendoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._subscription = this._musicPlayerFacade
       .searchJamendoTracks()
-      .subscribe((value) => console.log(value, 'From jamendo component'));
+      .subscribe();
   }
 
   public actionClearSearchQuery(): void {
