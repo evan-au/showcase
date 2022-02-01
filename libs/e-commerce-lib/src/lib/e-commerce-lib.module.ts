@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // Modules
 import { ECommerceDataModule } from '@showcase-ws/e-commerce-data';
-
-// Components
-import { FeatHomeComponent } from './features/feat-home/feat-home.component';
+// import { ClientModule } from './client/client.module';
+// import { AdminModule } from './admin/admin.module';
+import { ECommerceRoutingModule } from './e-commerce-routing.module';
 
 @NgModule({
-  declarations: [FeatHomeComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: FeatHomeComponent },
-    ]),
     ECommerceDataModule,
+    ECommerceRoutingModule,
+    // ClientModule,
+    // AdminModule,
   ],
 })
 export class ECommerceLibModule {}
