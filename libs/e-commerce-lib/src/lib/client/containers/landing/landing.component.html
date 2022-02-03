@@ -1,1 +1,13 @@
-<p>Welcome to E-commerce micro app</p>
+<p>E-commerce landing page</p>
+<ng-container *ngIf="products$ | async as products">
+  <div *ngFor="let product of products">{{ product.title }}</div>
+</ng-container>
+<ng-container *ngIf="error$ | async as error">
+  <div>
+    {{
+      error.status === 404
+        ? 'An error occurred. Please retry. If the problem persist contact the support team. Thank you'
+        : 'Technical issue. We are currently working on the problem.'
+    }}
+  </div>
+</ng-container>

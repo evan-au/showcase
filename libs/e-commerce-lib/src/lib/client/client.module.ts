@@ -14,9 +14,12 @@ import { HeaderBannerComponent } from '../client/components/header-banner/header
 import { LogoComponent } from '../client/components/logo/logo.component';
 import { FooterComponent } from '../client/components/footer/footer.component';
 import { ShowcaseComponent } from '../client/components/showcase/showcase.component';
+import { LandingModule } from './features/landing/landing.module';
+// import { LandingComponent } from './containers/landing/landing.component';
 
 @NgModule({
   declarations: [
+    // LandingComponent,
     HeaderComponent,
     HeroComponent,
     NavigationComponent,
@@ -25,6 +28,12 @@ import { ShowcaseComponent } from '../client/components/showcase/showcase.compon
     FooterComponent,
     ShowcaseComponent,
   ],
-  imports: [CommonModule, ClientRoutingModule, BlogModule, SearchStoreModule],
+  imports: [
+    CommonModule,
+    ClientRoutingModule,
+    LandingModule,
+    BlogModule,
+    SearchStoreModule,
+  ],
 })
 export class ClientModule {}
