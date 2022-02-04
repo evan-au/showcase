@@ -18,7 +18,10 @@
       <ng-content select="[header-label]"></ng-content>
     </div>
 
-    <music-player-menu [inputPlatform$]="inputPlatform$"></music-player-menu>
+    <music-player-menu
+      [inputPlatform$]="inputPlatform$"
+      [inputVolume$]="inputVolume$"
+    ></music-player-menu>
   </header>
 
   <body class="music-player__body">

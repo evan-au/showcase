@@ -21,6 +21,7 @@ export class JamendoComponent implements OnInit, OnDestroy {
   public selectorControllerSize$ =
     this._musicPlayerFacade.jamendoControllerSize$;
   public selectorPlatform$ = this._musicPlayerFacade.jamendoPlatform$;
+  public selectorVolume$ = this._musicPlayerFacade.jamendoVolume$;
 
   public selectorTrackDuration$ = this._musicPlayerFacade.jamendoTrackDuration$;
   public selectorActiveTrack$ = this._musicPlayerFacade.jamendoActiveTrack$;

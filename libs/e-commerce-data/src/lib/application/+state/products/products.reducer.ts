@@ -1,9 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import {
-  ErrorInterface,
-  ProductInterface,
-  ProductsActions,
-} from '@showcase-ws/e-commerce-data';
+import * as ProductsActions from './products.actions';
+import { ErrorInterface } from '../../../interfaces/error.interface';
+import { ProductInterface } from '../../../interfaces/product.interface';
 
 export const PRODUCTS_FEATURE_KEY = 'Products';
 
@@ -40,6 +38,6 @@ const ProductsReducer = createReducer(
   }))
 );
 
-export function reducer(state: ProductState | undefined, action: Action) {
+export function reducer(state: ProductState, action: Action) {
   return ProductsReducer(state, action);
 }

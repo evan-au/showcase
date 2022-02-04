@@ -31,6 +31,7 @@ class JamendoPlayerState {
   hasNextButton = true;
   hasPreviousButton = true;
   controllerSize = 'full';
+  volume = 0;
 }
 
 @Injectable({
@@ -49,6 +50,10 @@ export class JamendoStoreService {
   constructor(private _jamendoDataService: JamendoDataService) {}
 
   // Up-stream
+  public volume$ = this._playerState$.pipe(
+    map((state) => state.volume),
+    distinctUntilChanged()
+  );
   public controllerSize$ = this._playerState$.pipe(
     map((state) => state.controllerSize),
     distinctUntilChanged()

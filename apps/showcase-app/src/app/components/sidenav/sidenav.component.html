@@ -5,7 +5,7 @@
       class="sidenav__link"
       [routerLink]="link.routerLink"
       routerLinkActive="sidenav__active-link"
-      [routerLinkActiveOptions]="{ exact: false }"
+      [routerLinkActiveOptions]="{ exact: true }"
       (click)="dismissBottomSheet()"
       >{{ link.linkLabel }}
     </mat-list-option>

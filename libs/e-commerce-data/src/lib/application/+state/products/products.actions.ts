@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { ErrorInterface, ProductInterface } from '@showcase-ws/e-commerce-data';
+import { ErrorInterface } from '../../../interfaces/error.interface';
+import { ProductInterface } from '../../../interfaces/product.interface';
+// import { ErrorInterface, ProductInterface } from '@showcase-ws/e-commerce-data';
 
 export const initAction = createAction('[Landing Page] Init');
 

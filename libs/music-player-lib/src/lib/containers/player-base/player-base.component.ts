@@ -9,4 +9,5 @@ import { Observable } from 'rxjs';
 })
 export class PlayerBaseComponent {
   @Input() inputPlatform$!: Observable<string>;
+  @Input() inputVolume$!: Observable<number>;
 }

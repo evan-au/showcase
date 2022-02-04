@@ -9,6 +9,7 @@ import { JamendoStoreService } from './jamendo/jamendo.store.service';
 })
 export class MusicPlayerFacade {
   public jamendoActiveTrack$ = this._jamendoStore.activeTrack$;
+  public jamendoVolume$ = this._jamendoStore.volume$;
   public jamendoTrackDuration$ = this._jamendoStore.trackDuration$;
   public jamendoTrackProgress$ = this._jamendoStore.trackProgress$;
   public jamendoControllerSize$ = this._jamendoStore.controllerSize$;
