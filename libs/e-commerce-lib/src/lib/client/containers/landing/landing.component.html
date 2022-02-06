@@ -1,3 +1,5 @@
+<!-- <p>E-commerce landing page</p> -->
+
 <ng-container *ngIf="products$ | async as products">
   <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
     <p>E-commerce landing page</p>
@@ -24,7 +26,9 @@
   <div>
     {{
       error.status === 404
-        ? 'An error occurred. Please retry. If the problem persist contact the support team. Thank you'
+        ? 'A ' +
+          error.status +
+          ' error occurred. Please retry. If the problem persist contact the support team. Thank you'
         : 'Technical issue. We are currently working on the problem.'
     }}
   </div>

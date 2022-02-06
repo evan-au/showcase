@@ -1,19 +1,19 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ProductsActions from './products.actions';
-import { ErrorInterface } from '../../../interfaces/error.interface';
-import { ProductInterface } from '../../../interfaces/product.interface';
+import { ErrorInterface } from '../../../../interfaces/error.interface';
+import { ProductInterface } from '../../../../interfaces/product.interface';
 
 export const PRODUCTS_FEATURE_KEY = 'Products';
 
 export interface ProductState {
-  products: ProductInterface[];
+  products: ProductInterface[] | null;
   isLoading: boolean | null;
   hasSuccessfullyLoaded: boolean | null;
   error: ErrorInterface | null;
 }
 
 export const initialState: ProductState = {
-  products: [],
+  products: null,
   isLoading: null,
   hasSuccessfullyLoaded: null,
   error: null,

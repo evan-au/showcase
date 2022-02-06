@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ECommerceDataService } from '../services/e-commerce-data.service';
-import { ECommerceStoreService } from './e-commerce.store.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ErrorInterface } from '../interfaces/error.interface';
+import { ProductInterface } from '../interfaces/product.interface';
+import { ProductsActions, ProductsSelectors } from './store/ngrx';
 
 @Injectable({
   providedIn: 'any',
 })
 export class ECommerceFacade {
-  public products$ = this._eCommerceStoreService.storeProducts$;
+  public products$: Observable<ProductInterface[] | null> =
+    this._ngrxStore.select(ProductsSelectors.getAllProducts);
+  public error$: Observable<ErrorInterface | null> = this._ngrxStore.select(
+    ProductsSelectors.getProductsError
+  );
 
-  constructor(
-    private _eCommerceDataService: ECommerceDataService,
-    private _eCommerceStoreService: ECommerceStoreService
-  ) {}
+  constructor(private _ngrxStore: Store) {}
 
   public loadProducts() {
-    this._eCommerceDataService.loadData().subscribe((products) => {
-      this._eCommerceStoreService.saveProducts(products);
-    });
+    this._ngrxStore.dispatch(ProductsActions.initAction());
   }
 }

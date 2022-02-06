@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import {
+  ECommerceFacade,
   ErrorInterface,
   ProductInterface,
-  ProductsActions,
-  ProductsSelectors,
 } from '@showcase-ws/e-commerce-data';
 import { Observable } from 'rxjs';
 
@@ -14,14 +12,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  products$!: Observable<ProductInterface[]>;
-  error$!: Observable<ErrorInterface | null>;
+  products$: Observable<ProductInterface[] | null> = this._facade.products$;
+  error$: Observable<ErrorInterface | null> = this._facade.error$;
 
-  constructor(private _store: Store) {}
+  constructor(private _facade: ECommerceFacade) {}
 
   ngOnInit(): void {
-    this._store.dispatch(ProductsActions.initAction());
-    this.products$ = this._store.select(ProductsSelectors.getAllProducts);
-    this.error$ = this._store.select(ProductsSelectors.getProductsError);
+    this._facade.loadProducts();
   }
 }

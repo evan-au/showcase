@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ECommerceFacade } from './application/e-commerce.facade';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ProductsEffects } from './application/+state/products/products.effects';
-import * as fromProductsStore from './application/+state/products/products.reducer';
+import { ProductsEffects } from './application/store/ngrx/products/products.effects';
+import * as fromProductsStore from './application/store/ngrx/products/products.reducer';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
