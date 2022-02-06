@@ -25,17 +25,3 @@
     @apply lg:w-4/5 my-4 bg-gray-400;
   }
 }
-
-// Style scrollbar
-::-webkit-scrollbar {
-  width: 6px;
-  @apply bg-light;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-accent;
-  -webkit-border-radius: 2rem;
-}
-::-webkit-scrollbar-corner {
-  border-radius: 50%;
-}

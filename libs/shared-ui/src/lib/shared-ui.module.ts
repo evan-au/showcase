@@ -18,6 +18,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 const angularMaterialModules = [
   MatButtonModule,
@@ -30,6 +31,7 @@ const angularMaterialModules = [
   MatProgressBarModule,
   MatInputModule,
   MatDialogModule,
+  MatCardModule,
 ];
 
 @NgModule({
