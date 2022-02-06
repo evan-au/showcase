@@ -15,11 +15,9 @@ import { LogoComponent } from '../client/components/logo/logo.component';
 import { FooterComponent } from '../client/components/footer/footer.component';
 import { ShowcaseComponent } from '../client/components/showcase/showcase.component';
 import { LandingModule } from './features/landing/landing.module';
-// import { LandingComponent } from './containers/landing/landing.component';
 
 @NgModule({
   declarations: [
-    // LandingComponent,
     HeaderComponent,
     HeroComponent,
     NavigationComponent,

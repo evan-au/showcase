@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ECommerceFacade,
-  ErrorInterface,
   ProductInterface,
 } from '@showcase-ws/e-commerce-data';
 import { Observable } from 'rxjs';
@@ -13,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class LandingComponent implements OnInit {
   products$: Observable<ProductInterface[] | null> = this._facade.products$;
-  error$: Observable<ErrorInterface | null> = this._facade.error$;
+  isLoading$: Observable<boolean | null> = this._facade.isLoading$;
 
   constructor(private _facade: ECommerceFacade) {}
 

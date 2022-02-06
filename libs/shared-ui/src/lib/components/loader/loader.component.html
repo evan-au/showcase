@@ -1,0 +1,10 @@
+<ng-container *ngIf="isLoading$ | async">
+  <div class="w-full h-full bg-[rgba(0,0,0,0.5)] grid place-items-center">
+    <div class="w-[80%]" *ngIf="loaderStyle === 'progress'; else spinner">
+      <mat-progress-bar color="warn" mode="query"></mat-progress-bar>
+    </div>
+    <ng-template #spinner>
+      <mat-spinner color="warn"></mat-spinner>
+    </ng-template>
+  </div>
+</ng-container>

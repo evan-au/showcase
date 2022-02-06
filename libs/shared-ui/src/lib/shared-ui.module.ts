@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { SearchComponent } from './components/search/search.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { DisplayErrorComponent } from './components/display-error/display-error.component';
 
 // Angular material modules
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +21,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const angularMaterialModules = [
   MatButtonModule,
@@ -32,11 +36,18 @@ const angularMaterialModules = [
   MatInputModule,
   MatDialogModule,
   MatCardModule,
+  MatProgressSpinnerModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, LoaderComponent, DisplayErrorComponent],
   imports: [CommonModule, ReactiveFormsModule, angularMaterialModules],
-  exports: [angularMaterialModules, SearchComponent],
+  exports: [
+    angularMaterialModules,
+    SearchComponent,
+    LoaderComponent,
+    DisplayErrorComponent,
+  ],
 })
 export class SharedUiModule {}

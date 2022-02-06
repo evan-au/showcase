@@ -16,8 +16,6 @@ export class LoadingService {
 
   public isLoading$ = this._loadingSubject.asObservable();
 
-  // constructor() { }
-
   public loadUntilCompleted<T>(observable$: Observable<T>): Observable<T> {
     return of(null).pipe(
       tap(() => this.loadingOn()),

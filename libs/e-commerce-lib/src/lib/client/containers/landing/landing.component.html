@@ -1,8 +1,7 @@
-<!-- <p>E-commerce landing page</p> -->
+<p>E-commerce landing page</p>
 
-<ng-container *ngIf="products$ | async as products">
+<ng-container *ngIf="products$ | async as products; else emptyCollection">
   <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
-    <p>E-commerce landing page</p>
     <mat-card class="w-[300px]" *ngFor="let product of products">
       <mat-card-header>
         <div mat-card-avatar class="header-image"></div>
@@ -22,14 +21,9 @@
     </mat-card>
   </cdk-virtual-scroll-viewport>
 </ng-container>
-<ng-container *ngIf="error$ | async as error">
-  <div>
-    {{
-      error.status === 404
-        ? 'A ' +
-          error.status +
-          ' error occurred. Please retry. If the problem persist contact the support team. Thank you'
-        : 'Technical issue. We are currently working on the problem.'
-    }}
-  </div>
-</ng-container>
+
+<ng-template #emptyCollection>
+  <div>Empty Collection</div>
+</ng-template>
+
+<shared-ui-loader [isLoading$]="isLoading$"></shared-ui-loader>

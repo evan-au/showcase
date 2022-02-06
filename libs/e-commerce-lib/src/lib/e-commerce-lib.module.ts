@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 // Modules
 import { ECommerceDataModule } from '@showcase-ws/e-commerce-data';
-// import { ClientModule } from './client/client.module';
-// import { AdminModule } from './admin/admin.module';
 import { ECommerceRoutingModule } from './e-commerce-routing.module';
+// import { SharedUiModule } from '@showcase-ws/shared-ui';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [],
@@ -13,8 +13,7 @@ import { ECommerceRoutingModule } from './e-commerce-routing.module';
     CommonModule,
     ECommerceDataModule,
     ECommerceRoutingModule,
-    // ClientModule,
-    // AdminModule,
+    SharedModule,
   ],
 })
 export class ECommerceLibModule {}

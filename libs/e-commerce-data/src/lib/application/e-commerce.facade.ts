@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ErrorInterface } from '../interfaces/error.interface';
 import { ProductInterface } from '../interfaces/product.interface';
 import { ProductsActions, ProductsSelectors } from './store/ngrx';
 
@@ -11,8 +10,9 @@ import { ProductsActions, ProductsSelectors } from './store/ngrx';
 export class ECommerceFacade {
   public products$: Observable<ProductInterface[] | null> =
     this._ngrxStore.select(ProductsSelectors.getAllProducts);
-  public error$: Observable<ErrorInterface | null> = this._ngrxStore.select(
-    ProductsSelectors.getProductsError
+
+  public isLoading$: Observable<boolean | null> = this._ngrxStore.select(
+    ProductsSelectors.getIsLoading
   );
 
   constructor(private _ngrxStore: Store) {}

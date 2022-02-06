@@ -73,6 +73,12 @@ html,
   @apply border border-light transition-colors duration-500;
 }
 
+.error-snackbar {
+  .mat-button-wrapper {
+    @apply text-light;
+  }
+}
+
 // Style scrollbar
 ::-webkit-scrollbar {
   width: 6px;
