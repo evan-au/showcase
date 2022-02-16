@@ -14,36 +14,21 @@ import {
   take,
 } from 'rxjs';
 import { Howl } from 'howler';
-import { JamendoTrack } from '../../model/jamendo-track';
+import { JamendoTrack } from '../../interfaces/jamendo-track';
 import { JamendoDataService } from '../../services/jamendo-data.service';
 import { UntilDestroy } from '@ngneat/until-destroy';
-
-class JamendoPlayerState {
-  isTrackPlaying = false;
-  isTrackSelected = false;
-  trackDuration = 0;
-  trackProgress = 0;
-  activeTrack!: JamendoTrack;
-  searchField = new FormControl('');
-  platform = 'jamendo';
-  track!: JamendoTrack;
-  trackList: JamendoTrack[] = [];
-  hasNextButton = true;
-  hasPreviousButton = true;
-  controllerSize = 'full';
-  volume = 0;
-}
+import { MusicPlayerState } from '../../state/music-player.state';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
-export class JamendoStoreService {
+export class MusicPlayerRepositoryService {
   private _howlPlayer!: Howl;
 
-  private _state = new JamendoPlayerState();
-  private _playerStore = new BehaviorSubject<JamendoPlayerState>(this._state);
-  private _playerState$: Observable<JamendoPlayerState> =
+  private _state = new MusicPlayerState();
+  private _playerStore = new BehaviorSubject<MusicPlayerState>(this._state);
+  private _playerState$: Observable<MusicPlayerState> =
     this._playerStore.asObservable();
 
   constructor(private _jamendoDataService: JamendoDataService) {}

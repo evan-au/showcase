@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ProductsActions from './products.actions';
-import { ProductInterface } from '../../../../interfaces/product.interface';
+import { ProductInterface } from '../../../interfaces/product.interface';
 
 export const PRODUCTS_FEATURE_KEY = 'Products';
 

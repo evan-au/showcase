@@ -12,63 +12,60 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JamendoComponent implements OnInit {
-  public selectorControllerSize$ =
-    this._musicPlayerFacade.jamendoControllerSize$;
-  public selectorPlatform$ = this._musicPlayerFacade.jamendoPlatform$;
-  public selectorVolume$ = this._musicPlayerFacade.jamendoVolume$;
+  public selectorControllerSize$ = this._musicPlayerFacade.controllerSize$;
+  public selectorPlatform$ = this._musicPlayerFacade.platform$;
+  public selectorVolume$ = this._musicPlayerFacade.volume$;
 
-  public selectorTrackDuration$ = this._musicPlayerFacade.jamendoTrackDuration$;
-  public selectorActiveTrack$ = this._musicPlayerFacade.jamendoActiveTrack$;
-  public selectorTrackProgress$ = this._musicPlayerFacade.jamendoTrackProgress$;
+  public selectorTrackDuration$ = this._musicPlayerFacade.trackDuration$;
+  public selectorActiveTrack$ = this._musicPlayerFacade.activeTrack$;
+  public selectorTrackProgress$ = this._musicPlayerFacade.trackProgress$;
 
   public selectorDisplayNextButton$ =
-    this._musicPlayerFacade.jamendoDisplayNextButton$;
+    this._musicPlayerFacade.displayNextButton$;
 
   public selectorDisplayPreviousButton$ =
-    this._musicPlayerFacade.jamendoDisplayPreviousButton$;
+    this._musicPlayerFacade.displayPreviousButton$;
 
-  public selectorSearchField$ = this._musicPlayerFacade.jamendoSearchField$;
+  public selectorSearchField$ = this._musicPlayerFacade.searchField$;
 
-  public selectorIsTrackPlaying$ =
-    this._musicPlayerFacade.jamendoIsTrackPlaying$;
+  public selectorIsTrackPlaying$ = this._musicPlayerFacade.isTrackPlaying$;
 
-  public selectorTrackList$ = this._musicPlayerFacade.jamendoTrackList$;
+  public selectorTrackList$ = this._musicPlayerFacade.trackList$;
 
-  public selectorIsTrackSelected$ =
-    this._musicPlayerFacade.jamendoIsTrackSelected$;
+  public selectorIsTrackSelected$ = this._musicPlayerFacade.isTrackSelected$;
 
   constructor(private _musicPlayerFacade: MusicPlayerFacade) {}
 
   ngOnInit(): void {
-    this._musicPlayerFacade.searchJamendoTracks().subscribe();
+    this._musicPlayerFacade.searchTracks().subscribe();
   }
 
   public actionClearSearchQuery(): void {
-    this._musicPlayerFacade.clearJamendoTrackList();
+    this._musicPlayerFacade.clearTrackList();
   }
 
   public actionPlayPauseTrack(): void {
-    this._musicPlayerFacade.playPauseJamendoTrack();
+    this._musicPlayerFacade.playPauseTrack();
   }
   public actionSeekTrack(sliderValue: number): void {
-    this._musicPlayerFacade.seekJamendoTrack(sliderValue);
+    this._musicPlayerFacade.seekTrack(sliderValue);
   }
 
   public actionSelectTrack(track: JamendoTrack): void {
-    this._musicPlayerFacade.selectJamendoTrack(track);
+    this._musicPlayerFacade.selectTrack(track);
   }
 
   public actionSkipTrack(skipStatus: boolean): void {
-    this._musicPlayerFacade.skipJamendoTrack(skipStatus);
+    this._musicPlayerFacade.skipTrack(skipStatus);
   }
 
   public actionCloseController() {
-    this._musicPlayerFacade.closeJamendoController();
+    this._musicPlayerFacade.closeController();
   }
   public actionMinimiseController() {
-    this._musicPlayerFacade.minimiseJamendoController();
+    this._musicPlayerFacade.minimiseController();
   }
   public actionMaximiseController() {
-    this._musicPlayerFacade.maximiseJamendoController();
+    this._musicPlayerFacade.maximiseController();
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { ErrorInterface } from '../../../../interfaces/error.interface';
-import { ProductInterface } from '../../../../interfaces/product.interface';
+import { ErrorInterface } from '../../../interfaces/error.interface';
+import { ProductInterface } from '../../../interfaces/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError, concatMap, map, of, tap } from 'rxjs';
 import { ProductsActions } from '../index';

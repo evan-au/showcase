@@ -8,7 +8,6 @@ import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 // Components
 import { HomeComponent } from './components/home/home.component';
-// import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 
 @NgModule({
   declarations: [HomeComponent],

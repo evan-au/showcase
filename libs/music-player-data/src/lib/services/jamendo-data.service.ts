@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { shareReplay, map, BehaviorSubject, catchError, of } from 'rxjs';
-import { JamendoResponse } from '../model/jamendo-response';
-import { JamendoTrack } from '../model/jamendo-track';
+import { JamendoResponse } from '../interfaces/jamendo-response';
+import { JamendoTrack } from '../interfaces/jamendo-track';
 
 @Injectable({
   providedIn: 'root',
 })
+@UntilDestroy({ checkProperties: true })
 export class JamendoDataService {
   private _trackListSubject = new BehaviorSubject<JamendoTrack[]>([]);
   public trackList$ = this._trackListSubject.asObservable();
