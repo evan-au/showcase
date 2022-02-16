@@ -12,11 +12,11 @@ import {
   first,
   timer,
   take,
-  Subscription,
 } from 'rxjs';
 import { Howl } from 'howler';
 import { JamendoTrack } from '../../model/jamendo-track';
 import { JamendoDataService } from '../../services/jamendo-data.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 class JamendoPlayerState {
   isTrackPlaying = false;
@@ -34,14 +34,13 @@ class JamendoPlayerState {
   volume = 0;
 }
 
+@UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class JamendoStoreService {
   private _howlPlayer!: Howl;
-  private _trackCountdownSubscription = new Subscription();
-  private _progressSubscription = new Subscription();
-  private _trackPlayingSubscription = new Subscription();
+
   private _state = new JamendoPlayerState();
   private _playerStore = new BehaviorSubject<JamendoPlayerState>(this._state);
   private _playerState$: Observable<JamendoPlayerState> =
@@ -121,8 +120,6 @@ export class JamendoStoreService {
     this._howlPlayer.fade(1, 0, 1500);
     setTimeout(() => {
       this._howlPlayer.stop();
-      this._trackCountdownSubscription.unsubscribe();
-      this._progressSubscription.unsubscribe();
     }, 1000);
   }
 
@@ -189,8 +186,6 @@ export class JamendoStoreService {
     this._playerStore.next(
       (this._state = { ...this._state, controllerSize: 'full' })
     );
-    this._trackCountdownSubscription.unsubscribe();
-    this._progressSubscription.unsubscribe();
   }
 
   public skipTrack(skipStatus: boolean) {
@@ -204,10 +199,6 @@ export class JamendoStoreService {
         const index = trackList.indexOf(track);
         if (index !== trackList.length - 1) {
           this._startTrack(trackList[index + 1]);
-
-          this._trackPlayingSubscription.unsubscribe();
-          this._trackCountdownSubscription.unsubscribe();
-          this._progressSubscription.unsubscribe();
         } else {
           this._startTrack(trackList[0]);
         }
@@ -217,10 +208,6 @@ export class JamendoStoreService {
 
         if (index > 0) {
           this._startTrack(trackList[index - 1]);
-
-          this._trackPlayingSubscription.unsubscribe();
-          this._trackCountdownSubscription.unsubscribe();
-          this._progressSubscription.unsubscribe();
         } else {
           this._startTrack(trackList[trackList.length - 1]);
         }
@@ -229,7 +216,7 @@ export class JamendoStoreService {
   }
 
   public playPauseTrack() {
-    this._trackPlayingSubscription = this.isTrackPlaying$
+    this.isTrackPlaying$
       .pipe(
         first(),
         map((isTrackPlaying) => {
@@ -240,17 +227,12 @@ export class JamendoStoreService {
             this._playerStore.next(
               (this._state = { ...this._state, isTrackPlaying: true })
             );
-            this._trackCountdownSubscription.unsubscribe();
-            this._progressSubscription.unsubscribe();
           } else {
             this._howlPlayer.pause();
 
             this._playerStore.next(
               (this._state = { ...this._state, isTrackPlaying: false })
             );
-            this._trackPlayingSubscription.unsubscribe();
-            this._trackCountdownSubscription.unsubscribe();
-            this._progressSubscription.unsubscribe();
           }
         })
       )
@@ -263,7 +245,7 @@ export class JamendoStoreService {
   }
 
   private _updateTrackTimer() {
-    this._trackCountdownSubscription = timer(0, 1000)
+    timer(0, 1000)
       .pipe(
         switchMap(() => {
           const seek = this._howlPlayer.seek();
@@ -288,7 +270,7 @@ export class JamendoStoreService {
   }
 
   private _updateProgressSlider() {
-    this._progressSubscription = timer(0, 1000)
+    timer(0, 1000)
       .pipe(
         switchMap(() => {
           const seek = this._howlPlayer.seek();
@@ -340,8 +322,6 @@ export class JamendoStoreService {
       (this._state = { ...this._state, activeTrack: track })
     );
     this._playerStore.next((this._state = { ...this._state, track }));
-    this._trackCountdownSubscription.unsubscribe();
-    this._progressSubscription.unsubscribe();
     this._updateTrackTimer();
     this._updateProgressSlider();
   }
@@ -356,9 +336,6 @@ export class JamendoStoreService {
     );
 
     this._playerStore.next((this._state = { ...this._state, trackList: [] }));
-    this._trackPlayingSubscription.unsubscribe();
-    this._trackCountdownSubscription.unsubscribe();
-    this._progressSubscription.unsubscribe();
   }
 
   private _playNextSong() {
@@ -373,13 +350,8 @@ export class JamendoStoreService {
       } else {
         this._startTrack(trackList[0]);
       }
-
-      this._trackCountdownSubscription.unsubscribe();
-      this._progressSubscription.unsubscribe();
     } else {
       this._howlPlayer.stop();
-      this._trackCountdownSubscription.unsubscribe();
-      this._progressSubscription.unsubscribe();
     }
   }
 }

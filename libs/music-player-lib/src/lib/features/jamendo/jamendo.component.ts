@@ -1,23 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   JamendoTrack,
   MusicPlayerFacade,
 } from '@showcase-ws/music-player-data';
-import { Subscription } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   templateUrl: './jamendo.component.html',
   styleUrls: ['./jamendo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JamendoComponent implements OnInit, OnDestroy {
-  private _subscription!: Subscription;
-
+export class JamendoComponent implements OnInit {
   public selectorControllerSize$ =
     this._musicPlayerFacade.jamendoControllerSize$;
   public selectorPlatform$ = this._musicPlayerFacade.jamendoPlatform$;
@@ -46,9 +40,7 @@ export class JamendoComponent implements OnInit, OnDestroy {
   constructor(private _musicPlayerFacade: MusicPlayerFacade) {}
 
   ngOnInit(): void {
-    this._subscription = this._musicPlayerFacade
-      .searchJamendoTracks()
-      .subscribe();
+    this._musicPlayerFacade.searchJamendoTracks().subscribe();
   }
 
   public actionClearSearchQuery(): void {
@@ -78,9 +70,5 @@ export class JamendoComponent implements OnInit, OnDestroy {
   }
   public actionMaximiseController() {
     this._musicPlayerFacade.maximiseJamendoController();
-  }
-
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe();
   }
 }
