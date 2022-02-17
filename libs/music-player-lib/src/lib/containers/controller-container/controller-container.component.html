@@ -1,0 +1,37 @@
+<div [ngSwitch]="inputControllerSize$ | async">
+  <div *ngSwitchCase="'full'">
+    <player-controller
+      [inputDisplayNextButton$]="inputDisplayNextButton$"
+      [inputDisplayPreviousButton$]="inputDisplayPreviousButton$"
+      [inputIsTrackSelected$]="inputIsTrackSelected$"
+      [inputActiveTrack$]="inputJamendoActiveTrack$"
+      [inputTrackList$]="inputTrackList$"
+      [inputTrackDuration$]="inputTrackDuration$"
+      [inputTrackProgress$]="inputTrackProgress$"
+      [inputTrackPlayingStatus$]="inputTrackPlayingStatus$"
+      (outputOnClickClose)="closeController()"
+      (outputOnClickPlayPause)="playPauseTrack()"
+      (outputOnSlideSeekTrack)="seekTrack($event)"
+      (outputOnClickMaximise)="maximiseController()"
+      (outputOnClickMinimise)="minimiseController()"
+      (outputOnClickSkipTrack)="skipTrack($event)"
+    ></player-controller>
+  </div>
+  <div *ngSwitchCase="'mini'">
+    <ng-container *ngIf="inputIsTrackSelected$ | async">
+      <div
+        [@fadeSlideUpDown]
+        class="flex flex-col items-center py-4 bg-[rgba(0,0,0,0.15)] transition-all"
+      >
+        <div class="w-full flex justify-between items-center px-2">
+          <button mat-icon-button (click)="maximiseController()">
+            <mat-icon class="text-light">expand_less</mat-icon>
+          </button>
+          <button mat-icon-button (click)="closeController()">
+            <mat-icon class="text-light">close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

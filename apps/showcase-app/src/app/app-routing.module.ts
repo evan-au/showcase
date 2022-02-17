@@ -20,16 +20,16 @@ const routes: Routes = [
         (m) => m.MusicPlayerLibModule
       ),
   },
-  {
-    path: 'chat-app',
-    loadChildren: () =>
-      import('@showcase-ws/chat-lib').then((m) => m.ChatLibModule),
-  },
-  {
-    path: 'budget-app',
-    loadChildren: () =>
-      import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
-  },
+  // {
+  //   path: 'chat-app',
+  //   loadChildren: () =>
+  //     import('@showcase-ws/chat-lib').then((m) => m.ChatLibModule),
+  // },
+  // {
+  //   path: 'budget-app',
+  //   loadChildren: () =>
+  //     import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
+  // },
   {
     path: '**',
     loadChildren: () =>

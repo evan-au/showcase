@@ -1,12 +1,13 @@
 // Modules
 export * from './lib/e-commerce-data.module';
 
-// Facade
-export * from './lib/e-commerce.facade';
+// Facades
+export * from './lib/client/client.facade';
 
 // Interfaces
-export * from './lib/interfaces/product.interface';
-export * from './lib/interfaces/error.interface';
+export * from './lib/client/interfaces/product.interface';
+export * from './lib/client/interfaces/products-state.interface';
+export * from './lib/client/interfaces/error.interface';
 
 // NgRx store
-export * from './lib/store/ngrx';
+export * from './lib/client/store/ngrx';

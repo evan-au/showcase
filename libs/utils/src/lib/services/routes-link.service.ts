@@ -19,14 +19,14 @@ const links: Link[] = [
     routerLink: 'music-player-app',
     linkLabel: 'Music player',
   },
-  {
-    routerLink: 'chat-app',
-    linkLabel: 'Chat',
-  },
-  {
-    routerLink: 'budget-app',
-    linkLabel: 'Budget',
-  },
+  // {
+  //   routerLink: 'chat-app',
+  //   linkLabel: 'Chat',
+  // },
+  // {
+  //   routerLink: 'budget-app',
+  //   linkLabel: 'Budget',
+  // },
 ];
 
 @Injectable({

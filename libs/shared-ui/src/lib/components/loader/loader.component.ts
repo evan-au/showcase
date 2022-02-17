@@ -7,6 +7,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
-  @Input() loaderStyle: 'progress' | 'spinner' = 'progress';
-  @Input() isLoading$!: Observable<boolean | null>;
+  @Input() inputLoaderStyle: 'progress' | 'spinner' = 'progress';
+  @Input() inputIsLoading$!: Observable<boolean | null>;
 }

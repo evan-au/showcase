@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './containers/landing/landing.component';
+import { LandingContainerComponent } from './containers/landing-container/landing-container.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LandingComponent,
+    component: LandingContainerComponent,
   },
-  {
-    path: 'blog',
-    loadChildren: () =>
-      import('./features/blog/blog.module').then((m) => m.BlogModule),
-  },
+  // {
+  //   path: 'blog',
+  //   loadChildren: () =>
+  //     import('./features/blog/blog.module').then((m) => m.BlogModule),
+  // },
 ];
 
 @NgModule({

@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './components/home/home.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { RouterModule, Routes } from '@angular/router';
 
 // Routes
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: LandingComponent,
   },
   {
     path: 'jamendo',
     loadChildren: () =>
-      import('./features/jamendo/jamendo.module').then((m) => m.JamendoModule),
+      import('./features/jamendo-player/jamendo-player.module').then(
+        (m) => m.JamendoModule
+      ),
   },
 ];
 

@@ -28,61 +28,61 @@ export class MusicPlayerRepositoryService {
 
   private _state = new MusicPlayerState();
   private _playerStore = new BehaviorSubject<MusicPlayerState>(this._state);
-  private _playerState$: Observable<MusicPlayerState> =
+  private _playerStore$: Observable<MusicPlayerState> =
     this._playerStore.asObservable();
 
   constructor(private _jamendoDataService: JamendoDataService) {}
 
   // Up-stream
-  public volume$ = this._playerState$.pipe(
+  public volume$ = this._playerStore$.pipe(
     map((state) => state.volume),
     distinctUntilChanged()
   );
-  public controllerSize$ = this._playerState$.pipe(
+  public controllerSize$ = this._playerStore$.pipe(
     map((state) => state.controllerSize),
     distinctUntilChanged()
   );
-  public activeTrack$ = this._playerState$.pipe(
+  public activeTrack$ = this._playerStore$.pipe(
     map((state) => state.activeTrack),
     distinctUntilChanged()
   );
-  public trackDuration$ = this._playerState$.pipe(
+  public trackDuration$ = this._playerStore$.pipe(
     map((state) => state.trackDuration),
     distinctUntilChanged()
   );
-  public trackProgress$ = this._playerState$.pipe(
+  public trackProgress$ = this._playerStore$.pipe(
     map((state) => state.trackProgress),
     distinctUntilChanged()
   );
-  public isTrackPlaying$ = this._playerState$.pipe(
+  public isTrackPlaying$ = this._playerStore$.pipe(
     map((state) => state.isTrackPlaying),
     distinctUntilChanged()
   );
-  public isTrackSelected$ = this._playerState$.pipe(
+  public isTrackSelected$ = this._playerStore$.pipe(
     map((state) => state.isTrackSelected),
     distinctUntilChanged()
   );
-  public searchField$ = this._playerState$.pipe(
+  public searchField$ = this._playerStore$.pipe(
     map((state) => state.searchField),
     distinctUntilChanged()
   );
-  public platform$ = this._playerState$.pipe(
+  public platform$ = this._playerStore$.pipe(
     map((state) => state.platform),
     distinctUntilChanged()
   );
-  public track$ = this._playerState$.pipe(
+  public track$ = this._playerStore$.pipe(
     map((state) => state.track),
     distinctUntilChanged()
   );
-  public trackList$ = this._playerState$.pipe(
+  public trackList$ = this._playerStore$.pipe(
     map((state) => state.trackList),
     distinctUntilChanged()
   );
-  public hasPreviousButton$ = this._playerState$.pipe(
+  public hasPreviousButton$ = this._playerStore$.pipe(
     map((state) => state.hasPreviousButton),
     distinctUntilChanged()
   );
-  public hasNextButton$ = this._playerState$.pipe(
+  public hasNextButton$ = this._playerStore$.pipe(
     map((state) => state.hasNextButton),
     distinctUntilChanged()
   );

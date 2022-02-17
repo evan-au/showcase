@@ -21,7 +21,6 @@
           "error",
           {
             "type": "element",
-            "prefix": "music-player",
             "style": "kebab-case"
           }
         ]

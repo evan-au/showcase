@@ -1,0 +1,158 @@
+<main
+  class="h-full grid grid-rows-[8%_1fr_5%] bg-gradient-to-br from-light to-dark dark:from-dark dark:to-light"
+>
+  <header class="shadow-md flex items-center justify-between px-8">
+    <span class="text-xl"> Bazar </span>
+    <button mat-icon-button>
+      <mat-icon [matBadge]="10" [matBadgeHidden]="false">
+        shopping_bag
+      </mat-icon>
+    </button>
+  </header>
+  <body>
+    <shared-ui-loader [inputIsLoading$]="isLoading$">
+      <ng-container *ngIf="products$ | async; else emptyCollection">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
+          <div class="flex flex-col p-8">
+            <div>
+              <span class="text-xl"> Men Clothing </span>
+              <div class="my-4 lg:grid lg:grid-cols-4 lg:gap-4">
+                <mat-card
+                  class="h-[400px] bg-gradient-to-tr from-gray-50 to-gray-300"
+                  *ngFor="let product of menClothing$ | async"
+                >
+                  <div class="h-full grid grid-rows-[60%_2fr_1fr] gap-2">
+                    <div
+                      class="flex items-center justify-center bg-white shadow-md rounded-sm"
+                    >
+                      <img
+                        class="h-3/4 object-contain"
+                        mat-card-image
+                        [src]="product.image"
+                        alt="Image of products"
+                      />
+                    </div>
+                    <div class="flex justify-center px-2">
+                      <p class="text-lg text-center">
+                        {{ product.title }}
+                      </p>
+                    </div>
+
+                    <div class="w-full flex items-center justify-around">
+                      <button
+                        mat-stroked-button
+                        class="bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-800"
+                      >
+                        View
+                      </button>
+                      <button
+                        mat-stroked-button
+                        class="bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-800"
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+
+            <div>
+              Women Clothing
+              <div class="lg:grid lg:grid-cols-4 lg:gap-4">
+                <mat-card
+                  class="h-[400px] flex flex-col"
+                  *ngFor="let product of womenClothing$ | async"
+                >
+                  <img
+                    class="w-full h-3/5 object-contain"
+                    mat-card-image
+                    [src]="product.image"
+                    alt="Image of products"
+                  />
+                  <mat-card-content>
+                    <p>
+                      {{ product.title }}
+                    </p>
+                    <p>
+                      {{ product.category }}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button>View</button>
+                    <button mat-button>Add to cart</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+
+            <div>
+              Jewelery
+              <div class="lg:grid lg:grid-cols-4 lg:gap-4">
+                <mat-card
+                  class="h-[400px] flex flex-col"
+                  *ngFor="let product of jewelery$ | async"
+                >
+                  <img
+                    class="w-full h-3/5 object-contain"
+                    mat-card-image
+                    [src]="product.image"
+                    alt="Image of products"
+                  />
+                  <mat-card-content>
+                    <p>
+                      {{ product.title }}
+                    </p>
+                    <p>
+                      {{ product.category }}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button>View</button>
+                    <button mat-button>Add to cart</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+
+            <div>
+              Electronics
+              <div class="lg:grid lg:grid-cols-4 lg:gap-4">
+                <mat-card
+                  class="h-[400px] flex flex-col"
+                  *ngFor="let product of electronics$ | async"
+                >
+                  <img
+                    class="w-full h-3/5 object-contain"
+                    mat-card-image
+                    [src]="product.image"
+                    alt="Image of products"
+                  />
+                  <mat-card-content>
+                    <p>
+                      {{ product.title }}
+                    </p>
+                    <p>
+                      {{ product.category }}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button>View</button>
+                    <button mat-button>Add to cart</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </ng-container>
+    </shared-ui-loader>
+  </body>
+  <footer class="flex items-center justify-center text-sm text-black">
+    Made using xTech
+  </footer>
+</main>
+
+<ng-template #emptyCollection>
+  <div class="h-full grid place-items-center">No collection found.</div>
+</ng-template>

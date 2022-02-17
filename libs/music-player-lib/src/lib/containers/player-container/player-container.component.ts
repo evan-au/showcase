@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'player-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  selector: 'player-container',
+  templateUrl: './player-container.component.html',
+  styleUrls: ['./player-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent {
+export class PlayerContainerComponent {
   @Input() inputPlatform$!: Observable<string>;
   @Input() inputVolume$!: Observable<number>;
 }
