@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { shareReplay, map, BehaviorSubject, catchError, of } from 'rxjs';
+import {
+  shareReplay,
+  map,
+  BehaviorSubject,
+  catchError,
+  of,
+  finalize,
+} from 'rxjs';
 import { JamendoResponse } from '../interfaces/jamendo-response';
 import { JamendoTrack } from '../interfaces/jamendo-track';
 
@@ -11,7 +18,9 @@ import { JamendoTrack } from '../interfaces/jamendo-track';
 @UntilDestroy({ checkProperties: true })
 export class JamendoDataService {
   private _trackListSubject = new BehaviorSubject<JamendoTrack[]>([]);
+  private _isLoadingSubject = new BehaviorSubject<boolean>(true);
   public trackList$ = this._trackListSubject.asObservable();
+  public isLoading$ = this._isLoadingSubject.asObservable();
 
   private _baseApi = 'https://api.jamendo.com/v3.0/';
   private _collection = 'tracks/';
@@ -28,6 +37,9 @@ export class JamendoDataService {
       )
       .pipe(
         map(({ results }) => this._trackListSubject.next(results)),
+        finalize(() => {
+          this._isLoadingSubject.next(false);
+        }),
         catchError((error) => of(error)),
         shareReplay()
       )

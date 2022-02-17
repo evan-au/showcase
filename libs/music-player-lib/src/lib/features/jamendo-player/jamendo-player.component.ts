@@ -12,6 +12,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JamendoPlayerComponent implements OnInit {
+  public isLoading$ = this._musicPlayerFacade.isLoading$;
   public selectorControllerSize$ = this._musicPlayerFacade.controllerSize$;
   public selectorPlatform$ = this._musicPlayerFacade.platform$;
   public selectorVolume$ = this._musicPlayerFacade.volume$;

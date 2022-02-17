@@ -2,6 +2,7 @@ import { FormControl } from '@angular/forms';
 import { JamendoTrack } from '../interfaces/jamendo-track';
 
 export class MusicPlayerState {
+  isLoading = false;
   isTrackPlaying = false;
   isTrackSelected = false;
   trackDuration = 0;

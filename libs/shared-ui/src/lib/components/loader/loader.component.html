@@ -1,5 +1,5 @@
 <ng-container *ngIf="inputIsLoading$ | async; else defaultView">
-  <div class="w-full h-full bg-[rgba(168,85,247,0.2)] grid place-items-center">
+  <div class="w-full h-full grid place-items-center" [ngClass]="bgColor">
     <div class="w-[80%]" *ngIf="inputLoaderStyle === 'progress'; else spinner">
       <mat-progress-bar color="warn" mode="query"></mat-progress-bar>
     </div>

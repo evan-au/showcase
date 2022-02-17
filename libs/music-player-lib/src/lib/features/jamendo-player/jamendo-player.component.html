@@ -10,13 +10,17 @@
       [inputSearchField$]="selectorSearchField$"
       (outputClearQuery)="actionClearSearchQuery()"
     ></shared-ui-search>
-
-    <track-list-container
-      [inputJamendoActiveTrack$]="selectorActiveTrack$"
-      [inputIsTrackSelected$]="selectorIsTrackPlaying$"
-      [inputJamendoTrackList$]="selectorTrackList$"
-      (outputJamendoSelectedTrack)="actionSelectTrack($event)"
-    ></track-list-container>
+    <shared-ui-loader
+      [inputIsLoading$]="isLoading$"
+      inputBgColor="bg-[rgba(255,255,255,0.1)]"
+    >
+      <track-list-container
+        [inputJamendoActiveTrack$]="selectorActiveTrack$"
+        [inputIsTrackSelected$]="selectorIsTrackPlaying$"
+        [inputJamendoTrackList$]="selectorTrackList$"
+        (outputJamendoSelectedTrack)="actionSelectTrack($event)"
+      ></track-list-container>
+    </shared-ui-loader>
   </section>
 
   <section footer-content>

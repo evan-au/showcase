@@ -34,6 +34,10 @@ export class MusicPlayerRepositoryService {
   constructor(private _jamendoDataService: JamendoDataService) {}
 
   // Up-stream
+  public isLoading$ = this._playerStore$.pipe(
+    map((state) => state.isLoading),
+    distinctUntilChanged()
+  );
   public volume$ = this._playerStore$.pipe(
     map((state) => state.volume),
     distinctUntilChanged()
@@ -145,15 +149,29 @@ export class MusicPlayerRepositoryService {
 
     return search$.pipe(
       map((query) => {
+        this._playerStore.next(
+          (this._state = { ...this._state, isLoading: true })
+        );
+
         this._jamendoDataService.searchByTrack(query);
       }),
       concatMap(() =>
         trackList$.pipe(
-          map((trackList) =>
+          map((trackList) => {
             this._playerStore.next(
               (this._state = { ...this._state, trackList })
-            )
-          )
+            );
+
+            this._jamendoDataService.isLoading$
+              .pipe(
+                map((value) => {
+                  this._playerStore.next(
+                    (this._state = { ...this._state, isLoading: value })
+                  );
+                })
+              )
+              .subscribe();
+          })
         )
       )
     );

@@ -20,6 +20,7 @@ export class MusicPlayerFacade {
   public displayNextButton$ = this._store.hasNextButton$;
   public displayPreviousButton$ = this._store.hasPreviousButton$;
   public isTrackPlaying$ = this._store.isTrackPlaying$;
+  public isLoading$ = this._store.isLoading$;
 
   constructor(private _store: MusicPlayerRepositoryService) {}
 
