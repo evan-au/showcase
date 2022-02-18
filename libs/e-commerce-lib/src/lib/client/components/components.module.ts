@@ -7,6 +7,9 @@ import { HeroComponent } from './hero/hero.component';
 import { LogoComponent } from './logo/logo.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ShowcaseComponent } from './showcase/showcase.component';
+import { ProductsCategoryComponent } from './products-category/products-category.component';
+import { SharedUiModule } from '@showcase-ws/shared-ui';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { ShowcaseComponent } from './showcase/showcase.component';
     LogoComponent,
     FooterComponent,
     ShowcaseComponent,
+    ProductsCategoryComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, SharedUiModule, RouterModule],
+  exports: [ProductsCategoryComponent],
 })
 export class ComponentsModule {}

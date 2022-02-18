@@ -7,11 +7,20 @@ const routes: Routes = [
     path: '',
     component: LandingContainerComponent,
   },
-  // {
-  //   path: 'blog',
-  //   loadChildren: () =>
-  //     import('./features/blog/blog.module').then((m) => m.BlogModule),
-  // },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./pages/products-page/products-page.module').then(
+        (m) => m.ProductsPageModule
+      ),
+  },
+  {
+    path: 'products/:id',
+    loadChildren: () =>
+      import('./pages/product-detail-page/product-detail-page.module').then(
+        (m) => m.ProductDetailPageModule
+      ),
+  },
 ];
 
 @NgModule({

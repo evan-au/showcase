@@ -1,0 +1,41 @@
+<main class="h-full grid grid-rows-[8%_1fr_5%]">
+  <header>Product detail page</header>
+  <body>
+    <shared-ui-loader [inputIsLoading$]="isLoading$">
+      <ng-container *ngIf="product$ | async as product">
+        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
+          <div>
+            <div>
+              {{ product.id }}
+            </div>
+            <div>
+              {{ product.title }}
+            </div>
+            <div>
+              {{ product.price }}
+            </div>
+            <div>
+              {{ product.description }}
+            </div>
+            <div>
+              {{ product.category }}
+            </div>
+            <div
+              class="flex items-center justify-center bg-white shadow-md rounded-sm"
+            >
+              <img class="h-3/4 object-contain" [src]="product.image" />
+            </div>
+
+            <div>
+              {{ product.rating?.count }}
+            </div>
+            <div>
+              {{ product.rating?.rate }}
+            </div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </ng-container>
+    </shared-ui-loader>
+  </body>
+  <footer>Footer of detail page</footer>
+</main>
