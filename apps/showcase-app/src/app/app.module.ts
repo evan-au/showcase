@@ -6,6 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 
+// import { NgtCoreModule } from '@angular-three/core';
+// import { NgtMeshModule } from '@angular-three/core/meshes';
+// import { NgtMeshBasicMaterialModule } from '@angular-three/core/materials';
+// import { NgtBoxGeometryModule } from '@angular-three/core/geometries';
+
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -52,6 +57,10 @@ import { environment } from '../environments/environment';
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    // NgtCoreModule,
+    // NgtMeshModule,
+    // NgtBoxGeometryModule,
+    // NgtMeshBasicMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
