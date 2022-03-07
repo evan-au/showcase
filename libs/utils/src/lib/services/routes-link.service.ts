@@ -9,7 +9,7 @@ interface Link {
 const links: Link[] = [
   {
     routerLink: '/',
-    linkLabel: 'Intro',
+    linkLabel: 'Introduction',
   },
   {
     routerLink: 'e-commerce-app',
