@@ -5,11 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
-
-// import { NgtCoreModule } from '@angular-three/core';
-// import { NgtMeshModule } from '@angular-three/core/meshes';
-// import { NgtMeshBasicMaterialModule } from '@angular-three/core/materials';
-// import { NgtBoxGeometryModule } from '@angular-three/core/geometries';
+import { SharedNgThreeModule } from '@showcase-ws/shared-ng-three';
 
 // Components
 import { AppComponent } from './app.component';
@@ -26,6 +22,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { IntroContentComponent } from './components/intro-page/components/intro-content/intro-content.component';
+import { IntroSnowflakeCanvasComponent } from './components/intro-page/components/intro-snowflake-canvas/intro-snowflake-canvas.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +37,15 @@ import { environment } from '../environments/environment';
     DigitalClockComponent,
     LogoComponent,
     ThemeButtonComponent,
+    IntroContentComponent,
+    IntroSnowflakeCanvasComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedUiModule,
+    SharedNgThreeModule,
     StoreModule.forRoot(
       {},
       {
@@ -57,10 +58,6 @@ import { environment } from '../environments/environment';
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    // NgtCoreModule,
-    // NgtMeshModule,
-    // NgtBoxGeometryModule,
-    // NgtMeshBasicMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

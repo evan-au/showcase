@@ -1,8 +1,11 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
+UntilDestroy({ checkProperties: true });
 @Injectable({
   providedIn: 'root',
 })
@@ -21,18 +24,22 @@ export class ThemeService {
   }
 
   private _applyPreferredColorScheme() {
-    const colorScheme = this._mediaMatcher.matchMedia(
-      '(prefers-color-scheme: dark)'
-    );
-    colorScheme.addEventListener('change', (mediaQuery) => {
-      this._themeState.next(mediaQuery.matches);
-      this.theme$
-        .pipe(
-          tap((value) => this._setThemeItemInLocalStorage(value)),
-          map((value) => this._document.body.classList.toggle('dark', value))
-        )
-        .subscribe();
-    });
+    const isSystemDark =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const localStorageValue = this._getThemeItemFromLocalStorage();
+
+    if (isSystemDark && localStorageValue) {
+      this._themeState.next(true);
+    }
+    this._mediaMatcher
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (mediaQuery) => {
+        this._themeState.next(mediaQuery.matches);
+        this._setThemeItemInLocalStorage(mediaQuery.matches);
+        this._document.body.classList.toggle('dark', mediaQuery.matches);
+      });
   }
 
   private _getCurrentTheme() {

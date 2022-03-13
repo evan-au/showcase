@@ -341,6 +341,48 @@
       },
       "tags": []
     },
+    "shared-ng-three": {
+      "projectType": "library",
+      "root": "libs/shared-ng-three",
+      "sourceRoot": "libs/shared-ng-three/src",
+      "prefix": "shared-ngt",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/shared-ng-three"],
+          "options": {
+            "project": "libs/shared-ng-three/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/shared-ng-three/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/shared-ng-three/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared-ng-three"],
+          "options": {
+            "jestConfig": "libs/shared-ng-three/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-ng-three/src/**/*.ts",
+              "libs/shared-ng-three/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-ui": {
       "projectType": "library",
       "root": "libs/shared-ui",

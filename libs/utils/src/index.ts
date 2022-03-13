@@ -17,3 +17,6 @@ export * from './lib/animations/list.animation';
 export * from './lib/animations/fade-slide-up-down.animation';
 export * from './lib/animations/fade-slide-left-right.animation';
 export * from './lib/animations/custom-empty-list.animation';
+
+// Helpers
+export * from './lib/helpers/random-numbers';

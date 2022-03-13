@@ -1,0 +1,98 @@
+<body
+  class="h-full w-full flex flex-col justify-between xl:w-1/2 absolute top-0 px-4 pb-16 pt-8 text-light dark:text-dark backdrop-blur-sm dark:bg-light bg-[#022b3a] bg-opacity-20 dark:bg-opacity-20 transition-colors duration-1000 z-50"
+>
+  <div class="first flex gap-4 items-center">
+    <showcase-app-logo></showcase-app-logo>
+    <h1 class="text-5xl">Expo</h1>
+  </div>
+
+  <div class="second text-2xl xl:text-4xl">
+    <div>
+      <span class="greetings inline-block text-accent flicker">{{
+        greetings
+      }}</span>
+    </div>
+    <div>
+      <span class="text dark:text-dark"></span>
+      <span class="cursor text-accent inline-block">_</span>
+    </div>
+  </div>
+
+  <div class="third leading-relaxed text-sm xl:text-lg xl:leading-loose">
+    <p>
+      Expo aims at showcasing applications and features developed using tools
+      such as the
+      <span
+        ><a
+          class="underline hover:text-accent duration-500"
+          href="http://nx.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          >NX build system</a
+        ></span
+      >,
+      <span
+        ><a
+          class="underline hover:text-accent duration-500"
+          href="http://angular.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Angular</a
+        ></span
+      >
+      as the framework and other third party libraries.
+    </p>
+  </div>
+  <div class="fourth flex flex-col gap-2 xl:gap-4">
+    <p class="text-sm pb-2 xl:text-base">Explore available applications</p>
+    <div class="flex flex-col xl:flex-row gap-4">
+      <button
+        routerLink="e-commerce-app"
+        class="button py-2 px-4 rounded-full border border-light dark:border-dark hover:bg-accent duration-500"
+      >
+        E-commerce app
+      </button>
+      <button
+        routerLink="music-player-app"
+        class="button py-2 px-4 rounded-full border border-light dark:border-dark hover:bg-accent duration-500"
+      >
+        Music Player app
+      </button>
+      <button
+        routerLink="todo-app"
+        class="button py-2 px-4 rounded-full border border-light dark:border-dark hover:bg-accent duration-500"
+      >
+        Todo app
+      </button>
+    </div>
+  </div>
+</body>
+
+<footer
+  class="intro-footer absolute z-50 w-full px-4 h-8 bottom-0 flex items-center justify-center xl:justify-start text-xs text-light dark:text-dark"
+>
+  <p>
+    Built using
+    <span
+      ><a
+        class="underline hover:text-accent duration-500"
+        href="http://angular-three.netlify.app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Angular Three</a
+      ></span
+    >
+    &
+    <span
+      ><a
+        class="underline hover:text-accent duration-500"
+        href="http://greensock.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GSAP</a
+      ></span
+    >
+  </p>
+</footer>

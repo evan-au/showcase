@@ -1,0 +1,24 @@
+<div
+  class="h-full w-full bg-[#022b3a] dark:bg-light transition-colors duration-1000"
+>
+  <ngt-canvas
+    [camera]="{
+      fov: 50,
+      position: [0, 0, 1000]
+    }"
+    [scene]="{
+      fog: ['#000000', 0.001] | fogExp2
+    }"
+  >
+    <ngt-group
+      (animateReady)="moveCamera($event.object)"
+      [rotation]="[inputCameraPositionX, inputCameraPositionY, 0]"
+    >
+      <shared-ngt-particles></shared-ngt-particles>
+    </ngt-group>
+
+    <ngt-soba-orbit-controls
+      (ready)="configControls($event)"
+    ></ngt-soba-orbit-controls>
+  </ngt-canvas>
+</div>

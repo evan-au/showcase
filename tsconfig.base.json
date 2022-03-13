@@ -23,6 +23,7 @@
       "@showcase-ws/e-commerce-lib": ["libs/e-commerce-lib/src/index.ts"],
       "@showcase-ws/music-player-data": ["libs/music-player-data/src/index.ts"],
       "@showcase-ws/music-player-lib": ["libs/music-player-lib/src/index.ts"],
+      "@showcase-ws/shared-ng-three": ["libs/shared-ng-three/src/index.ts"],
       "@showcase-ws/shared-ui": ["libs/shared-ui/src/index.ts"],
       "@showcase-ws/shared-utils": ["libs/shared-utils/src/index.ts"],
       "@showcase-ws/utils": ["libs/utils/src/index.ts"]

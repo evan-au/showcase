@@ -1,0 +1,19 @@
+<ngt-points>
+  <ngt-buffer-geometry>
+    <ngt-float32-buffer-attribute
+      [attach]="'position'"
+      [args]="[vertices, 3]"
+    ></ngt-float32-buffer-attribute>
+  </ngt-buffer-geometry>
+  <ngt-points-material
+    #material
+    [parameters]="{
+      size: 25,
+      sizeAttenuation: true,
+      map: disc,
+      alphaTest: 0.5,
+      transparent: false,
+      color: color | color
+    }"
+  ></ngt-points-material>
+</ngt-points>
