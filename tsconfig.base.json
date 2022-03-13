@@ -26,6 +26,7 @@
       "@showcase-ws/shared-ng-three": ["libs/shared-ng-three/src/index.ts"],
       "@showcase-ws/shared-ui": ["libs/shared-ui/src/index.ts"],
       "@showcase-ws/shared-utils": ["libs/shared-utils/src/index.ts"],
+      "@showcase-ws/todo-lib": ["libs/todo-lib/src/index.ts"],
       "@showcase-ws/utils": ["libs/utils/src/index.ts"]
     }
   },

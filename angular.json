@@ -603,6 +603,49 @@
       },
       "tags": []
     },
+    "todo-lib": {
+      "projectType": "library",
+      "root": "libs/todo-lib",
+      "sourceRoot": "libs/todo-lib/src",
+      "prefix": "showcase-ws",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/todo-lib"],
+          "options": {
+            "project": "libs/todo-lib/ng-package.json",
+            "tailwindConfig": "libs/todo-lib/tailwind.config.js"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/todo-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/todo-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-lib"],
+          "options": {
+            "jestConfig": "libs/todo-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-lib/src/**/*.ts",
+              "libs/todo-lib/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "utils": {
       "projectType": "library",
       "root": "libs/utils",
