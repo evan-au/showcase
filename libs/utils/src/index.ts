@@ -20,3 +20,5 @@ export * from './lib/animations/custom-empty-list.animation';
 
 // Helpers
 export * from './lib/helpers/random-numbers';
+export * from './lib/helpers/random-hex-color';
+export * from './lib/helpers/get-portion-of-day';

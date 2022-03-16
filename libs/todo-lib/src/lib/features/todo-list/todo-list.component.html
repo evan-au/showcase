@@ -1,0 +1,35 @@
+<main class="h-full grid grid-rows-[8%_1fr_5%]">
+  <header>Header</header>
+  <body class="flex flex-col">
+    <todo-user-info
+      [inputUser$]="user$"
+      [inputPartOfDayName$]="partOfDayName$"
+    ></todo-user-info>
+
+    <todo-add
+      [inputAreTodosCompleted$]="areTodosCompleted$"
+      [inputVisibleTodos$]="visibleTodos$"
+      (outputAddtodo)="addTodo($event)"
+      (outputToggleSelectAll)="toggleSelectAll($event)"
+    ></todo-add>
+
+    <todo-view
+      [inputTodos$]="visibleTodos$"
+      (outputDeleteTodo)="deleteTodo($event)"
+      (outputToggleTodo)="toggleTodo($event)"
+      (outputSaveUpdatedTodo)="saveUpdatedTodo($event)"
+    ></todo-view>
+
+    <todo-filter
+      [inputCompletedTodos$]="completedTodos$"
+      (outputClearCompletedTodos)="clearCompletedTodos()"
+      (outputUpdateFilter)="updateFilter($event)"
+    ></todo-filter>
+
+    <todo-count
+      [inputActiveCount$]="activeCount$"
+      [inputActiveCountText$]="activeCountText$"
+    ></todo-count>
+  </body>
+  <footer>Footer</footer>
+</main>

@@ -1,0 +1,52 @@
+<ng-container *ngIf="inputTodos$ | async as todos">
+  <ng-container *ngIf="todos.length > 0; else noTodos">
+    <section
+      *ngFor="let todo of todos; let todoIndex = index"
+      (mouseenter)="showActionButtons(todo.id)"
+      (mouseleave)="hideActionButtons()"
+      (keyup.esc)="dismissEditor()"
+      class="flex items-center"
+    >
+      <!-- checkbox -->
+      <input
+        class="checkbox"
+        type="checkbox"
+        (change)="toggleTodo(todo.id)"
+        [checked]="todo.completed"
+      />
+      <!-- text editor -->
+      <div class="w-3/4 cursor-pointer">
+        <div (click)="toggleTodo(todo.id)">
+          <input
+            (blur)="addLineThru(todoIndex, todo.completed)"
+            (focus)="removeLineThru(todoIndex, todo.completed)"
+            class="cursor-pointer"
+            [ngClass]="{ 'line-through': todo.completed && todoIndex + 1 }"
+            #editor
+            type="text"
+            [value]="todo.text"
+            (change)="editTodoText($event)"
+            (keyup.enter)="saveUpdatedTodo(todo.id)"
+            [disabled]="editingTodoID !== todo.id"
+          />
+        </div>
+      </div>
+      <!-- action buttons -->
+      <div todoGsapRTL *ngIf="onHoverGetTodoID === todo.id">
+        <button mat-icon-button (click)="triggerEditMode(todo.id, todoIndex)">
+          <mat-icon class="hover:text-green-700 transition-colors duration-500"
+            >edit</mat-icon
+          >
+        </button>
+        <button mat-icon-button (click)="deleteTodo(todo.id)">
+          <mat-icon class="hover:text-red-700 transition-colors duration-500"
+            >close</mat-icon
+          >
+        </button>
+      </div>
+    </section>
+  </ng-container>
+</ng-container>
+<ng-template #noTodos>
+  <div>Add a task</div>
+</ng-template>

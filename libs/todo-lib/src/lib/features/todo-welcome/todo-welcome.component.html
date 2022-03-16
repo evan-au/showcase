@@ -1,0 +1,23 @@
+<main>
+  <header>Header</header>
+
+  <body>
+    <section class="flex flex-col gap-8">
+      <p>Welcome</p>
+
+      <input
+        autofocus
+        type="text"
+        [formControl]="userName"
+        (keyup.enter)="addUser()"
+        required
+      />
+
+      <button [disabled]="userName.invalid" (click)="addUser()">
+        Add user
+      </button>
+    </section>
+  </body>
+
+  <footer>Footer</footer>
+</main>

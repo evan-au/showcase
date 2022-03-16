@@ -12,13 +12,18 @@ const links: Link[] = [
     linkLabel: 'Introduction',
   },
   {
-    routerLink: 'e-commerce-app',
-    linkLabel: 'E-commerce',
+    routerLink: 'todo-app',
+    linkLabel: 'Todo',
   },
   {
     routerLink: 'music-player-app',
     linkLabel: 'Music player',
   },
+  {
+    routerLink: 'e-commerce-app',
+    linkLabel: 'E-commerce',
+  },
+
   // {
   //   routerLink: 'chat-app',
   //   linkLabel: 'Chat',

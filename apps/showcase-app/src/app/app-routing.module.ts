@@ -20,6 +20,11 @@ const routes: Routes = [
         (m) => m.MusicPlayerLibModule
       ),
   },
+  {
+    path: 'todo-app',
+    loadChildren: () =>
+      import('@showcase-ws/todo-lib').then((m) => m.TodoLibModule),
+  },
   // {
   //   path: 'chat-app',
   //   loadChildren: () =>

@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { gsap } from 'gsap';
 
 import TextPlugin from 'gsap/TextPlugin';
 import { EasePack } from 'gsap/all';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
-gsap.registerPlugin(TextPlugin, EasePack);
-
+UntilDestroy({ checkProperties: true });
 @Component({
   selector: 'intro-content',
   templateUrl: './intro-content.component.html',
   styleUrls: ['./intro-content.component.scss'],
 })
 export class IntroContentComponent implements OnInit {
+  @ViewChild('intro', { static: true }) intro!: ElementRef<HTMLElement>;
+  @ViewChild('greet', { static: true }) greet!: ElementRef<HTMLElement>;
+  @ViewChild('description', { static: true })
+  description!: ElementRef<HTMLElement>;
+  @ViewChild('action', { static: true }) action!: ElementRef<HTMLElement>;
+  @ViewChild('footer', { static: true }) footer!: ElementRef<HTMLElement>;
+
   greetings = 'Hello,';
   words$: Observable<string[]> = of([
     'my name is Evan.',
@@ -26,6 +33,11 @@ export class IntroContentComponent implements OnInit {
   cursorTimeline = gsap.timeline().pause();
 
   ngOnInit(): void {
+    gsap.registerPlugin(TextPlugin, EasePack);
+    this.animateContent();
+  }
+
+  animateContent() {
     this.greetingsTimeline
       .to('.flicker', {
         duration: 2,
@@ -41,7 +53,7 @@ export class IntroContentComponent implements OnInit {
           clamp: false,
         }),
       })
-      .from('.greetings', {
+      .from(this.greet.nativeElement, {
         duration: 1,
         x: -300,
         ease: 'sine.in',
@@ -50,7 +62,7 @@ export class IntroContentComponent implements OnInit {
         },
       });
 
-    // Cursor
+    // Cursor;
     this.cursorTimeline
       .from('.cursor', {
         delay: 0.5,
@@ -87,7 +99,7 @@ export class IntroContentComponent implements OnInit {
       )
       .subscribe();
 
-    gsap.from('.first', {
+    gsap.from(this.intro.nativeElement, {
       duration: 1.5,
       delay: 0.2,
       y: -100,
@@ -98,7 +110,7 @@ export class IntroContentComponent implements OnInit {
       },
     });
 
-    gsap.from('.third', {
+    gsap.from(this.description.nativeElement, {
       delay: 1,
       duration: 2,
       opacity: 0,
@@ -106,14 +118,14 @@ export class IntroContentComponent implements OnInit {
       ease: 'sine.in',
     });
 
-    gsap.from('.fourth', {
+    gsap.from(this.action.nativeElement, {
       delay: 2,
       duration: 1,
       opacity: 0,
       ease: 'sine.in',
       y: 300,
     });
-    gsap.from('.intro-footer', {
+    gsap.from(this.footer.nativeElement, {
       delay: 3,
       duration: 0.5,
       opacity: 0,

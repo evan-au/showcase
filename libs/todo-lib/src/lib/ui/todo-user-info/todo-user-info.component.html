@@ -1,0 +1,7 @@
+<ng-container *ngIf="inputUser$ | async as user">
+  <div class="flex flex-col">
+    <img [src]="user.avatarImage" alt="User avatar" class="w-20" />
+    <p>Good {{ inputPartOfDayName$ | async }}</p>
+    <p>{{ user.name }}</p>
+  </div>
+</ng-container>

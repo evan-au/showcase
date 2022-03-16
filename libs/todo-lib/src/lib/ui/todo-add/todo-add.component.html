@@ -1,0 +1,24 @@
+<div class="flex gap-2 items-center">
+  <ng-container *ngIf="inputVisibleTodos$ | async as visibleTodos">
+    <div *ngIf="visibleTodos.length > 0">
+      <input
+        id="selectAll"
+        class="checkbox"
+        type="checkbox"
+        (change)="toggleSelectAll($event)"
+        [checked]="inputAreTodosCompleted$ | async"
+      />
+      <label for="selectAll">Select all</label>
+    </div>
+  </ng-container>
+  <input
+    autofocus
+    placeholder="What needs to be done?"
+    type="text"
+    [formControl]="todoFormControl"
+    (keyup.enter)="addTodo()"
+  />
+  <button [disabled]="todoFormControl.invalid" (click)="addTodo()">
+    Add todo
+  </button>
+</div>

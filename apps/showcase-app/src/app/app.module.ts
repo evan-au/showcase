@@ -1,11 +1,18 @@
-import { NgModule } from '@angular/core';
+import { ApplicationRef, NgModule } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { environment } from '../environments/environment';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 import { SharedNgThreeModule } from '@showcase-ws/shared-ng-three';
+import { devTools } from '@ngneat/elf-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Components
 import { AppComponent } from './app.component';
@@ -18,10 +25,6 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
 import { DigitalClockComponent } from './components/digital-clock/digital-clock.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { ThemeButtonComponent } from './components/theme-button/theme-button.component';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { IntroContentComponent } from './components/intro-page/components/intro-content/intro-content.component';
 import { IntroSnowflakeCanvasComponent } from './components/intro-page/components/intro-snowflake-canvas/intro-snowflake-canvas.component';
 
@@ -63,3 +66,11 @@ import { IntroSnowflakeCanvasComponent } from './components/intro-page/component
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then((moduleRef) => {
+    devTools({
+      postTimelineUpdate: () => moduleRef.injector.get(ApplicationRef).tick(),
+    });
+  });
