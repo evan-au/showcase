@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthContainerComponent } from '../../containers/auth-container/auth-container.component';
+import { AuthComponent } from './auth.component';
 
 @NgModule({
-  declarations: [AuthContainerComponent],
+  declarations: [AuthComponent],
   imports: [CommonModule],
 })
 export class AuthModule {}

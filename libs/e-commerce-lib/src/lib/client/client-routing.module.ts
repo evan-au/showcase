@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingContainerComponent } from './containers/landing-container/landing-container.component';
+import { LandingComponent } from './features/landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LandingContainerComponent,
+    component: LandingComponent,
   },
   {
     path: 'products',
     loadChildren: () =>
-      import('./pages/products-page/products-page.module').then(
+      import('./features/products/products.module').then(
         (m) => m.ProductsPageModule
       ),
   },
   {
     path: 'products/:id',
     loadChildren: () =>
-      import('./pages/product-detail-page/product-detail-page.module').then(
+      import('./features/product-detail/product-detail.module').then(
         (m) => m.ProductDetailPageModule
       ),
   },

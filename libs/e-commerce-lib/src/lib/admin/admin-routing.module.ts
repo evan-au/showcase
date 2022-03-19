@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthContainerComponent } from './containers/auth-container/auth-container.component';
-import { DashboardContainerComponent } from './containers/dashboard/dashboard-container.component';
+import { AuthComponent } from './features/auth/auth.component';
+import { DashboardHomeComponent } from './features/dashboard/dashboard-home/dashboard-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardContainerComponent,
+    component: DashboardHomeComponent,
   },
   {
     path: 'auth',
-    component: AuthContainerComponent,
+    component: AuthComponent,
   },
 ];
 

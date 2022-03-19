@@ -4,11 +4,11 @@ import { ClientFacade } from '@showcase-ws/e-commerce-data';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'landing-container',
-  templateUrl: './landing-container.component.html',
-  styleUrls: ['./landing-container.component.scss'],
+  selector: 'landing',
+  templateUrl: './landing.component.html',
+  styleUrls: ['./landing.component.scss'],
 })
-export class LandingContainerComponent implements OnInit {
+export class LandingComponent implements OnInit {
   products$: Observable<ProductInterface[] | null> = this._facade.products$;
   menClothing$: Observable<ProductInterface[] | undefined> =
     this._facade.menClothing$;

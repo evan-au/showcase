@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductDetailPageComponent } from './product-detail-page.component';
+import { ProductsComponent } from './products.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductDetailPageComponent,
+    component: ProductsComponent,
   },
 ];
 
 @NgModule({
-  declarations: [ProductDetailPageComponent],
+  declarations: [ProductsComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedUiModule],
 })
-export class ProductDetailPageModule {}
+export class ProductsPageModule {}

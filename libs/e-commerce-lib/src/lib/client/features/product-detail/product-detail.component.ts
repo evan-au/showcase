@@ -4,10 +4,10 @@ import { ClientFacade, ProductInterface } from '@showcase-ws/e-commerce-data';
 import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
-  templateUrl: './product-detail-page.component.html',
-  styleUrls: ['./product-detail-page.component.scss'],
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.scss'],
 })
-export class ProductDetailPageComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
   product$!: Observable<ProductInterface | undefined>;
   isLoading$: Observable<boolean | null> = this._facade.isLoading$;
 
