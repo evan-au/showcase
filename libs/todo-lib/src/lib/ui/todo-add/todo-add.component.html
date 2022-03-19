@@ -1,24 +1,36 @@
-<div class="flex gap-2 items-center">
-  <ng-container *ngIf="inputVisibleTodos$ | async as visibleTodos">
-    <div *ngIf="visibleTodos.length > 0">
+<section class="py-2 flex gap-2">
+  <ng-container *ngIf="inputVisibleTodos">
+    <div *ngIf="inputVisibleTodos.length > 0">
       <input
         id="selectAll"
         class="checkbox"
         type="checkbox"
         (change)="toggleSelectAll($event)"
-        [checked]="inputAreTodosCompleted$ | async"
+        [checked]="inputAreTodosCompleted"
       />
-      <label for="selectAll">Select all</label>
     </div>
   </ng-container>
-  <input
-    autofocus
-    placeholder="What needs to be done?"
-    type="text"
-    [formControl]="todoFormControl"
-    (keyup.enter)="addTodo()"
-  />
-  <button [disabled]="todoFormControl.invalid" (click)="addTodo()">
-    Add todo
-  </button>
-</div>
+  <ng-container *ngIf="inputTodoFormControl">
+    <div class="w-full">
+      <input
+        autofocus
+        class="w-full h-10 rounded-sm px-2 bg-[#022b3a] bg-opacity-20 text-light placeholder:text-sm placeholder:xl:text-xl xl:px-4 text-2xl"
+        placeholder="What needs to be done?"
+        type="text"
+        [formControl]="inputTodoFormControl"
+        (keyup.enter)="addTodo()"
+      />
+    </div>
+  </ng-container>
+  <div>
+    <button
+      mat-icon-button
+      [disabled]="!inputTodoFormControl?.value"
+      (click)="addTodo()"
+    >
+      <mat-icon class="hover:text-green-500 transition-colors duration-500"
+        >add</mat-icon
+      >
+    </button>
+  </div>
+</section>
