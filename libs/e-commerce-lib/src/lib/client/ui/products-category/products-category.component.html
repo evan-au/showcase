@@ -2,8 +2,8 @@
   <div>
     <span class="text-xl"> {{ inputCategoryName }} </span>
     <div class="my-4 xl:grid xl:grid-cols-4 xl:gap-4">
-      <mat-card
-        class="h-[400px] bg-gradient-to-tr from-gray-50 to-gray-300"
+      <div
+        class="h-[400px] bg-gray-300 bg-opacity-20 backdrop-blur-sm"
         *ngFor="let product of products"
       >
         <div class="h-full grid grid-rows-[60%_2fr_1fr] gap-2">
@@ -39,7 +39,7 @@
             </button>
           </div>
         </div>
-      </mat-card>
+      </div>
     </div>
   </div>
 </ng-container>

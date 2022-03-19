@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientFacade } from '@showcase-ws/e-commerce-data';
 import { Observable } from 'rxjs';
+import { ClientFacade } from '../../data/client.facade';
 
 @Component({
   templateUrl: './products.component.html',
