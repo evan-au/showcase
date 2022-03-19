@@ -1,17 +1,29 @@
-<div class="flex gap-4">
-  <button mat-raised-button (click)="updateFilter(filterEnum.completed)">
-    Complete
-  </button>
-  <button mat-raised-button (click)="updateFilter(filterEnum.active)">
-    Active
-  </button>
-  <button mat-raised-button (click)="updateFilter(filterEnum.all)">All</button>
+<ng-container *ngIf="inputFilterTodos">
+  <section class="flex items-center justify-between">
+    <button
+      class="filter-button hover:bg-[#022b3a] transition-colors duration-500"
+      [ngClass]="{ active: filterEnum.completed === inputFilterTodos }"
+      mat-stroked-button
+      (click)="updateFilter(filterEnum.completed)"
+    >
+      Completed
+    </button>
 
-  <ng-container *ngIf="inputCompletedTodos$ | async as completedTodos">
-    <ng-container *ngIf="completedTodos.length > 0">
-      <button mat-raised-button (click)="clearCompletedTodos()">
-        Clear completed
-      </button>
-    </ng-container>
-  </ng-container>
-</div>
+    <button
+      class="filter-button hover:bg-[#022b3a] transition-colors duration-500"
+      [ngClass]="{ active: filterEnum.active === inputFilterTodos }"
+      mat-stroked-button
+      (click)="updateFilter(filterEnum.active)"
+    >
+      Active
+    </button>
+    <button
+      class="filter-button hover:bg-[#022b3a] transition-colors duration-500"
+      [ngClass]="{ active: filterEnum.all === inputFilterTodos }"
+      mat-stroked-button
+      (click)="updateFilter(filterEnum.all)"
+    >
+      All
+    </button>
+  </section>
+</ng-container>

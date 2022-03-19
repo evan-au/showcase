@@ -1,35 +1,65 @@
-<main class="h-full grid grid-rows-[8%_1fr_5%]">
-  <header>Header</header>
-  <body class="flex flex-col">
+<main class="h-full grid grid-rows-[8%_1fr_8%] relative text-light">
+  <img
+    class="absolute h-full w-full top-0 object-cover"
+    src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg"
+    alt="Person Walking Between Green Forest Trees"
+  />
+  <header class="flex items-center justify-between px-4 xl:px-8 z-10">
+    <span class="text-xl"> odot. </span>
+    <!-- <button mat-icon-button>
+      <mat-icon> menu </mat-icon>
+    </button> -->
+  </header>
+  <body
+    class="flex flex-col justify-between mx-2 p-2 xl:p-4 z-10 rounded-lg shadow-md bg-light backdrop-blur-sm bg-opacity-20 xl:w-1/2 xl:justify-self-center"
+  >
     <todo-user-info
-      [inputUser$]="user$"
-      [inputPartOfDayName$]="partOfDayName$"
+      [inputUser]="user$ | async"
+      [inputPartOfDayName]="partOfDayName$ | async"
     ></todo-user-info>
 
     <todo-add
-      [inputAreTodosCompleted$]="areTodosCompleted$"
-      [inputVisibleTodos$]="visibleTodos$"
+      [inputAreTodosCompleted]="areTodosCompleted$ | async"
+      [inputVisibleTodos]="visibleTodos$ | async"
+      [inputTodoFormControl]="todoFormControl$ | async"
       (outputAddtodo)="addTodo($event)"
       (outputToggleSelectAll)="toggleSelectAll($event)"
     ></todo-add>
 
     <todo-view
-      [inputTodos$]="visibleTodos$"
+      [inputTodos]="visibleTodos$ | async"
       (outputDeleteTodo)="deleteTodo($event)"
       (outputToggleTodo)="toggleTodo($event)"
       (outputSaveUpdatedTodo)="saveUpdatedTodo($event)"
     ></todo-view>
 
-    <todo-filter
-      [inputCompletedTodos$]="completedTodos$"
-      (outputClearCompletedTodos)="clearCompletedTodos()"
-      (outputUpdateFilter)="updateFilter($event)"
-    ></todo-filter>
-
-    <todo-count
-      [inputActiveCount$]="activeCount$"
-      [inputActiveCountText$]="activeCountText$"
-    ></todo-count>
+    <section class="flex flex-col gap-2">
+      <todo-count
+        [inputActiveCount]="activeCount$ | async"
+        [inputFilterTodos]="filterTodos$ | async"
+        [inputActiveCountText]="activeCountText$ | async"
+        [inputAreTodosCompleted]="areTodosCompleted$ | async"
+        [inputCompletedTodos]="completedTodos$ | async"
+        (outputClearCompletedTodos)="clearCompletedTodos()"
+      ></todo-count>
+      <todo-filter
+        [inputFilterTodos]="filterTodos$ | async"
+        (outputUpdateFilter)="updateFilter($event)"
+      ></todo-filter>
+    </section>
   </body>
-  <footer>Footer</footer>
+  <footer class="flex items-center justify-center text-sm z-10">
+    <div>
+      Built using
+      <span
+        ><a
+          class="underline"
+          href="https://ngneat.github.io/elf/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Elf Reactive store</a
+        ></span
+      >
+    </div>
+  </footer>
 </main>

@@ -10,6 +10,9 @@ export * from './lib/services/loading.service';
 
 // Directives
 export * from './lib/directives/back-button.directive';
+export * from './lib/directives/breakpoint-check.directive';
+export * from './lib/directives/touch-long-press.directive';
+export * from './lib/directives/mouse-long-press.directive';
 
 // Animations
 export * from './lib/animations/route.animation';

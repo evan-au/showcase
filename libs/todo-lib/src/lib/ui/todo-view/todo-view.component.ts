@@ -1,28 +1,30 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { TodoInterface } from '../../data/interfaces/todo.interface';
 
 @Component({
   selector: 'todo-view',
   templateUrl: './todo-view.component.html',
   styleUrls: ['./todo-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoViewComponent {
+export class TodoViewComponent implements OnInit {
   @ViewChildren('editor') editor!: QueryList<ElementRef<HTMLInputElement>>;
 
-  public onHoverGetTodoID!: TodoInterface['id'] | null;
+  public hoveringTodoID!: TodoInterface['id'] | null;
   public editingTodoID!: TodoInterface['id'] | null;
   private _updatedTodo!: string;
 
-  @Input() inputTodos$!: Observable<TodoInterface[]>;
+  @Input() inputTodos!: TodoInterface[] | null;
 
   @Output() outputToggleTodo: EventEmitter<TodoInterface['id']> =
     new EventEmitter();
@@ -34,7 +36,24 @@ export class TodoViewComponent {
     updatedTodo: string;
   }> = new EventEmitter();
 
+  isViewOnMobile!: boolean;
+
+  // constructor(private _breakpoint: BreakpointObserver) {}
+  ngOnInit(): void {
+    return;
+    // this._breakpoint
+    //   .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+    //   .subscribe((state) => {
+    //     if (state.matches) {
+    //       this.isOnMobile = state.matches;
+    //     }
+    //   });
+  }
+
   toggleTodo(payloadID: TodoInterface['id']) {
+    if (this.editingTodoID) {
+      this.editingTodoID = null;
+    }
     this.outputToggleTodo.emit(payloadID);
   }
 
@@ -42,19 +61,34 @@ export class TodoViewComponent {
     this.outputDeleteTodo.emit(payload);
   }
 
-  saveUpdatedTodo(payloadID: TodoInterface['id']) {
-    this.outputSaveUpdatedTodo.emit({
-      id: payloadID,
-      updatedTodo: this._updatedTodo,
-    });
+  saveUpdatedTodo(
+    payloadID: TodoInterface['id'],
+    isCompleted: TodoInterface['completed'],
+    todoIndex: number
+  ) {
+    if (this._updatedTodo) {
+      this.outputSaveUpdatedTodo.emit({
+        id: payloadID,
+        updatedTodo: this._updatedTodo,
+      });
+    }
+
+    if (isCompleted) {
+      this.editor
+        .toArray()
+        [todoIndex].nativeElement.classList.add('line-through');
+    }
+
     this.editingTodoID = null;
   }
 
   triggerEditMode(payloadID: TodoInterface['id'], todoIndex: number) {
     setTimeout(() => {
       this.editor.toArray()[todoIndex].nativeElement.focus();
-    }, 100);
+    }, 0);
     this.editingTodoID = payloadID;
+
+    this.hideActionButtons();
   }
 
   dismissEditor() {
@@ -67,26 +101,20 @@ export class TodoViewComponent {
     this._updatedTodo = (event.target as HTMLInputElement).value;
   }
 
-  removeLineThru(todoIndex: number, isCompleted: TodoInterface['completed']) {
-    if (isCompleted) {
-      this.editor
-        .toArray()
-        [todoIndex].nativeElement.classList.remove('line-through');
-    }
-  }
-  addLineThru(todoIndex: number, isCompleted: TodoInterface['completed']) {
-    if (isCompleted) {
-      this.editor
-        .toArray()
-        [todoIndex].nativeElement.classList.add('line-through');
-    }
-  }
-
   showActionButtons(payloadID: TodoInterface['id']) {
-    this.onHoverGetTodoID = payloadID;
+    this.hoveringTodoID = payloadID;
   }
 
   hideActionButtons() {
-    this.onHoverGetTodoID = null;
+    this.hoveringTodoID = null;
+  }
+
+  isBreakpointMatching(payload: boolean) {
+    // if (payload) {
+    this.isViewOnMobile = payload;
+
+    // } else {
+    //   this.isOnMobile = false;
+    // }
   }
 }

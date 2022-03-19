@@ -2,50 +2,53 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FilterEnum } from '../../data/enums/filter.enum';
 import { TodoInterface } from '../../data/interfaces/todo.interface';
-import { TodosRepository } from '../../data/store/todos.repository';
+import { TodosAppRepository } from '../../data/store/todos-app.repository';
 
 @Component({
   selector: 'todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
+  // providers: [TodosAppRepository],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {
-  user$ = this._todoRepo.user$;
-  partOfDayName$ = this._todoRepo.partOfDayName$;
-  visibleTodos$ = this._todoRepo.visibleTodos$;
-  areTodosCompleted$ = this._todoRepo.areTodosCompleted$;
-  completedTodos$ = this._todoRepo.completedTodos$;
-  activeCount$ = this._todoRepo.activeCount$;
-  activeCountText$ = this._todoRepo.activeCountText$;
+  user$ = this._repo.user$;
+  partOfDayName$ = this._repo.partOfDayName$;
+  filterTodos$ = this._repo.filterTodos$;
+  visibleTodos$ = this._repo.visibleTodos$;
+  areTodosCompleted$ = this._repo.areTodosCompleted$;
+  completedTodos$ = this._repo.completedTodos$;
+  activeCount$ = this._repo.activeCount$;
+  activeCountText$ = this._repo.activeCountText$;
+  todoFormControl$ = this._repo.todoFormControl$;
 
-  constructor(private _todoRepo: TodosRepository) {}
+  constructor(private _repo: TodosAppRepository) {}
 
   addTodo(payloadText: TodoInterface['text']) {
-    this._todoRepo.addTodo(payloadText);
+    this._repo.addTodo(payloadText);
   }
 
   saveUpdatedTodo(payload: { id: TodoInterface['id']; updatedTodo: string }) {
-    this._todoRepo.saveUpdatedTodo(payload.id, payload.updatedTodo);
+    this._repo.saveUpdatedTodo(payload.id, payload.updatedTodo);
   }
 
   clearCompletedTodos() {
-    this._todoRepo.clearCompletedTodos();
+    this._repo.clearCompletedTodos();
   }
 
   deleteTodo(payloadID: TodoInterface['id']) {
-    this._todoRepo.deleteTodo(payloadID);
+    this._repo.deleteTodo(payloadID);
   }
 
   toggleTodo(payloadID: TodoInterface['id']) {
-    this._todoRepo.toggleTodo(payloadID);
+    this._repo.toggleTodo(payloadID);
   }
 
   updateFilter(payloadEnum: FilterEnum) {
-    this._todoRepo.updateFilter(payloadEnum);
+    this._repo.updateFilter(payloadEnum);
   }
 
   toggleSelectAll(payloadBool: boolean) {
-    this._todoRepo.toggleSelectAllTodos(payloadBool);
+    this._repo.toggleSelectAllTodos(payloadBool);
   }
 }

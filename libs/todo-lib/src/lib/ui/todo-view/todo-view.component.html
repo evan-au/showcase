@@ -1,52 +1,135 @@
-<ng-container *ngIf="inputTodos$ | async as todos">
-  <ng-container *ngIf="todos.length > 0; else noTodos">
-    <section
-      *ngFor="let todo of todos; let todoIndex = index"
-      (mouseenter)="showActionButtons(todo.id)"
-      (mouseleave)="hideActionButtons()"
-      (keyup.esc)="dismissEditor()"
-      class="flex items-center"
-    >
-      <!-- checkbox -->
-      <input
-        class="checkbox"
-        type="checkbox"
-        (change)="toggleTodo(todo.id)"
-        [checked]="todo.completed"
-      />
-      <!-- text editor -->
-      <div class="w-3/4 cursor-pointer">
-        <div (click)="toggleTodo(todo.id)">
-          <input
-            (blur)="addLineThru(todoIndex, todo.completed)"
-            (focus)="removeLineThru(todoIndex, todo.completed)"
-            class="cursor-pointer"
-            [ngClass]="{ 'line-through': todo.completed && todoIndex + 1 }"
-            #editor
-            type="text"
-            [value]="todo.text"
-            (change)="editTodoText($event)"
-            (keyup.enter)="saveUpdatedTodo(todo.id)"
-            [disabled]="editingTodoID !== todo.id"
-          />
-        </div>
-      </div>
-      <!-- action buttons -->
-      <div todoGsapRTL *ngIf="onHoverGetTodoID === todo.id">
-        <button mat-icon-button (click)="triggerEditMode(todo.id, todoIndex)">
-          <mat-icon class="hover:text-green-700 transition-colors duration-500"
-            >edit</mat-icon
-          >
-        </button>
-        <button mat-icon-button (click)="deleteTodo(todo.id)">
-          <mat-icon class="hover:text-red-700 transition-colors duration-500"
-            >close</mat-icon
-          >
-        </button>
-      </div>
-    </section>
+<ng-container *ngIf="!isViewOnMobile; else mobileView">
+  <ng-container *ngIf="inputTodos">
+    <ng-container *ngIf="inputTodos.length > 0; else noTodos">
+      <cdk-virtual-scroll-viewport
+        appendOnly
+        itemSize="50"
+        class="h-72 w-full border-b border-[#022b3a] my-4"
+      >
+        <section
+          todoGsapStagger
+          utilsBreakpointCheck
+          (outputIsBreakpointMatching)="isBreakpointMatching($event)"
+          *ngFor="let todo of inputTodos; let todoIndex = index"
+          (mouseenter)="showActionButtons(todo.id)"
+          (mouseleave)="hideActionButtons()"
+          (keyup.esc)="dismissEditor()"
+          class="flex justify-between items-center h-10 mb-4 mr-2"
+        >
+          <div class="flex items-center gap-2 w-full">
+            <!-- checkbox -->
+            <div class="flex items-center">
+              <input
+                todoGsapFade
+                class="checkbox"
+                type="checkbox"
+                (change)="toggleTodo(todo.id)"
+                [checked]="todo.completed"
+              />
+            </div>
+
+            <!-- text editor -->
+
+            <div class="w-full" (click)="toggleTodo(todo.id)">
+              <input
+                class="w-full h-10 text-xl cursor-pointer text-dark px-4 rounded-md shadow-lg"
+                (blur)="saveUpdatedTodo(todo.id, todo.completed, todoIndex)"
+                [ngClass]="{
+                  'line-through text-[#022b3a]': todo.completed && todoIndex + 1
+                }"
+                #editor
+                type="text"
+                [value]="todo.text"
+                (change)="editTodoText($event)"
+                (keyup.enter)="
+                  saveUpdatedTodo(todo.id, todo.completed, todoIndex)
+                "
+                [disabled]="editingTodoID !== todo.id"
+              />
+            </div>
+          </div>
+          <!-- action buttons -->
+          <div todoGsapLTR *ngIf="hoveringTodoID === todo.id" class="flex">
+            <button
+              mat-icon-button
+              (click)="triggerEditMode(todo.id, todoIndex)"
+            >
+              <mat-icon class="hover:text-dark transition-colors duration-500"
+                >edit</mat-icon
+              >
+            </button>
+            <button mat-icon-button (click)="deleteTodo(todo.id)">
+              <mat-icon
+                class="hover:text-orange-500 transition-colors duration-500"
+                >close</mat-icon
+              >
+            </button>
+          </div>
+        </section>
+      </cdk-virtual-scroll-viewport>
+    </ng-container>
   </ng-container>
 </ng-container>
+
+<ng-template #mobileView>
+  <ng-container *ngIf="inputTodos">
+    <ng-container *ngIf="inputTodos.length > 0; else noTodos">
+      <cdk-virtual-scroll-viewport
+        appendOnly
+        itemSize="50"
+        class="h-64 w-full border-b border-[#022b3a] my-2"
+      >
+        <section
+          todoGsapStagger
+          class="flex items-center gap-2 mb-2 mr-2"
+          *ngFor="let todo of inputTodos; let todoIndex = index"
+        >
+          <!-- check box-->
+          <div class="flex items-center">
+            <input
+              class="checkbox"
+              type="checkbox"
+              (change)="toggleTodo(todo.id)"
+              [checked]="todo.completed"
+            />
+          </div>
+          <!-- text editor -->
+
+          <div
+            utilsTouchLongPress
+            (touchLongPress)="triggerEditMode(todo.id, todoIndex)"
+            class="w-full"
+            (click)="toggleTodo(todo.id)"
+          >
+            <ng-container *ngIf="todo.text.length <= 0">Nothing</ng-container>
+            <input
+              class="w-full h-10 px-2 text-dark text-lg rounded-sm shadow-md"
+              (blur)="saveUpdatedTodo(todo.id, todo.completed, todoIndex)"
+              [ngClass]="{
+                'line-through text-[#022b3a]': todo.completed && todoIndex + 1
+              }"
+              #editor
+              type="text"
+              [value]="todo.text"
+              (change)="editTodoText($event)"
+              (keyup.enter)="
+                saveUpdatedTodo(todo.id, todo.completed, todoIndex)
+              "
+              [disabled]="editingTodoID !== todo.id"
+            />
+          </div>
+        </section>
+      </cdk-virtual-scroll-viewport>
+      <div class="text-center">
+        <sub>Long press to edit</sub>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>
 <ng-template #noTodos>
-  <div>Add a task</div>
+  <div
+    class="my-2 xl:my-4 text-center font-semibold text-lg xl:text-xl h-72 grid place-items-center italic"
+  >
+    No task yet.
+  </div>
 </ng-template>

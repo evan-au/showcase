@@ -1,38 +1,46 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { TodoInterface } from '../../data/interfaces/todo.interface';
 
 @Component({
   selector: 'todo-add',
   templateUrl: './todo-add.component.html',
   styleUrls: ['./todo-add.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoAddComponent {
-  @Input() inputVisibleTodos$!: Observable<TodoInterface[] | null>;
-  @Input() inputAreTodosCompleted$!: Observable<boolean | null>;
+  @ViewChild('addInput', { static: true })
+  addInput!: ElementRef<HTMLInputElement>;
+
+  @Input() inputVisibleTodos!: TodoInterface[] | null;
+  @Input() inputAreTodosCompleted!: boolean | null;
+  @Input() inputTodoFormControl!: FormControl | null;
 
   @Output() outputToggleSelectAll: EventEmitter<boolean> = new EventEmitter();
   @Output() outputAddtodo: EventEmitter<TodoInterface['text']> =
     new EventEmitter();
 
-  todoFormControl = new FormControl();
-
   toggleSelectAll(event: Event) {
     const target = event.target as HTMLInputElement;
 
     this.outputToggleSelectAll.emit(target.checked);
-    // this._todoRepo.toggleSelectAllTodos(target.checked);
   }
 
   addTodo() {
     if (
-      this.todoFormControl.value !== null &&
-      this.todoFormControl.value !== ' '
+      this.inputTodoFormControl?.value !== null &&
+      this.inputTodoFormControl?.value !== ' '
     ) {
-      this.outputAddtodo.emit(this.todoFormControl.value);
-      // this._todoRepo.addTodo(this.todoFormControl.value);
-      this.todoFormControl.reset();
+      this.outputAddtodo.emit(this.inputTodoFormControl?.value);
+      this.inputTodoFormControl?.reset();
     }
   }
 }

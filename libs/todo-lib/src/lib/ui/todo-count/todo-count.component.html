@@ -1,4 +1,21 @@
-<div>
-  <span>{{ inputActiveCount$ | async }}</span>
-  <span> {{ inputActiveCountText$ | async }}</span>
-</div>
+<section class="h-10 flex items-center justify-between">
+  <div>
+    <span class="text-sm">{{ inputActiveCount }}</span>
+    <span class="text-xs"> {{ inputActiveCountText }}</span>
+  </div>
+
+  <ng-container *ngIf="inputCompletedTodos">
+    <ng-container *ngIf="inputCompletedTodos.length > 0">
+      <ng-container *ngIf="inputFilterTodos !== filterEnum.active">
+        <button
+          class="filter-button bg-yellow-400 bg-opacity-40 duration-1000 transition-all"
+          [ngClass]="{ 'bg-pink-400': inputAreTodosCompleted }"
+          mat-stroked-button
+          (click)="clearCompletedTodos()"
+        >
+          {{ inputAreTodosCompleted ? 'Clear all' : 'Clear selected' }}
+        </button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</section>

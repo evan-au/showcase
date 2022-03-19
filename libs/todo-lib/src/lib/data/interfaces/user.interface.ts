@@ -1,5 +1,4 @@
 export interface UserInterface {
-  id?: string | null;
+  id: string | null;
   name: string | null;
-  avatarImage: string | null;
 }

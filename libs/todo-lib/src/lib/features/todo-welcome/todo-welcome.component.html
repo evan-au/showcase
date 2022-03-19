@@ -1,23 +1,63 @@
-<main>
-  <header>Header</header>
+<main
+  class="h-full grid grid-rows-[8%_1fr_8%] relative bg-gradient-to-br from-emerald-300 to-teal-600 text-dark"
+>
+  <header class="flex items-center justify-between px-4 xl:px-8 z-10">
+    <span class="text-xl"> odot. </span>
+    <!-- <button mat-icon-button>
+      <mat-icon> menu </mat-icon>
+    </button> -->
+  </header>
 
-  <body>
-    <section class="flex flex-col gap-8">
-      <p>Welcome</p>
+  <body class="h-full grid place-items-center">
+    <section class="flex flex-col items-center gap-8">
+      <p class="text-xl text-center">
+        Welcome to the odot app. <br />
+        The app is a todo application inspired by
+        <span
+          ><a
+            class="underline"
+            href="https://todomvc.com/examples/react"
+            target="_blank"
+            rel="noopener noreferrer"
+            >TodoMVC</a
+          >.</span
+        >
+      </p>
 
       <input
+        class="w-4/5 h-12 bg-light bg-opacity-20 px-4 text-center text-2xl placeholder:text-sm placeholder:text-gray-800"
         autofocus
+        placeholder="Provide your name to start"
         type="text"
         [formControl]="userName"
         (keyup.enter)="addUser()"
         required
       />
 
-      <button [disabled]="userName.invalid" (click)="addUser()">
-        Add user
+      <button
+        [disabled]="userName"
+        class="hover:bg-[#022b3a] hover:text-light disabled:hover:bg-transparent transition-colors duration-500"
+        mat-stroked-button
+        [disabled]="userName.invalid"
+        (click)="addUser()"
+      >
+        Start app
       </button>
     </section>
   </body>
 
-  <footer>Footer</footer>
+  <footer class="flex items-center justify-center text-sm z-10">
+    <div>
+      Built using
+      <span
+        ><a
+          class="underline"
+          href="https://ngneat.github.io/elf/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Elf Reactive store</a
+        ></span
+      >
+    </div>
+  </footer>
 </main>

@@ -16,6 +16,11 @@ import { TodoUserInfoComponent } from '../../ui/todo-user-info/todo-user-info.co
 import { TodoAddComponent } from '../../ui/todo-add/todo-add.component';
 import { TodoFilterComponent } from '../../ui/todo-filter/todo-filter.component';
 import { TodoCountComponent } from '../../ui/todo-count/todo-count.component';
+import { TodoGsapStaggerDirective } from '../../utils/directives/todo-gsap-stagger.directive';
+import { UtilsModule } from '@showcase-ws/utils';
+import { TodoGsapFadeDirective } from '../../utils/directives/todo-gsap-fade.directive';
+import { TodoGsapLTRDirective } from '../../utils/directives/todo-gsap-ltr.directive';
+import { TodoGsapTTBDirective } from '../../utils/directives/todo-gsap-ttb.directive';
 
 @NgModule({
   declarations: [
@@ -26,12 +31,17 @@ import { TodoCountComponent } from '../../ui/todo-count/todo-count.component';
     TodoFilterComponent,
     TodoCountComponent,
     TodoGsapRTLDirective,
+    TodoGsapLTRDirective,
+    TodoGsapTTBDirective,
+    TodoGsapFadeDirective,
+    TodoGsapStaggerDirective,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     TodoListRoutingModule,
     SharedUiModule,
+    UtilsModule,
   ],
 })
 export class TodoListModule {}
