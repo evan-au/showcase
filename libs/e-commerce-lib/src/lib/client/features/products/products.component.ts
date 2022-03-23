@@ -7,12 +7,13 @@ import { ClientFacade } from '../../data/client.facade';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  products$ = this._facade.products$;
-  isLoading$: Observable<boolean | null> = this._facade.isLoading$;
+  // products$ = this._facade.products$;
+  // isLoading$: Observable<boolean | null> = this._facade.isLoading$;
 
-  constructor(private _facade: ClientFacade) {}
+  // constructor(private _facade: ClientFacade) {}
 
   ngOnInit(): void {
-    this._facade.loadProducts();
+    return;
+    // this._facade.loadProducts();
   }
 }

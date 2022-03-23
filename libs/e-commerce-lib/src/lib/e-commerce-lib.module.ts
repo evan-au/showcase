@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Modules
-import { ECommerceDataModule } from '@showcase-ws/e-commerce-data';
 import { ECommerceRoutingModule } from './e-commerce-routing.module';
-// import { SharedUiModule } from '@showcase-ws/shared-ui';
+import { EffectsNgModule } from '@ngneat/effects-ng';
+import { CreateStoreEffects } from './client/data/store/client-store.effects';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ECommerceDataModule, ECommerceRoutingModule],
+
+  imports: [
+    CommonModule,
+    ECommerceRoutingModule,
+    EffectsNgModule.forFeature([CreateStoreEffects]),
+  ],
 })
 export class ECommerceLibModule {}

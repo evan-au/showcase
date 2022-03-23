@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './features/auth/auth.component';
-import { DashboardHomeComponent } from './features/dashboard/dashboard-home/dashboard-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardHomeComponent,
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'auth',
-    component: AuthComponent,
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./features/dashboard/dashboard-home.module').then(
+        (m) => m.DashboardHomeModule
+      ),
   },
 ];
 

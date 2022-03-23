@@ -1,4 +1,4 @@
-<main class="h-full grid grid-rows-[8%_1fr_5%] bg-gray-100 text-dark">
+<!-- <main class="h-full grid grid-rows-[8%_1fr_5%] bg-gray-100 text-dark">
   <header class="shadow-md flex items-center justify-between px-4 xl:px-8">
     <span class="text-xl"> Esklep </span>
     <button mat-icon-button>
@@ -43,4 +43,21 @@
 
 <ng-template #emptyCollection>
   <div class="h-full grid place-items-center">No collection found.</div>
-</ng-template>
+</ng-template> -->
+<main class="h-full w-full grid">
+  <shared-ui-loader [inputIsLoading$]="isPending$">
+    <body class="grid grid-cols-3 place-content-center">
+      <div *ngFor="let product of products$ | async">
+        <img [src]="product.images[0]" width="300" />
+        <div>{{ product.name }}</div>
+        <div>{{ product.brand }}</div>
+        <!-- <div>{{ product.categories.name }}</div> -->
+        <div>{{ product.price }} PLN</div>
+      </div>
+    </body>
+  </shared-ui-loader>
+  <products-category></products-category>
+  <div *ngIf="isFailing$ | async">
+    Network error. We are working on the issue.
+  </div>
+</main>

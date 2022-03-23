@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ProductInterface } from '@showcase-ws/e-commerce-data';
 import { Observable } from 'rxjs';
+import { ProductInterface } from '../../../backend/interfaces/product.interface';
 
 @Component({
   selector: 'products-category',

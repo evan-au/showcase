@@ -3,16 +3,12 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { environment } from '../environments/environment';
-
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 import { SharedNgThreeModule } from '@showcase-ws/shared-ng-three';
 import { devTools } from '@ngneat/elf-devtools';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsNgModule } from '@ngneat/effects-ng';
 
 // Components
 import { AppComponent } from './app.component';
@@ -49,24 +45,14 @@ import { IntroSnowflakeCanvasComponent } from './components/intro-page/component
     AppRoutingModule,
     SharedUiModule,
     SharedNgThreeModule,
-    StoreModule.forRoot(
-      {},
-      {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
-      }
-    ),
-    EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsNgModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
 
+// Elf Dev tools
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .then((moduleRef) => {

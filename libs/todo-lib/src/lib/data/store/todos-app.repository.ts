@@ -25,30 +25,22 @@ import { FilterEnum } from '../enums/filter.enum';
 import { TodoInterface } from '../interfaces/todo.interface';
 import { UserInterface } from '../interfaces/user.interface';
 
-// interface TodosProps {
-//   todos: TodoInterface[];
-// }
 interface UserProps {
   user: UserInterface | null;
 }
 
-interface FilterProps {
+interface FilterTodosProps {
   filterTodos: FilterEnum;
 }
 interface PartOfDayProps {
   partOfDayName: string | null;
 }
-// interface TodoFormControlProps {
-//   todoFormControl: FormControl | null;
-// }
 
 const { state, config } = createState(
   withEntities<TodoInterface>(),
-  // withProps<TodosProps>({ todos: [] }),
   withProps<UserProps>({ user: null }),
-  withProps<FilterProps>({ filterTodos: FilterEnum.active }),
+  withProps<FilterTodosProps>({ filterTodos: FilterEnum.active }),
   withProps<PartOfDayProps>({ partOfDayName: getPortionOfDay() })
-  // withProps<TodoFormControlProps>({ todoFormControl: null })
 );
 
 const store = new Store({ name: 'todos', state, config });
@@ -156,7 +148,7 @@ export class TodosAppRepository {
     );
   }
 
-  public updateFilter(filterTodos: FilterProps['filterTodos']) {
+  public updateFilter(filterTodos: FilterTodosProps['filterTodos']) {
     store.update((state) => ({
       ...state,
       filterTodos,

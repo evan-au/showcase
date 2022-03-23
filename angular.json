@@ -448,7 +448,7 @@
             "styles": ["apps/showcase-app/src/styles.scss"],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "opentype.js"
+              "opentype.js", "websocket"
            ]
             
           },

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ErrorInterface } from '@showcase-ws/e-commerce-data';
 
 @Component({
   selector: 'shared-ui-display-error',
@@ -8,5 +7,5 @@ import { ErrorInterface } from '@showcase-ws/e-commerce-data';
 })
 export class DisplayErrorComponent {
   @Input() status!: number;
-  @Input() error!: ErrorInterface;
+  // @Input() error!: ErrorInterface;
 }
