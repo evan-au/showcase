@@ -12,10 +12,10 @@ import {
 import { JamendoResponse } from '../interfaces/jamendo-response';
 import { JamendoTrack } from '../interfaces/jamendo-track';
 
+@UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
-@UntilDestroy({ checkProperties: true })
 export class JamendoDataService {
   private _trackListSubject = new BehaviorSubject<JamendoTrack[]>([]);
   private _isLoadingSubject = new BehaviorSubject<boolean>(true);

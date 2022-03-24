@@ -6,7 +6,7 @@ import TextPlugin from 'gsap/TextPlugin';
 import { EasePack } from 'gsap/all';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
-UntilDestroy({ checkProperties: true });
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'intro-content',
   templateUrl: './intro-content.component.html',

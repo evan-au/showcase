@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { PostgrestError } from '@supabase/supabase-js';
 import { catchError, from, map, of, switchMap, tap } from 'rxjs';
 import { SupabaseService } from '../../../backend/services/supabase.service';
@@ -8,9 +9,9 @@ import {
   ClientStoreRepository,
   trackProductsRequestsStatus,
 } from './client-store.repository';
-
+@UntilDestroy({ checkProperties: true })
 @Injectable({ providedIn: 'root' })
-export class CreateStoreEffects {
+export class ClientStoreEffects {
   constructor(
     private _supabaseService: SupabaseService,
     private _repo: ClientStoreRepository

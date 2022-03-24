@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 // Modules
 import { ECommerceRoutingModule } from './e-commerce-routing.module';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { CreateStoreEffects } from './client/data/store/client-store.effects';
+import { ClientStoreEffects } from './client/data/store/client-store.effects';
 
 @NgModule({
   declarations: [],
@@ -12,7 +12,7 @@ import { CreateStoreEffects } from './client/data/store/client-store.effects';
   imports: [
     CommonModule,
     ECommerceRoutingModule,
-    EffectsNgModule.forFeature([CreateStoreEffects]),
+    EffectsNgModule.forFeature([ClientStoreEffects]),
   ],
 })
 export class ECommerceLibModule {}

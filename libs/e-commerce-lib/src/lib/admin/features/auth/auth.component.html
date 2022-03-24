@@ -1,1 +1,27 @@
-<admin-layout>Check my new layout</admin-layout>
+<admin-layout>
+  <section class="h-full flex flex-col xl:flex-row-reverse">
+    <div
+      class="hidden xl:grid xl:place-items-center xl:p-14 xl:h-full xl:w-1/2"
+    >
+      <img src="assets/e-commerce/admin/admin-auth.svg" />
+    </div>
+    <div class="h-full xl:p-14 xl:grid xl:w-1/2">
+      <ng-container
+        *ngIf="isSignInComponentVisible; else displaySignUpComponent"
+      >
+        <admin-sign-in
+          (outputSwitchToSignUp)="showSignUpComponent($event)"
+          (outputSignIn)="signIn($event)"
+        ></admin-sign-in>
+      </ng-container>
+    </div>
+  </section>
+</admin-layout>
+
+<ng-template #displaySignUpComponent>
+  <admin-sign-up
+    (outputSignUp)="signUp($event)"
+    (outputSwitchToSignIn)="showSignInComponent($event)"
+  >
+  </admin-sign-up>
+</ng-template>
