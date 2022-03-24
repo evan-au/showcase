@@ -27,13 +27,13 @@ const authStore = createStore(
 export const LocalStorageInstance = persistState(authStore, {
   key: 'admin-auth-e-commerce',
   storage: localStorageStrategy,
-  source: () => authStore.pipe(excludeKeys(['requestsStatus'])),
+  source: () => authStore.pipe(excludeKeys(['requestsStatus', 'error'])),
 });
 
 @Injectable({ providedIn: 'root' })
 export class AuthStoreRepository {
   adminUser$ = authStore.pipe(map((state) => state.user));
-  authError$ = authStore.pipe(map((state) => state.error));
+  authError$ = authStore.pipe(map((state) => state.error?.message as string));
   isAdminAuthenticated$ = this.adminUser$.pipe(
     map((user) => {
       if (user?.aud === 'authenticated') {

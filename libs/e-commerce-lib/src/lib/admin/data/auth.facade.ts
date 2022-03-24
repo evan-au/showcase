@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { SupabaseService } from '../../backend/services/supabase.service';
@@ -11,15 +12,17 @@ import { AuthStoreRepository } from './store/auth-store.repository';
 })
 export class AuthFacade {
   isAdminAuthenticated$ = this._store.isAdminAuthenticated$;
-  authenticationStatus!: boolean;
+  authError$ = this._store.authError$;
+  isAdminAuthenticated!: boolean;
 
   constructor(
     private _supabaseService: SupabaseService,
     private _store: AuthStoreRepository,
-    private _router: Router
+    private _router: Router,
+    private _snackbar: MatSnackBar
   ) {
     this.isAdminAuthenticated$.subscribe((status) => {
-      this.authenticationStatus = status;
+      this.isAdminAuthenticated = status;
     });
   }
 
@@ -28,7 +31,7 @@ export class AuthFacade {
 
     this._store.signOutAdmin(error);
 
-    if (!this.authenticationStatus)
+    if (!this.isAdminAuthenticated)
       this._router.navigate(['e-commerce-app/admin']);
   }
 
@@ -40,7 +43,7 @@ export class AuthFacade {
 
     this._store.signInAdmin(signInPayload);
 
-    if (this.authenticationStatus)
+    if (this.isAdminAuthenticated)
       this._router.navigate(['e-commerce-app/admin/dashboard']);
   }
 
@@ -52,7 +55,7 @@ export class AuthFacade {
 
     this._store.signUpAdmin(signUpPayload);
 
-    if (this.authenticationStatus)
+    if (this.isAdminAuthenticated)
       this._router.navigate(['e-commerce-app/admin/dashboard']);
   }
 }

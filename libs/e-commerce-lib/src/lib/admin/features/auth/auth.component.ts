@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { AuthFacade } from '../../data/auth.facade';
@@ -7,6 +7,7 @@ import { AuthFacade } from '../../data/auth.facade';
   selector: 'auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent {
   isSignInComponentVisible = true;
@@ -23,9 +24,15 @@ export class AuthComponent {
 
   signIn(payload: FormGroup) {
     this._facade.signInAdmin(payload);
+    // this.authError$.subscribe((message) => {
+    //   if (message) this._snackbar.open(message, 'Dismiss', { duration: 5000 });
+    // });
   }
 
   signUp(payload: FormGroup) {
     this._facade.signUpAdmin(payload);
+    // this.authError$.subscribe((message) => {
+    //   if (message) this._snackbar.open(message, 'Dismiss', { duration: 5000 });
+    // });
   }
 }

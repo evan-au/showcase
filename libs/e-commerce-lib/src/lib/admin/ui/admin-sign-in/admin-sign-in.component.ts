@@ -1,12 +1,18 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'admin-sign-in',
   templateUrl: './admin-sign-in.component.html',
   styleUrls: ['./admin-sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminSignInComponent implements OnInit {
+export class AdminSignInComponent {
   @Output() outputSwitchToSignUp: EventEmitter<boolean> = new EventEmitter();
   @Output() outputSignIn: EventEmitter<FormGroup> = new EventEmitter();
 
@@ -17,10 +23,6 @@ export class AdminSignInComponent implements OnInit {
       Validators.required,
     ]),
   });
-
-  ngOnInit(): void {
-    return;
-  }
 
   switchToSignUp() {
     this.outputSwitchToSignUp.emit(false);

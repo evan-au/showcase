@@ -1,10 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'admin-sign-up',
   templateUrl: './admin-sign-up.component.html',
   styleUrls: ['./admin-sign-up.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminSignUpComponent implements OnInit {
   @Output() outputSwitchToSignIn: EventEmitter<boolean> = new EventEmitter();
