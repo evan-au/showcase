@@ -1,0 +1,39 @@
+<main
+  class="h-full grid grid-rows-[8%_1fr_8%] bg-e-com-front-primary text-dark"
+>
+  <header
+    class="bg-e-com-front-secondary flex items-center justify-between px-4"
+  >
+    <div class="flex items-center gap-4">
+      <img src="assets/e-commerce/logo.svg" width="30" alt="E-commerce logo" />
+      <span class="text-xl xl:text-2xl"> Shopo </span>
+    </div>
+  </header>
+  <body>
+    <ng-content></ng-content>
+  </body>
+  <footer class="text-sm xl:text-base flex items-center justify-center">
+    <div class="text-center">
+      Built using
+      <span
+        ><a
+          class="underline"
+          href="https://ngneat.github.io/elf/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Elf Reactive store</a
+        ></span
+      >
+      and
+      <span
+        ><a
+          class="underline"
+          href="https://supabase.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Supabase</a
+        ></span
+      >
+    </div>
+  </footer>
+</main>

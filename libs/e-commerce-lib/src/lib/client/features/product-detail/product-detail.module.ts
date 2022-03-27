@@ -15,4 +15,4 @@ const routes: Routes = [
   declarations: [ProductDetailComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedUiModule],
 })
-export class ProductDetailPageModule {}
+export class ProductDetailModule {}

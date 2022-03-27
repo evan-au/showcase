@@ -1,0 +1,28 @@
+<div
+  class="border border-light bg-e-com-secondary-variant bg-opacity-20 p-4 flex items-center justify-between rounded-sm"
+>
+  <div class="text-sm text-center">Order #987654</div>
+  <div class="truncate w-1/2">
+    Order summary: 2x Iko shoesasfasfasfasfasfasasfadsasdfasdfasdfasdf
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      class="bg-e-com-secondary-variant text-light"
+      [matMenuTriggerFor]="menu"
+    >
+      Actions <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="view-menu">View</button>
+      <button mat-menu-item class="view-dispatch">Dispatch</button>
+      <button mat-menu-item class="view-cancel">Cancel</button>
+    </mat-menu>
+    <!-- <button mat-raised-button class="bg-e-com-secondary-variant text-light">
+      View
+    </button>
+    <button mat-raised-button class="bg-e-com-secondary-variant text-light">
+      Process
+    </button> -->
+  </div>
+</div>

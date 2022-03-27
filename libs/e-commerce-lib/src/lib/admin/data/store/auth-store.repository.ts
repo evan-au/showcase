@@ -13,7 +13,7 @@ import {
 import { AdminUserInterface } from '../../../backend/interfaces/admin-user.interface';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UiSnackbarComponent } from '../../ui/ui-snackbar/ui-snackbar.component';
+import { SharedSnackbarComponent } from '../../../shared/ui/shared-snackbar/shared-snackbar.component';
 
 const authStore = createStore(
   { name: 'admin-store' },
@@ -106,7 +106,7 @@ export class AuthStoreRepository {
 
   private _handleError(payload: ApiError | null) {
     if (payload) {
-      this._snackbar.openFromComponent(UiSnackbarComponent, {
+      this._snackbar.openFromComponent(SharedSnackbarComponent, {
         panelClass: 'e-commerce-error-snackbar',
       });
     } else {

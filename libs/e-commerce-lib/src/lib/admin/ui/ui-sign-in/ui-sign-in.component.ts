@@ -17,8 +17,8 @@ export class UiSignInComponent {
   @Output() outputSignIn: EventEmitter<FormGroup> = new EventEmitter();
 
   signInForm = new FormGroup({
-    emailSignIn: new FormControl('evan@test.com', [Validators.email]),
-    passwordSignIn: new FormControl('password', [
+    emailSignIn: new FormControl('admin@shopo.expo', [Validators.email]),
+    passwordSignIn: new FormControl('Password', [
       Validators.minLength(6),
       Validators.required,
     ]),

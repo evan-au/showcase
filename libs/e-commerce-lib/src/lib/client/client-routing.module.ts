@@ -11,14 +11,14 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () =>
       import('./features/products/products.module').then(
-        (m) => m.ProductsPageModule
+        (m) => m.ProductsModule
       ),
   },
   {
     path: 'products/:id',
     loadChildren: () =>
       import('./features/product-detail/product-detail.module').then(
-        (m) => m.ProductDetailPageModule
+        (m) => m.ProductDetailModule
       ),
   },
 ];

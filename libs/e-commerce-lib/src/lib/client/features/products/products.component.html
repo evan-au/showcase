@@ -50,3 +50,20 @@
   </body>
   <footer>footer</footer>
 </main> -->
+
+<ui-layout>
+  <shared-ui-loader [inputIsLoading$]="isPending$">
+    <section class="grid grid-cols-3 place-content-center">
+      <ng-container *ngIf="products$ | async as products">
+        <e-commerce-shared-product-card
+          *ngFor="let product of products"
+          [inputImage]="product.images[0]"
+          inputMode="view"
+          [inputProductName]="product.name"
+          [inputProductPrice]="product.price"
+          [inputProductBrand]="product.brand"
+        ></e-commerce-shared-product-card>
+      </ng-container>
+    </section>
+  </shared-ui-loader>
+</ui-layout>

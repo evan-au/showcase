@@ -1,0 +1,9 @@
+.view-menu {
+  @apply hover:bg-accent;
+}
+.view-dispatch {
+  @apply hover:bg-green-400;
+}
+.view-cancel {
+  @apply hover:bg-red-400;
+}

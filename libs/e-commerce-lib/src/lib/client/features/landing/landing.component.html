@@ -1,62 +1,43 @@
-<!-- <main class="h-full grid grid-rows-[8%_1fr_5%] bg-gray-100 text-dark">
-  <header class="shadow-md flex items-center justify-between px-4 xl:px-8">
-    <span class="text-xl"> Esklep </span>
-    <button mat-icon-button>
-      <mat-icon [matBadge]="10" [matBadgeHidden]="true">
-        shopping_bag
-      </mat-icon>
-    </button>
-  </header>
-  <body>
-    <shared-ui-loader [inputIsLoading$]="isLoading$">
-      <ng-container *ngIf="products$ | async; else emptyCollection">
-        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
-          <div class="flex flex-col p-8">
-            <products-category
-              [inputProducts$]="menClothing$"
-              inputCategoryName="Men Clothing"
-            ></products-category>
-
-            <products-category
-              [inputProducts$]="womenClothing$"
-              inputCategoryName="Women Clothing"
-            ></products-category>
-
-            <products-category
-              [inputProducts$]="jewelery$"
-              inputCategoryName="Jewelery"
-            ></products-category>
-
-            <products-category
-              [inputProducts$]="electronics$"
-              inputCategoryName="Electronics"
-            ></products-category>
-          </div>
-        </cdk-virtual-scroll-viewport>
-      </ng-container>
-    </shared-ui-loader>
-  </body>
-  <footer class="flex items-center justify-center text-sm text-black">
-    Built using xTech
-  </footer>
-</main>
-
-<ng-template #emptyCollection>
-  <div class="h-full grid place-items-center">No collection found.</div>
-</ng-template> -->
-<main class="h-full w-full grid">
-  <shared-ui-loader [inputIsLoading$]="isPending$">
-    <body class="grid grid-cols-3 place-content-center">
-      <div *ngFor="let product of products$ | async">
-        <img [src]="product.images[0]" width="300" />
-        <div>{{ product.name }}</div>
-        <div>{{ product.brand }}</div>
-        <!-- <div>{{ product.categories.name }}</div> -->
-        <div>{{ product.price }} PLN</div>
+<ui-layout>
+  <section class="h-full flex flex-col xl:flex-row">
+    <div
+      class="p-2 xl:p-14 h-full flex flex-col items-center justify-between xl:w-1/2"
+    >
+      <div class="flex flex-col gap-2 xl:gap-4 items-center">
+        <img
+          class="w-[40px] xl:w-[60px]"
+          src="assets/e-commerce/logo.svg"
+          alt="E-commerce logo"
+        />
+        <p class="text-2xl xl:text-3xl">Welcome to Shopo</p>
       </div>
-    </body>
-  </shared-ui-loader>
-  <div *ngIf="isFailing$ | async">
-    Network error. We are working on the issue.
-  </div>
-</main>
+      <p class="text-center">
+        <span class="font-semibold">Shopo</span> is a demo of a mini online
+        shop, with basic e-commerce features.
+      </p>
+      <div>
+        <button
+          routerLink="products"
+          class="hover:bg-e-com-front-secondary-variant transition-colors duration-300 border border-dark rounded-full py-2 px-6"
+        >
+          Explore products
+        </button>
+      </div>
+
+      <div class="text-sm">
+        Are you a shop manager?
+        <a
+          routerLink="admin"
+          class="hover:text-e-com-front-secondary-variant transition-colors duration-300 underline underline-offset-2"
+        >
+          Manage shop
+        </a>
+      </div>
+    </div>
+    <div class="p-2 xl:p-14 h-full grid place-items-center xl:w-1/2">
+      <img class="w-3/5 xl:w-full" src="assets/e-commerce/landing.svg" />
+    </div>
+  </section>
+</ui-layout>
+
+<!-- hidden xl:grid xl:place-items-center xl:p-14 xl:h-full xl:w-1/2 -->

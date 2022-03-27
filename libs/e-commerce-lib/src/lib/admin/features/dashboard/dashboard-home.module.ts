@@ -9,6 +9,7 @@ import { UtilsModule } from '@showcase-ws/utils';
 
 // Components
 import { DashboardHomeComponent } from './dashboard-home.component';
+import { EcommerceSharedUiModule } from '../../../shared/ui/e-commerce-shared-ui.module';
 
 const routes: Routes = [{ path: '', component: DashboardHomeComponent }];
 @NgModule({
@@ -17,6 +18,7 @@ const routes: Routes = [{ path: '', component: DashboardHomeComponent }];
     CommonModule,
     RouterModule.forChild(routes),
     UiModule,
+    EcommerceSharedUiModule,
     SharedUiModule,
     UtilsModule,
   ],

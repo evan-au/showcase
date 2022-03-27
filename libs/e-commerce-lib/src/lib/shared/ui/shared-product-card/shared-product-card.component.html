@@ -1,0 +1,28 @@
+<div
+  class="border border-light bg-e-com-secondary-variant bg-opacity-20 w-[300px] flex flex-col gap-2 rounded-md p-2"
+  [ngClass]="{
+    'bg-e-com-front-secondary-variant border-dark': inputMode === 'view'
+  }"
+>
+  <div class="rounded-sm overflow-hidden">
+    <img class="h-[200px] w-full" [src]="inputImage" />
+  </div>
+  <div class="text-lg">{{ inputProductName }}</div>
+  <div>{{ inputProductBrand }}</div>
+  <div class="flex items-center justify-between">
+    <div>{{ inputProductPrice }} PLN</div>
+    <div>
+      <ng-container *ngIf="inputMode === 'edit'; else showDefault">
+        <button mat-raised-button class="bg-e-com-secondary-variant text-light">
+          Edit
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #showDefault>
+  <button mat-raised-button class="bg-e-com-front-secondary-variant text-dark">
+    View
+  </button>
+</ng-template>
