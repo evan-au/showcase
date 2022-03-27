@@ -38,7 +38,10 @@ $showcase-app-theme: mat.define-light-theme(
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+// Swiper
+@import '~swiper/css';
+@import '~swiper/css/pagination';
+@import '~swiper/css/navigation';
 
 html,
 .mat-list-option,
@@ -91,4 +94,21 @@ html,
 }
 ::-webkit-scrollbar-corner {
   border-radius: 50%;
+}
+
+// E-commerce
+.e-commerce-error-snackbar {
+  @apply bg-e-com-secondary-variant;
+}
+
+.mat-drawer-container {
+  @apply bg-e-com-primary text-light;
+}
+
+.mat-drawer-over {
+  @apply bg-e-com-primary text-light;
+}
+
+.mat-drawer-side {
+  @apply xl:border-e-com-secondary xl:mt-10 bg-e-com-primary text-light;
 }

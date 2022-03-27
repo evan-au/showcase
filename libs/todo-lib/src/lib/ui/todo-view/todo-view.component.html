@@ -8,8 +8,8 @@
       >
         <section
           todoGsapStagger
-          utilsBreakpointCheck
-          (outputIsBreakpointMatching)="isBreakpointMatching($event)"
+          utilsBreakpointCheckMobile
+          (outputIsBreakpointMatchingMobile)="isBreakpointMatching($event)"
           *ngFor="let todo of inputTodos; let todoIndex = index"
           (mouseenter)="showActionButtons(todo.id)"
           (mouseleave)="hideActionButtons()"

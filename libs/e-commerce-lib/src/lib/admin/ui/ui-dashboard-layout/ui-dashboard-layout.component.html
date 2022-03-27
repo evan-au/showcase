@@ -1,0 +1,93 @@
+<ui-layout>
+  <mat-drawer-container
+    utilsBreakpointCheckMobile
+    (outputIsBreakpointMatchingMobile)="isBreakpointMatching($event)"
+    class="h-full w-full"
+    [hasBackdrop]="isViewOnMobile"
+  >
+    <mat-drawer
+      [opened]="!isViewOnMobile"
+      #drawer
+      class="w-full xl:w-1/5 p-8"
+      [mode]="isViewOnMobile ? 'over' : 'side'"
+    >
+      <section class="h-full flex flex-col gap-6">
+        <ng-container *ngIf="isViewOnMobile">
+          <div
+            class="flex items-center justify-between py-2 text-xs text-gray-400 border-b-[1px] border-e-com-secondary-variant border-opacity-50"
+          >
+            <div>Dashboard</div>
+            <button (click)="drawer.close()" mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+        <button
+          (click)="handleMenuClick('inventory')"
+          class="flex items-center gap-4 p-2 text-sm xl:text-base hover:text-e-com-accent transition-colors duration-300"
+          [ngClass]="{
+            'bg-e-com-secondary bg-opacity-70  rounded-md':
+              content === 'inventory'
+          }"
+        >
+          <mat-icon class="text-e-com-secondary-variant">inventory</mat-icon>
+          Manage inventory
+        </button>
+        <button
+          (click)="handleMenuClick('orders')"
+          class="flex items-center gap-4 p-2 text-sm xl:text-base hover:text-e-com-accent transition-colors duration-300"
+          [ngClass]="{
+            'bg-e-com-secondary bg-opacity-70  rounded-md': content === 'orders'
+          }"
+        >
+          <mat-icon class="text-e-com-secondary-variant">view_list</mat-icon>
+          View orders
+        </button>
+      </section>
+    </mat-drawer>
+
+    <section class="h-full flex flex-col">
+      <div class="p-2">
+        <button mat-icon-button (click)="drawer.toggle()">
+          <ng-container *ngIf="!drawer.opened; else showChevronIcon">
+            <mat-icon title="Expand menu">vertical_split</mat-icon>
+          </ng-container>
+        </button>
+        <ng-container *ngIf="!isViewOnMobile || !drawer.opened">
+          {{ content | titlecase }}
+        </ng-container>
+      </div>
+
+      <section class="h-full flex">
+        <ng-container [ngSwitch]="content">
+          <ng-container *ngSwitchCase="'inventory'">
+            <div class="w-full">
+              <cdk-virtual-scroll-viewport
+                appendOnly
+                itemSize="50"
+                class="w-full h-full"
+              >
+                <ng-content select="[inventory]"></ng-content>
+              </cdk-virtual-scroll-viewport>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="'orders'">
+            <div class="w-full">
+              <cdk-virtual-scroll-viewport
+                appendOnly
+                itemSize="50"
+                class="w-full h-full"
+              >
+                <ng-content select="[orders]"></ng-content>
+              </cdk-virtual-scroll-viewport>
+            </div>
+          </ng-container>
+        </ng-container>
+      </section>
+    </section>
+  </mat-drawer-container>
+</ui-layout>
+
+<ng-template #showChevronIcon>
+  <mat-icon title="Minimise menu">chevron_left</mat-icon>
+</ng-template>

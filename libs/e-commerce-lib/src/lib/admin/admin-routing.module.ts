@@ -1,20 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminUserNotSignedInGuard } from './utils/guards/admin-user-not-signed-in.guard';
-import { AdminUserSignedInGuard } from './utils/guards/admin-user-signed-in.guard';
+import { UserSignedInGuard } from './utils/guards/user-signed-in.guard';
+import { UserNotSignedInGuard } from './utils/guards/user-not-signed-in.guard';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AdminUserSignedInGuard],
-
+    canActivate: [UserNotSignedInGuard],
     loadChildren: () =>
-      import('./features/auth/auth.module').then((m) => m.AuthModule),
+      import('./features/auth/sign-in/sign-in.module').then(
+        (m) => m.SignInModule
+      ),
+  },
+  {
+    path: 'register',
+    canActivate: [UserNotSignedInGuard],
+    loadChildren: () =>
+      import('./features/auth/sign-up/sign-up.module').then(
+        (m) => m.SignUpModule
+      ),
   },
   {
     path: 'dashboard',
-    canActivate: [AdminUserNotSignedInGuard],
-
+    canActivate: [UserSignedInGuard],
     loadChildren: () =>
       import('./features/dashboard/dashboard-home.module').then(
         (m) => m.DashboardHomeModule

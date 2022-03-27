@@ -1,0 +1,12 @@
+<ui-layout>
+  <section class="h-full flex flex-col xl:flex-row-reverse">
+    <div
+      class="hidden xl:grid xl:place-items-center xl:p-14 xl:h-full xl:w-1/2"
+    >
+      <img src="assets/e-commerce/admin/admin-auth.svg" />
+    </div>
+    <div class="h-full xl:p-14 xl:grid xl:w-1/2">
+      <ui-sign-up (outputSignUp)="signUp($event)"> </ui-sign-up>
+    </div>
+  </section>
+</ui-layout>

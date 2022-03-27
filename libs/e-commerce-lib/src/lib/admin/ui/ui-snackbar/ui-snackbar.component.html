@@ -1,0 +1,15 @@
+<ng-container *ngIf="authError$ | async as error">
+  <div class="flex flex-col items-center gap-2 xl:flex-row">
+    <div>
+      {{ error.message }}
+    </div>
+
+    <button
+      mat-button
+      class="bg-e-com-primary bg-opacity-40"
+      (click)="dismissSnackbar()"
+    >
+      Dismiss
+    </button>
+  </div>
+</ng-container>

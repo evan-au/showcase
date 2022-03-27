@@ -1,0 +1,24 @@
+<ui-layout>
+  <section
+    class="flex flex-col items-center justify-center gap-4 w-full h-full"
+  >
+    <div class="w-[320px] h-4/5 xl:w-[600px] border border-white">
+      <swiper
+        [config]="config"
+        class="w-full h-full bg-e-com-secondary-variant bg-opacity-10"
+      >
+        <ng-template swiperSlide>Questionnaire 1</ng-template>
+        <ng-template swiperSlide>Questionnaire 2 </ng-template>
+        <ng-template swiperSlide>Questionnaire 3 </ng-template>
+      </swiper>
+    </div>
+    <div>
+      <button
+        (click)="skipWelcomeIntro()"
+        class="hover:text-e-com-accent transition-colors duration-300"
+      >
+        Skip
+      </button>
+    </div>
+  </section>
+</ui-layout>

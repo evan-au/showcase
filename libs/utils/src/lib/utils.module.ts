@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackButtonDirective } from './directives/back-button.directive';
-import { BreakpointCheckDirective } from './directives/breakpoint-check.directive';
+import { BreakpointCheckMobileDirective } from './directives/breakpoint-check-mobile.directive';
 import { TouchLongPressDirective } from './directives/touch-long-press.directive';
 import { MouseLongPressDirective } from './directives/mouse-long-press.directive';
 import { CharacterSlicerPipe } from './pipes/character-slicer.pipe';
@@ -9,7 +9,7 @@ import { CharacterSlicerPipe } from './pipes/character-slicer.pipe';
 @NgModule({
   declarations: [
     BackButtonDirective,
-    BreakpointCheckDirective,
+    BreakpointCheckMobileDirective,
     TouchLongPressDirective,
     MouseLongPressDirective,
     CharacterSlicerPipe,
@@ -17,7 +17,7 @@ import { CharacterSlicerPipe } from './pipes/character-slicer.pipe';
   imports: [CommonModule],
   exports: [
     BackButtonDirective,
-    BreakpointCheckDirective,
+    BreakpointCheckMobileDirective,
     TouchLongPressDirective,
     MouseLongPressDirective,
     CharacterSlicerPipe,

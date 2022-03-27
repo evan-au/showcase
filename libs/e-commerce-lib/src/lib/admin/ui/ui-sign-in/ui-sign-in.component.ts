@@ -7,12 +7,12 @@ import {
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'admin-sign-in',
-  templateUrl: './admin-sign-in.component.html',
-  styleUrls: ['./admin-sign-in.component.scss'],
+  selector: 'ui-sign-in',
+  templateUrl: './ui-sign-in.component.html',
+  styleUrls: ['./ui-sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminSignInComponent {
+export class UiSignInComponent {
   @Output() outputSwitchToSignUp: EventEmitter<boolean> = new EventEmitter();
   @Output() outputSignIn: EventEmitter<FormGroup> = new EventEmitter();
 

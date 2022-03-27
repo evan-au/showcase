@@ -2,10 +2,10 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Directive, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Directive({
-  selector: '[utilsBreakpointCheck]',
+  selector: '[utilsBreakpointCheckMobile]',
 })
-export class BreakpointCheckDirective implements OnInit {
-  @Output() outputIsBreakpointMatching: EventEmitter<boolean> =
+export class BreakpointCheckMobileDirective implements OnInit {
+  @Output() outputIsBreakpointMatchingMobile: EventEmitter<boolean> =
     new EventEmitter();
 
   constructor(private _breakpoint: BreakpointObserver) {}
@@ -13,7 +13,7 @@ export class BreakpointCheckDirective implements OnInit {
     this._breakpoint
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state) => {
-        this.outputIsBreakpointMatching.emit(state.matches);
+        this.outputIsBreakpointMatchingMobile.emit(state.matches);
       });
   }
 }

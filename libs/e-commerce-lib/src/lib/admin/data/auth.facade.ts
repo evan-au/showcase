@@ -1,38 +1,25 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { UntilDestroy } from '@ngneat/until-destroy';
 import { SupabaseService } from '../../backend/services/supabase.service';
 import { AuthStoreRepository } from './store/auth-store.repository';
 
-@UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacade {
+  isAdminNew$ = this._store.isAdminNew$;
   isAdminAuthenticated$ = this._store.isAdminAuthenticated$;
   authError$ = this._store.authError$;
-  isAdminAuthenticated!: boolean;
 
   constructor(
     private _supabaseService: SupabaseService,
-    private _store: AuthStoreRepository,
-    private _router: Router,
-    private _snackbar: MatSnackBar
-  ) {
-    this.isAdminAuthenticated$.subscribe((status) => {
-      this.isAdminAuthenticated = status;
-    });
-  }
+    private _store: AuthStoreRepository
+  ) {}
 
   async signOutAdmin() {
     const { error } = await this._supabaseService.signOut();
 
     this._store.signOutAdmin(error);
-
-    if (!this.isAdminAuthenticated)
-      this._router.navigate(['e-commerce-app/admin']);
   }
 
   async signInAdmin(payload: FormGroup) {
@@ -41,10 +28,7 @@ export class AuthFacade {
       payload.value.passwordSignIn
     );
 
-    this._store.signInAdmin(signInPayload);
-
-    if (this.isAdminAuthenticated)
-      this._router.navigate(['e-commerce-app/admin/dashboard']);
+    this._store.handleAuth(signInPayload);
   }
 
   async signUpAdmin(payload: FormGroup) {
@@ -53,9 +37,10 @@ export class AuthFacade {
       payload.value.passwordSignUp
     );
 
-    this._store.signUpAdmin(signUpPayload);
+    this._store.handleAuth(signUpPayload);
+  }
 
-    if (this.isAdminAuthenticated)
-      this._router.navigate(['e-commerce-app/admin/dashboard']);
+  skipWelcomeIntro() {
+    this._store.skipWelcomeIntro();
   }
 }
