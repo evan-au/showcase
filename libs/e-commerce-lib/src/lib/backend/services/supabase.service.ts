@@ -1,21 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
-  // AuthChangeEvent,
   createClient,
   PostgrestError,
-  // Session,
   SupabaseClient,
 } from '@supabase/supabase-js';
-// import { from, of } from 'rxjs';
 import { environment } from '../environments/environment';
-// import { BlogArticleInterface } from '../interfaces/blog-article.interface';
+import { BrandInterface } from '../interfaces/brand.interface';
+import { CategoryInterface } from '../interfaces/category.interface';
 import { ProductInterface } from '../interfaces/product.interface';
-
-// export interface Profile {
-//   username: string;
-//   website: string;
-//   avatar_url: string;
-// }
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +26,7 @@ export class SupabaseService {
   async getAllProducts() {
     const { data: products, error } = await this.supabase
       .from<ProductInterface>('products')
-      .select('*')
-      // .select('*, categories(*), brands(*), dimensions(*)')
-      .limit(10);
+      .select('*, brands(*), categories(*)');
 
     return {
       products: products as ProductInterface[],
@@ -44,15 +34,31 @@ export class SupabaseService {
     };
   }
 
+  // Categories
+  async getAllCategories() {
+    const { data: categories, error } = await this.supabase
+      .from<CategoryInterface>('categories')
+      .select('*');
+
+    return {
+      categories: categories as CategoryInterface[],
+      error: error as PostgrestError,
+    };
+  }
+
+  // Brands
+  async getAllBrands() {
+    const { data: brands, error } = await this.supabase
+      .from<BrandInterface>('brands')
+      .select('*');
+
+    return {
+      brands: brands as BrandInterface[],
+      error: error as PostgrestError,
+    };
+  }
+
   // Authentication
-
-  get user() {
-    return this.supabase.auth.user();
-  }
-
-  get session() {
-    return this.supabase.auth.session();
-  }
 
   signIn(email: string, password: string) {
     return this.supabase.auth.signIn({ email, password });

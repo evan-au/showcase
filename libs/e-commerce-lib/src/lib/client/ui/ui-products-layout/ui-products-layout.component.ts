@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { BrandInterface } from '../../../backend/interfaces/brand.interface';
+import { CategoryInterface } from '../../../backend/interfaces/category.interface';
 
 @Component({
   selector: 'ui-products-layout',
@@ -8,17 +17,42 @@ import { MatDrawer } from '@angular/material/sidenav';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiProductsLayoutComponent {
+  @Input() inputCategories!: CategoryInterface[] | null;
+  @Input() inputBrands!: BrandInterface[] | null;
+  @Output() outputUpdateFilterBrands: EventEmitter<BrandInterface['name']> =
+    new EventEmitter();
+  @Output() outputUpdateFilterCategories: EventEmitter<
+    CategoryInterface['name']
+  > = new EventEmitter();
+  @Output() outputUpdateFilterAll = new EventEmitter();
+
   @ViewChild('drawer') private _drawer!: MatDrawer;
 
   isViewOnMobile!: boolean;
-  content: 'all' | 'brand' | 'category' = 'all';
+  content = 'All Products';
 
   isBreakpointMatching(payload: boolean) {
     this.isViewOnMobile = payload;
   }
 
-  handleMenuClick(payload: 'all' | 'brand' | 'category') {
-    this.content = payload;
+  updateFilterBrands(payload: BrandInterface['name']) {
+    this.outputUpdateFilterBrands.emit(payload);
+    this.content = payload as string;
+
+    if (this.isViewOnMobile) this._drawer.close();
+  }
+
+  updateFilterCategories(payload: CategoryInterface['name']) {
+    this.outputUpdateFilterCategories.emit(payload);
+    this.content = payload as string;
+
+    if (this.isViewOnMobile) this._drawer.close();
+  }
+
+  updateFilterAll() {
+    this.outputUpdateFilterAll.emit();
+    this.content = 'All Products';
+
     if (this.isViewOnMobile) this._drawer.close();
   }
 }

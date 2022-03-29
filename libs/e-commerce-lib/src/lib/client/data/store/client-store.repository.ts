@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { createStore } from '@ngneat/elf';
+import { createStore, select, withProps } from '@ngneat/elf';
 import {
-  addEntities,
   deleteEntities,
   selectAll,
+  selectAllApply,
   setEntities,
   updateEntities,
   upsertEntities,
@@ -23,14 +23,34 @@ import {
   selectIsRequestPending,
 } from '@ngneat/elf-requests';
 import { PostgrestError } from '@supabase/supabase-js';
-import { filter, map, tap } from 'rxjs';
+import { distinctUntilChanged, filter, map, mergeWith, switchMap } from 'rxjs';
 import { ProductInterface } from '../../../backend/interfaces/product.interface';
 
 import * as localforage from 'localforage';
+import { BrandInterface } from '../../../backend/interfaces/brand.interface';
+import { CategoryInterface } from '../../../backend/interfaces/category.interface';
+
+interface GeneralErrorProps {
+  generalError: PostgrestError | null;
+}
+interface CategoriesProps {
+  categories: CategoryInterface[] | null;
+}
+interface BrandsProps {
+  brands: BrandInterface[] | null;
+}
+interface FilterProps {
+  filterBrands: BrandInterface['name'] | null;
+  filterCategories: CategoryInterface['name'] | null;
+}
 
 const store = createStore(
   { name: 'client-store' },
   withEntities<ProductInterface>(),
+  withProps<BrandsProps>({ brands: null }),
+  withProps<CategoriesProps>({ categories: null }),
+  withProps<GeneralErrorProps>({ generalError: null }),
+  withProps<FilterProps>({ filterBrands: null, filterCategories: null }),
   withRequestsStatus<'products'>()
 );
 
@@ -44,23 +64,76 @@ localforage.config({
 export const indexDBInstance = persistState(store, {
   key: 'e-commerce-store',
   storage: localforage as unknown as StateStorage,
-  source: () => store.pipe(excludeKeys(['requestsStatus'])),
+  source: () =>
+    store.pipe(
+      excludeKeys([
+        'requestsStatus',
+        'generalError',
+        'filterBrands',
+        'filterCategories',
+      ])
+    ),
 });
 
 export const trackProductsRequestsStatus = createRequestsStatusOperator(store);
 
 @Injectable({ providedIn: 'root' })
 export class ClientStoreRepository {
+  // Streams
   allProducts$ = store.pipe(selectAll());
+  filterBrands$ = store.pipe(select((state) => state.filterBrands));
+  filterCategories$ = store.pipe(select((state) => state.filterCategories));
 
-  isFailing$ = store.pipe(
-    selectRequestStatus('products'),
-    filter((status) => status.value === 'error'),
-    map(() => true)
+  private _visibleBrands$ = this.filterBrands$.pipe(
+    switchMap((filterBrands) => {
+      return store.pipe(
+        selectAllApply({
+          filterEntity({ brands }) {
+            if (filterBrands === null) return true;
+            return filterBrands !== brands['name'] ? false : true;
+          },
+        }),
+        distinctUntilChanged()
+      );
+    })
+  );
+  private _visibleCategories$ = this.filterCategories$.pipe(
+    switchMap((filterCategories) => {
+      return store.pipe(
+        selectAllApply({
+          filterEntity({ categories }) {
+            if (filterCategories === null) return true;
+            return filterCategories !== categories['name'] ? false : true;
+          },
+        }),
+        distinctUntilChanged()
+      );
+    })
+  );
+  visibleProducts$ = this._visibleBrands$.pipe(
+    mergeWith(this._visibleCategories$)
   );
 
+  allCategories$ = store.pipe(
+    map((state) => state.categories),
+    distinctUntilChanged()
+  );
+  allBrands$ = store.pipe(
+    map((state) => state.brands),
+    distinctUntilChanged()
+  );
+  productsError$ = store.pipe(
+    selectRequestStatus('products'),
+    filter((status) => status.value === 'error'),
+    distinctUntilChanged()
+  );
+  generalErrors$ = store.pipe(
+    map((state) => state.generalError),
+    distinctUntilChanged()
+  );
   isPending$ = store.pipe(selectIsRequestPending('products'));
 
+  // Actions
   loadAllProductsSuccess(products: ProductInterface[]) {
     store.update(
       setEntities(products),
@@ -82,5 +155,41 @@ export class ClientStoreRepository {
 
   addProductsRT(product: ProductInterface) {
     store.update(upsertEntities(product));
+  }
+
+  loadAllBrands(brands: BrandInterface[], error: PostgrestError) {
+    store.update((state) => ({
+      ...state,
+      brands,
+      generalError: error,
+    }));
+  }
+
+  loadAllCategories(categories: CategoryInterface[], error: PostgrestError) {
+    store.update((state) => ({
+      ...state,
+      categories,
+      generalError: error,
+    }));
+  }
+
+  updateFilterBrands(payload: BrandInterface['name']) {
+    store.update((state) => ({
+      ...state,
+      filterBrands: payload,
+    }));
+  }
+  updateFilterCategories(payload: CategoryInterface['name']) {
+    store.update((state) => ({
+      ...state,
+      filterCategories: payload,
+    }));
+  }
+  updateFilterAll() {
+    store.update((state) => ({
+      ...state,
+      filterCategories: null,
+      filterBrands: null,
+    }));
   }
 }

@@ -1,21 +1,25 @@
-<ui-products-layout>
-  <section all>
-    <shared-ui-loader [inputIsLoading$]="isPending$">
-      <ng-container *ngIf="products$ | async as products">
-        <section
-          class="p-4 grid grid-cols-1 gap-4 place-items-center lg:grid-cols-3"
-        >
-          <e-commerce-shared-product-card
-            *ngFor="let product of products"
-            [inputImage]="product.images[0]"
-            inputMode="view"
-            [inputProductName]="product.name"
-            [inputProductPrice]="product.price"
-            [inputProductBrand]="product.brand"
-            [inputProductID]="product.id"
-          ></e-commerce-shared-product-card>
-        </section>
-      </ng-container>
-    </shared-ui-loader>
-  </section>
+<ui-products-layout
+  [inputBrands]="brands$ | async"
+  [inputCategories]="categories$ | async"
+  (outputUpdateFilterBrands)="updateFilterBrands($event)"
+  (outputUpdateFilterCategories)="updateFilterCategories($event)"
+  (outputUpdateFilterAll)="updateFilterAll()"
+>
+  <shared-ui-loader [inputIsLoading$]="isPending$">
+    <ng-container *ngIf="products$ | async as products">
+      <section
+        class="p-4 grid grid-cols-1 gap-4 place-items-center lg:grid-cols-3"
+      >
+        <e-commerce-shared-product-card
+          *ngFor="let product of products"
+          [inputImage]="product.images[0]"
+          inputMode="view"
+          [inputProductName]="product.name"
+          [inputProductPrice]="product.price"
+          [inputProductBrand]="product.brand"
+          [inputProductID]="product.id"
+        ></e-commerce-shared-product-card>
+      </section>
+    </ng-container>
+  </shared-ui-loader>
 </ui-products-layout>

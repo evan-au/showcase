@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, switchMap } from 'rxjs';
 import { ProductInterface } from '../../../backend/interfaces/product.interface';
-import { Actions } from '@ngneat/effects-ng';
-import { loadAllProducts } from '../../data/store/client-store.actions';
-import { ClientStoreRepository } from '../../data/store/client-store.repository';
+import { ClientFacade } from '../../data/client.facade';
 
 @Component({
   templateUrl: './product-detail.component.html',
@@ -13,22 +11,15 @@ import { ClientStoreRepository } from '../../data/store/client-store.repository'
 })
 export class ProductDetailComponent implements OnInit {
   product$!: Observable<ProductInterface | null>;
-  isPending$!: Observable<boolean>;
+  isPending$ = this._facade.isPending$;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _actions: Actions,
-    private _clientRepo: ClientStoreRepository
-  ) {}
+  constructor(private _route: ActivatedRoute, private _facade: ClientFacade) {}
 
   ngOnInit(): void {
-    this._actions.dispatch(loadAllProducts());
-    this.isPending$ = this._clientRepo.isPending$;
-
     this.product$ = this._route.params.pipe(
       map(({ id }) => id),
       switchMap((id: number) =>
-        this._clientRepo.allProducts$.pipe(
+        this._facade.visibleProducts$.pipe(
           map(
             (products) =>
               products.find((product) => product.id == id) as ProductInterface
@@ -36,5 +27,9 @@ export class ProductDetailComponent implements OnInit {
         )
       )
     );
+  }
+
+  resetProductsView() {
+    this._facade.updateFilterAll();
   }
 }

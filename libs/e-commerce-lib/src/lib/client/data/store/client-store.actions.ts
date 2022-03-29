@@ -15,4 +15,10 @@ import { createAction } from '@ngneat/effects';
 // );
 
 // Products
-export const loadAllProducts = createAction('[Landing page] Load All Products');
+export const loadAllProducts = createAction(
+  '[Products page] Load All Products'
+);
+export const loadAllCategories = createAction(
+  '[Landing page] Load All Categories'
+);
+export const loadAllBrands = createAction('[Landing page] Load All Brands');

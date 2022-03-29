@@ -1,6 +1,6 @@
 export interface BrandInterface {
-  id: number;
-  name: string;
-  is_trusted: boolean;
-  created_at: string;
+  id: number | null;
+  name: string | null;
+  is_trusted: boolean | null;
+  created_at: string | null;
 }

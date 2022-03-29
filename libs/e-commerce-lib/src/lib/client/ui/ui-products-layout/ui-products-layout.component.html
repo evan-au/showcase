@@ -11,7 +11,7 @@
       class="w-full lg:w-1/5 p-8"
       [mode]="isViewOnMobile ? 'over' : 'side'"
     >
-      <section class="h-full flex flex-col gap-6">
+      <section class="h-full flex flex-col gap-6 mx-4 lg:mr-2">
         <ng-container *ngIf="isViewOnMobile">
           <div
             class="flex items-center justify-between py-2 text-xs text-gray-400 border-b-[1px] border-e-com-front-secondary-variant border-opacity-50"
@@ -22,45 +22,60 @@
             </button>
           </div>
         </ng-container>
-        <button
-          (click)="handleMenuClick('all')"
-          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-front-accent transition-colors duration-300"
-          [ngClass]="{
-            'bg-e-com-front-secondary bg-opacity-70  rounded-md':
-              content === 'all'
-          }"
-        >
-          <mat-icon class="text-e-com-front-secondary-variant"
-            >local_florist</mat-icon
+
+        <div>
+          <button
+            class="rounded-md p-2 hover:bg-e-com-front-secondary transition-colors duration-300 text-left"
+            [ngClass]="{
+              'bg-e-com-front-secondary': content === 'All Products'
+            }"
+            (click)="updateFilterAll()"
           >
-          Shop all
-        </button>
-        <button
-          (click)="handleMenuClick('brand')"
-          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-front-accent transition-colors duration-300"
-          [ngClass]="{
-            'bg-e-com-front-secondary bg-opacity-70  rounded-md':
-              content === 'brand'
-          }"
-        >
-          <mat-icon class="text-e-com-front-secondary-variant"
-            >local_offer</mat-icon
+            All Products
+          </button>
+        </div>
+        <div>
+          <div
+            class="flex items-center text-sm border-b border-gray-400 mb-2 text-gray-500 w-fit"
           >
-          By brand
-        </button>
-        <button
-          (click)="handleMenuClick('category')"
-          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-front-accent transition-colors duration-300"
-          [ngClass]="{
-            'bg-e-com-front-secondary bg-opacity-70  rounded-md':
-              content === 'category'
-          }"
-        >
-          <mat-icon class="text-e-com-front-secondary-variant"
-            >category</mat-icon
+            Brands
+          </div>
+          <ng-container *ngIf="inputBrands as brands">
+            <div class="flex flex-col gap-2">
+              <button
+                (click)="updateFilterBrands(brand.name)"
+                class="rounded-md p-2 hover:bg-e-com-front-secondary transition-colors duration-300 text-left"
+                [ngClass]="{
+                  'bg-e-com-front-secondary': content === brand.name
+                }"
+                *ngFor="let brand of brands"
+              >
+                {{ brand.name }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+        <div>
+          <div
+            class="flex items-center text-sm border-b border-gray-400 mb-2 text-gray-500 w-fit"
           >
-          By category
-        </button>
+            Category
+          </div>
+          <ng-container *ngIf="inputCategories as categories">
+            <div class="flex flex-col gap-2">
+              <button
+                (click)="updateFilterCategories(category.name)"
+                class="rounded-md p-2 hover:bg-e-com-front-secondary transition-colors duration-300 text-left"
+                [ngClass]="{
+                  'bg-e-com-front-secondary': content === category.name
+                }"
+                *ngFor="let category of categories"
+              >
+                {{ category.name }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
       </section>
     </mat-drawer>
 
@@ -72,46 +87,18 @@
           </ng-container>
         </button>
         <ng-container *ngIf="!isViewOnMobile || !drawer.opened">
-          {{ content | titlecase }}
+          {{ content }}
         </ng-container>
       </div>
 
-      <section class="h-full flex">
-        <ng-container [ngSwitch]="content">
-          <ng-container *ngSwitchCase="'all'">
-            <div class="w-full h-full">
-              <cdk-virtual-scroll-viewport
-                appendOnly
-                itemSize="50"
-                class="w-full h-full"
-              >
-                <ng-content select="[all]"></ng-content>
-              </cdk-virtual-scroll-viewport>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'brand'">
-            <div class="w-full h-full">
-              <cdk-virtual-scroll-viewport
-                appendOnly
-                itemSize="50"
-                class="w-full h-full"
-              >
-                <ng-content select="[brand]"></ng-content>
-              </cdk-virtual-scroll-viewport>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'category'">
-            <div class="w-full h-full">
-              <cdk-virtual-scroll-viewport
-                appendOnly
-                itemSize="50"
-                class="w-full h-full"
-              >
-                <ng-content select="[category]"></ng-content>
-              </cdk-virtual-scroll-viewport>
-            </div>
-          </ng-container>
-        </ng-container>
+      <section class="h-full">
+        <cdk-virtual-scroll-viewport
+          appendOnly
+          itemSize="50"
+          class="w-full h-full"
+        >
+          <ng-content></ng-content>
+        </cdk-virtual-scroll-viewport>
       </section>
     </section>
   </mat-drawer-container>

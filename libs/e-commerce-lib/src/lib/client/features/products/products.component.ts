@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Actions } from '@ngneat/effects-ng';
-import { Observable } from 'rxjs';
-import { ProductInterface } from '../../../backend/interfaces/product.interface';
-import { loadAllProducts } from '../../data/store/client-store.actions';
-import { ClientStoreRepository } from '../../data/store/client-store.repository';
+import { BrandInterface } from '../../../backend/interfaces/brand.interface';
+import { CategoryInterface } from '../../../backend/interfaces/category.interface';
+import { ClientFacade } from '../../data/client.facade';
 
 @Component({
   templateUrl: './products.component.html',
@@ -11,21 +9,28 @@ import { ClientStoreRepository } from '../../data/store/client-store.repository'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent implements OnInit {
-  products$!: Observable<ProductInterface[] | null>;
-  isPending$!: Observable<boolean>;
-  isFailing$!: Observable<boolean>;
+  products$ = this._facade.visibleProducts$;
+  brands$ = this._facade.brands$;
+  categories$ = this._facade.categories$;
+  isPending$ = this._facade.isPending$;
 
-  constructor(
-    private _clientRepo: ClientStoreRepository,
-    private _actions: Actions
-  ) {}
+  constructor(private _facade: ClientFacade) {}
 
   ngOnInit(): void {
-    this._actions.dispatch(loadAllProducts());
+    this._facade.loadAllProducts();
+    this._facade.loadAllBrands();
+    this._facade.loadAllCategories();
+  }
 
-    this.isPending$ = this._clientRepo.isPending$;
-    this.isFailing$ = this._clientRepo.isFailing$;
+  updateFilterBrands(payload: BrandInterface['name']) {
+    this._facade.updateFilterBrands(payload);
+  }
 
-    this.products$ = this._clientRepo.allProducts$;
+  updateFilterCategories(payload: CategoryInterface['name']) {
+    this._facade.updateFilterCategories(payload);
+  }
+
+  updateFilterAll() {
+    this._facade.updateFilterAll();
   }
 }

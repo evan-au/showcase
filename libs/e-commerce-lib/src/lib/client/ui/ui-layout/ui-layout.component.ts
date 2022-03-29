@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ClientFacade } from '../../data/client.facade';
 import { UiCartComponent } from '../ui-cart/ui-cart.component';
 
 @Component({
@@ -11,9 +12,13 @@ import { UiCartComponent } from '../ui-cart/ui-cart.component';
 export class UiLayoutComponent {
   @Input() inputCartMode = false;
 
-  constructor(private _dialog: MatDialog) {}
+  constructor(private _dialog: MatDialog, private _facade: ClientFacade) {}
 
   openCart() {
     this._dialog.open(UiCartComponent);
+  }
+
+  resetProductsView() {
+    this._facade.updateFilterAll();
   }
 }

@@ -4,7 +4,11 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { PostgrestError } from '@supabase/supabase-js';
 import { catchError, from, map, of, switchMap, tap } from 'rxjs';
 import { SupabaseService } from '../../../backend/services/supabase.service';
-import { loadAllProducts } from './client-store.actions';
+import {
+  loadAllBrands,
+  loadAllCategories,
+  loadAllProducts,
+} from './client-store.actions';
 import {
   ClientStoreRepository,
   trackProductsRequestsStatus,
@@ -44,6 +48,30 @@ export class ClientStoreEffects {
           }),
           catchError((error: PostgrestError) =>
             of(this._repo.loadAllProductsFailure(error))
+          )
+        )
+      )
+    )
+  );
+
+  loadAllBrands$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(loadAllBrands),
+      switchMap(() =>
+        from(this._supabaseService.getAllBrands()).pipe(
+          map(({ brands, error }) => this._repo.loadAllBrands(brands, error))
+        )
+      )
+    )
+  );
+
+  loadAllCategories$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(loadAllCategories),
+      switchMap(() =>
+        from(this._supabaseService.getAllCategories()).pipe(
+          map(({ categories, error }) =>
+            this._repo.loadAllCategories(categories, error)
           )
         )
       )

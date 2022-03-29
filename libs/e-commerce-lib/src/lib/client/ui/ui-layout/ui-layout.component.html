@@ -6,7 +6,7 @@
   >
     <div class="flex items-center gap-4">
       <ng-container *ngIf="inputCartMode">
-        <button mat-icon-button utilsBackButton>
+        <button (click)="resetProductsView()" mat-icon-button utilsBackButton>
           <mat-icon>arrow_back</mat-icon>
         </button>
       </ng-container>
