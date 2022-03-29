@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 // Components
 import { PageNotFoundComponent } from './page-not-found.component';
 import { RouterModule } from '@angular/router';
+import { UtilsModule } from '@showcase-ws/utils';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
         component: PageNotFoundComponent,
       },
     ]),
+    UtilsModule,
   ],
 })
 export class PageNotFoundModule {}

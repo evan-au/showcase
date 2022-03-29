@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'shared-ui-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderComponent implements OnInit {
   @Input() inputLoaderStyle: 'progress' | 'spinner' = 'progress';

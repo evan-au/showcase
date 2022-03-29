@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { generateRandomNumbers } from '@showcase-ws/utils';
 import * as THREE from 'three';
 import { Object3D } from 'three';
@@ -7,6 +13,7 @@ import { Object3D } from 'three';
   selector: 'intro-snowflake-canvas',
   templateUrl: './intro-snowflake-canvas.component.html',
   styleUrls: ['./intro-snowflake-canvas.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntroSnowflakeCanvasComponent {
   @Input() inputCameraPositionX!: number;

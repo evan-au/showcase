@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { AuthFacade } from '../../../admin/data/auth.facade';
-// import { AuthFacade } from '../../data/auth.facade';
 
 @Component({
   templateUrl: './shared-snackbar.component.html',
   styleUrls: ['./shared-snackbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SharedSnackbarComponent {
   authError$ = this._authFacade.authError$;

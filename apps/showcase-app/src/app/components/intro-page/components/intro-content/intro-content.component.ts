@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { gsap } from 'gsap';
 
@@ -11,6 +17,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   selector: 'intro-content',
   templateUrl: './intro-content.component.html',
   styleUrls: ['./intro-content.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntroContentComponent implements OnInit {
   @ViewChild('intro', { static: true }) intro!: ElementRef<HTMLElement>;

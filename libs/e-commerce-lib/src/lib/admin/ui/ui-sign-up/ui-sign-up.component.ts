@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./ui-sign-up.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiSignUpComponent implements OnInit {
+export class UiSignUpComponent {
   @Output() outputSwitchToSignIn: EventEmitter<boolean> = new EventEmitter();
   @Output() outputSignUp: EventEmitter<FormGroup> = new EventEmitter();
 
@@ -24,10 +23,6 @@ export class UiSignUpComponent implements OnInit {
       Validators.required,
     ]),
   });
-
-  ngOnInit(): void {
-    return;
-  }
 
   switchToSignIn() {
     this.outputSwitchToSignIn.emit(true);

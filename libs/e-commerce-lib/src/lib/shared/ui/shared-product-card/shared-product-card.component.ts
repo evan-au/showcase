@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'e-commerce-shared-product-card',
   templateUrl: './shared-product-card.component.html',
   styleUrls: ['./shared-product-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SharedProductCardComponent {
   @Input() inputMode: 'edit' | 'view' = 'edit';
@@ -13,6 +14,4 @@ export class SharedProductCardComponent {
   @Input() inputProductBrand = 5;
   @Input() inputProductPrice = 400;
   @Input() inputProductID = 400;
-
-  // constructor() { }
 }

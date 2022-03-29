@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ui-order',
   templateUrl: './ui-order.component.html',
   styleUrls: ['./ui-order.component.scss'],
 })
-export class UiOrderComponent implements OnInit {
-  // constructor() { }
-
-  ngOnInit(): void {
-    return;
-  }
-}
+export class UiOrderComponent {}

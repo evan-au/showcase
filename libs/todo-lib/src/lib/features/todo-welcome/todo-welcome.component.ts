@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TodosAppRepository } from '../../data/store/todos-app.repository';
@@ -7,6 +7,7 @@ import { TodosAppRepository } from '../../data/store/todos-app.repository';
   selector: 'todo-welcome',
   templateUrl: './todo-welcome.component.html',
   styleUrls: ['./todo-welcome.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoWelcomeComponent {
   user$ = this._repo.user$;

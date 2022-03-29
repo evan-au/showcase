@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { fromEvent, map } from 'rxjs';
 
@@ -10,6 +16,7 @@ import { Object3D } from 'three';
   selector: 'showcase-app-intro-page',
   templateUrl: './intro-page.component.html',
   styleUrls: ['./intro-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntroPageComponent implements OnInit {
   @ViewChild('main', { static: true }) main!: ElementRef<HTMLElement>;

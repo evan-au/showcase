@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   QueryList,
   ViewChildren,
@@ -17,7 +16,7 @@ import { TodoInterface } from '../../data/interfaces/todo.interface';
   styleUrls: ['./todo-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoViewComponent implements OnInit {
+export class TodoViewComponent {
   @ViewChildren('editor') editor!: QueryList<ElementRef<HTMLInputElement>>;
 
   public hoveringTodoID!: TodoInterface['id'] | null;
@@ -37,18 +36,6 @@ export class TodoViewComponent implements OnInit {
   }> = new EventEmitter();
 
   isViewOnMobile!: boolean;
-
-  // constructor(private _breakpoint: BreakpointObserver) {}
-  ngOnInit(): void {
-    return;
-    // this._breakpoint
-    //   .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
-    //   .subscribe((state) => {
-    //     if (state.matches) {
-    //       this.isOnMobile = state.matches;
-    //     }
-    //   });
-  }
 
   toggleTodo(payloadID: TodoInterface['id']) {
     if (this.editingTodoID) {
@@ -110,11 +97,6 @@ export class TodoViewComponent implements OnInit {
   }
 
   isBreakpointMatching(payload: boolean) {
-    // if (payload) {
     this.isViewOnMobile = payload;
-
-    // } else {
-    //   this.isOnMobile = false;
-    // }
   }
 }

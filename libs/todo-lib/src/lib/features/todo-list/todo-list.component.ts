@@ -8,7 +8,6 @@ import { TodosAppRepository } from '../../data/store/todos-app.repository';
   selector: 'todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
-  // providers: [TodosAppRepository],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {

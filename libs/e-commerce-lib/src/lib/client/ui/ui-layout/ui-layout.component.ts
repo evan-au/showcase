@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UiCartComponent } from '../ui-cart/ui-cart.component';
 
@@ -6,6 +6,7 @@ import { UiCartComponent } from '../ui-cart/ui-cart.component';
   selector: 'ui-layout',
   templateUrl: './ui-layout.component.html',
   styleUrls: ['./ui-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiLayoutComponent {
   @Input() inputCartMode = false;
