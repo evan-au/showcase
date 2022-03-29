@@ -1,6 +1,6 @@
 <ui-layout [inputCartMode]="true">
   <shared-ui-loader [inputIsLoading$]="isPending$">
-    <ng-container *ngIf="product$ | async as product">
+    <ng-container *ngIf="product$ | async as product; else productNotFound">
       <section class="h-full w-full flex flex-col lg:flex-row">
         <div class="grid place-items-center w-full h-full p-4 lg:p-14 lg:w-1/2">
           <div class="rounded-md overflow-hidden">
@@ -48,3 +48,27 @@
     </ng-container>
   </shared-ui-loader>
 </ui-layout>
+
+<ng-template #productNotFound>
+  <section class="h-full w-full flex flex-col">
+    <div class="h-3/5 lg:h-4/5 w-full grid place-items-center">
+      <div class="lg:w-3/5">
+        <img
+          src="assets/e-commerce/product-not-found.svg"
+          alt="Product not found"
+        />
+      </div>
+    </div>
+    <div class="h-2/5 lg:h-1/5 w-full grid place-items-center">
+      <div class="text-2xl">Oops.. Product not found</div>
+      <div class="flex gap-14">
+        <button
+          utilsBackButton
+          class="border border-dark hover:bg-accent transition-colors duration-300 rounded-full py-2 px-4"
+        >
+          Go back
+        </button>
+      </div>
+    </div>
+  </section>
+</ng-template>
