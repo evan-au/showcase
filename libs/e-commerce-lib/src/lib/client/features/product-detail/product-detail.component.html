@@ -1,41 +1,50 @@
-<!-- <main class="h-full grid grid-rows-[8%_1fr_5%]">
-  <header>Product detail page</header>
-  <body>
-    <shared-ui-loader [inputIsLoading$]="isLoading$">
-      <ng-container *ngIf="product$ | async as product">
-        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="h-full">
-          <div>
-            <div>
-              {{ product.id }}
-            </div>
-            <div>
-              {{ product.title }}
-            </div>
-            <div>
-              {{ product.price }}
-            </div>
-            <div>
-              {{ product.description }}
-            </div>
-            <div>
-              {{ product.category }}
-            </div>
-            <div
-              class="flex items-center justify-center bg-white shadow-md rounded-sm"
-            >
-              <img class="h-3/4 object-contain" [src]="product.image" />
-            </div>
-
-            <div>
-              {{ product.rating?.count }}
-            </div>
-            <div>
-              {{ product.rating?.rate }}
-            </div>
+<ui-layout [inputCartMode]="true">
+  <shared-ui-loader [inputIsLoading$]="isPending$">
+    <ng-container *ngIf="product$ | async as product">
+      <section class="h-full w-full flex flex-col lg:flex-row">
+        <div class="grid place-items-center w-full h-full p-4 lg:p-14 lg:w-1/2">
+          <div class="rounded-md overflow-hidden">
+            <img [src]="product.images[0]" />
           </div>
-        </cdk-virtual-scroll-viewport>
-      </ng-container>
-    </shared-ui-loader>
-  </body>
-  <footer>Footer of detail page</footer>
-</main> -->
+        </div>
+        <div class="w-full h-full lg:w-1/2 p-2 lg:p-14">
+          <cdk-virtual-scroll-viewport
+            appendOnly
+            itemSize="50"
+            class="w-full h-full"
+          >
+            <div class="h-full flex flex-col gap-8">
+              <div class="flex items-center justify-between text-lg">
+                {{ product.brand }}
+              </div>
+              <div class="text-lg font-semibold">{{ product.name }}</div>
+              <div class="flex flex-col gap-2">
+                <span class="text-sm underline underline-offset-2"
+                  >Description</span
+                >
+                {{ product.description }}
+              </div>
+              <div class="text-sm flex flex-col gap-2">
+                <span class="underline underline-offset-2"
+                  >Shipping information</span
+                >
+                {{ product.shipping_information }}
+              </div>
+              <div
+                class="text-lg font-semibold flex justify-between items-center p-2"
+              >
+                <span>{{ product.price }} PLN </span>
+                <button
+                  mat-raised-button
+                  class="bg-e-com-front-secondary-variant"
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </section>
+    </ng-container>
+  </shared-ui-loader>
+</ui-layout>

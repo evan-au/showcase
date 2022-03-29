@@ -12,6 +12,7 @@ export class SharedProductCardComponent {
   @Input() inputProductName = 'Product name';
   @Input() inputProductBrand = 5;
   @Input() inputProductPrice = 400;
+  @Input() inputProductID = 400;
 
   // constructor() { }
 }

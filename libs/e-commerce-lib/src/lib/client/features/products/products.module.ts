@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedUiModule } from '@showcase-ws/shared-ui';
 import { UiModule } from '../../ui/ui.module';
 import { EcommerceSharedUiModule } from '../../../shared/ui/e-commerce-shared-ui.module';
+import { UtilsModule } from '@showcase-ws/utils';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedUiModule,
     UiModule,
+    UtilsModule,
     EcommerceSharedUiModule,
   ],
 })

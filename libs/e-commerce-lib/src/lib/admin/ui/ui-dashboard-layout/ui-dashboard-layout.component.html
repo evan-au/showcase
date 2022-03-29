@@ -8,7 +8,7 @@
     <mat-drawer
       [opened]="!isViewOnMobile"
       #drawer
-      class="w-full xl:w-1/5 p-8"
+      class="w-full lg:w-1/5 p-8"
       [mode]="isViewOnMobile ? 'over' : 'side'"
     >
       <section class="h-full flex flex-col gap-6">
@@ -24,7 +24,7 @@
         </ng-container>
         <button
           (click)="handleMenuClick('inventory')"
-          class="flex items-center gap-4 p-2 text-sm xl:text-base hover:text-e-com-accent transition-colors duration-300"
+          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
           [ngClass]="{
             'bg-e-com-secondary bg-opacity-70  rounded-md':
               content === 'inventory'
@@ -35,7 +35,7 @@
         </button>
         <button
           (click)="handleMenuClick('orders')"
-          class="flex items-center gap-4 p-2 text-sm xl:text-base hover:text-e-com-accent transition-colors duration-300"
+          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
           [ngClass]="{
             'bg-e-com-secondary bg-opacity-70  rounded-md': content === 'orders'
           }"

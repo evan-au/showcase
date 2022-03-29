@@ -2,10 +2,10 @@
   <header class="bg-e-com-secondary flex items-center justify-between px-4">
     <div class="flex items-center gap-4">
       <img src="assets/e-commerce/logo.svg" width="30" alt="E-commerce logo" />
-      <span class="text-xl xl:text-2xl"> Shopo </span>
+      <span class="text-lg lg:text-2lg"> Shopo </span>
     </div>
 
-    <div class="text-sm xl:text-base">
+    <div class="text-sm lg:text-base">
       <span> Admin portal </span>
       <ng-container *ngIf="isAdminAuthenticated$ | async">
         <span>
@@ -22,7 +22,7 @@
   <footer class="flex items-center justify-center">
     <a
       class="underline hover:text-e-com-accent transition-colors duration-500"
-      routerLink="../"
+      routerLink="../../"
       >View online shop</a
     >
   </footer>

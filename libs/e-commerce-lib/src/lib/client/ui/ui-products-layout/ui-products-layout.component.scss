@@ -1,0 +1,11 @@
+.mat-drawer-container {
+  @apply bg-e-com-front-primary text-dark;
+}
+
+.mat-drawer-over {
+  @apply bg-e-com-front-primary text-dark;
+}
+
+.mat-drawer-side {
+  @apply lg:border-e-com-front-secondary lg:mt-10 bg-e-com-front-primary text-dark;
+}

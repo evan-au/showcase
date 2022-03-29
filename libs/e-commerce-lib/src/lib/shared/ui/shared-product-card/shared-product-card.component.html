@@ -10,7 +10,9 @@
   <div class="text-lg">{{ inputProductName }}</div>
   <div>{{ inputProductBrand }}</div>
   <div class="flex items-center justify-between">
-    <div>{{ inputProductPrice }} PLN</div>
+    <div class="font-semibold text-lg">
+      {{ inputProductPrice }} <span class="text-sm font-normal">PLN</span>
+    </div>
     <div>
       <ng-container *ngIf="inputMode === 'edit'; else showDefault">
         <button mat-raised-button class="bg-e-com-secondary-variant text-light">
@@ -22,7 +24,11 @@
 </div>
 
 <ng-template #showDefault>
-  <button mat-raised-button class="bg-e-com-front-secondary-variant text-dark">
+  <button
+    [routerLink]="[inputProductID]"
+    mat-raised-button
+    class="bg-e-com-front-secondary-variant text-dark"
+  >
     View
   </button>
 </ng-template>

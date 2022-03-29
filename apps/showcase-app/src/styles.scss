@@ -85,7 +85,7 @@ html,
 // Style scrollbar
 ::-webkit-scrollbar {
   width: 6px;
-  @apply bg-light;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -96,19 +96,11 @@ html,
   border-radius: 50%;
 }
 
-// E-commerce
+// e-commerce
+.mat-dialog-container {
+  @apply bg-e-com-front-primary;
+}
+
 .e-commerce-error-snackbar {
   @apply bg-e-com-secondary-variant;
-}
-
-.mat-drawer-container {
-  @apply bg-e-com-primary text-light;
-}
-
-.mat-drawer-over {
-  @apply bg-e-com-primary text-light;
-}
-
-.mat-drawer-side {
-  @apply xl:border-e-com-secondary xl:mt-10 bg-e-com-primary text-light;
 }

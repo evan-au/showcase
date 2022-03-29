@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UiCartComponent } from '../ui-cart/ui-cart.component';
 
 @Component({
   selector: 'ui-layout',
   templateUrl: './ui-layout.component.html',
   styleUrls: ['./ui-layout.component.scss'],
 })
-export class UiLayoutComponent implements OnInit {
-  // constructor() { }
+export class UiLayoutComponent {
+  @Input() inputCartMode = false;
 
-  ngOnInit(): void {
-    return;
+  constructor(private _dialog: MatDialog) {}
+
+  openCart() {
+    this._dialog.open(UiCartComponent);
   }
 }

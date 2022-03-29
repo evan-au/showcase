@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable } from 'rxjs';
 import { ProductInterface } from '../../../backend/interfaces/product.interface';
@@ -8,6 +8,7 @@ import { ClientStoreRepository } from '../../data/store/client-store.repository'
 @Component({
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent implements OnInit {
   products$!: Observable<ProductInterface[] | null>;

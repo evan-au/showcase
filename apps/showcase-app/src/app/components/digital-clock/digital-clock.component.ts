@@ -8,9 +8,9 @@ import { DateTimeService } from '@showcase-ws/utils';
     <div
       class="digital-clock w-full flex items-center justify-between px-4 absolute bottom-2 lg:w-auto lg:flex-col lg:items-end lg:px-4 lg:py-2 lg:right-0 text-dark dark:text-light transition-colors duration-1000"
     >
-      <div class="digital-clock__clock text-3xl">
+      <div class="digital-clock__clock text-2xl">
         {{ time$ | async | date: 'HH:mm' }}
-        <span class="digital-clock__seconds-only text-sm p-0 -ml-4">{{
+        <span class="digital-clock__seconds-only text-sm p-0 -ml-2">{{
           time$ | async | date: 'ss'
         }}</span>
       </div>

@@ -5,14 +5,30 @@
     class="bg-e-com-front-secondary flex items-center justify-between px-4"
   >
     <div class="flex items-center gap-4">
-      <img src="assets/e-commerce/logo.svg" width="30" alt="E-commerce logo" />
-      <span class="text-xl xl:text-2xl"> Shopo </span>
+      <ng-container *ngIf="inputCartMode">
+        <button mat-icon-button utilsBackButton>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </ng-container>
+      <div class="flex items-center gap-4">
+        <img
+          src="assets/e-commerce/logo.svg"
+          width="30"
+          alt="E-commerce logo"
+        />
+        <span class="text-lg lg:text-2lg"> Shopo </span>
+      </div>
     </div>
+    <ng-container *ngIf="inputCartMode">
+      <button (click)="openCart()" mat-icon-button>
+        <mat-icon>shopping_bag</mat-icon>
+      </button>
+    </ng-container>
   </header>
   <body>
     <ng-content></ng-content>
   </body>
-  <footer class="text-sm xl:text-base flex items-center justify-center">
+  <footer class="text-xs lg:text-base flex items-center justify-center">
     <div class="text-center">
       Built using
       <span

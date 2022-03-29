@@ -1,6 +1,6 @@
 <ng-container *ngIf="inputSearchField$ | async as searchField">
   <mat-form-field appearance="standard" color="accent" class="w-[80%] lg:w-1/2">
-    <mat-label>Lookup songs</mat-label>
+    <mat-label>Look up for songs - e.g. World</mat-label>
     <input matInput type="search" [formControl]="searchField" />
     <button
       *ngIf="searchField.value"
