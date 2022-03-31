@@ -6,6 +6,8 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+
+// Swiper
 import Swiper, { Pagination, SwiperOptions } from 'swiper';
 
 @Component({

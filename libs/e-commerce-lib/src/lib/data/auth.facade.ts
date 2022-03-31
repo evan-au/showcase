@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { SupabaseService } from '../../backend/services/supabase.service';
-import { AuthStoreRepository } from './store/auth-store.repository';
+
+// Services
+import { SupabaseService } from './services/supabase.service';
+
+// Store
+import { AuthStoreRepository } from './store/auth/auth-store.repository';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacade {
+  // Streams
   isAdminNew$ = this._store.isAdminNew$;
   isAdminAuthenticated$ = this._store.isAdminAuthenticated$;
   authError$ = this._store.authError$;
@@ -16,6 +21,7 @@ export class AuthFacade {
     private _store: AuthStoreRepository
   ) {}
 
+  // Actions
   async signOutAdmin() {
     const { error } = await this._supabaseService.signOut();
 

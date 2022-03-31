@@ -1,0 +1,130 @@
+<main class="p-4 flex flex-col gap-6 lg:items-center">
+  <form [formGroup]="addProductForm" class="flex flex-col gap-6 lg:w-3/5">
+    <div class="flex flex-col gap-2">
+      <label for="name">Name</label>
+      <input
+        class="add-input"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Product name"
+        formControlName="name"
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="price">Price</label>
+      <input
+        class="add-input"
+        type="number"
+        name="price"
+        id="price"
+        placeholder="100 PLN"
+        formControlName="price"
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="description">Description</label>
+      <input
+        class="add-input"
+        type="text"
+        name="description"
+        id="description"
+        placeholder="Some product description"
+        formControlName="description"
+      />
+    </div>
+    <div class="flex items-center justify-between lg:justify-start lg:gap-6">
+      <div class="flex flex-col gap-2">
+        <label for="brands" class="text-sm lg:text-base">Choose a brand</label>
+        <select
+          class="add-input"
+          name="brands"
+          id="brands"
+          formControlName="brand"
+        >
+          <ng-container *ngIf="inputBrands as brands">
+            <option
+              class="add-input"
+              *ngFor="let brand of brands"
+              [value]="brand.name"
+            >
+              {{ brand.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="categories" class="text-sm lg:text-base"
+          >Choose a category</label
+        >
+        <select
+          class="add-input"
+          name="categories"
+          id="categories"
+          formControlName="category"
+        >
+          <ng-container *ngIf="inputCategories as categories">
+            <option
+              class="add-input"
+              *ngFor="let category of categories"
+              [value]="category.name"
+            >
+              {{ category.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="shipping">Shipping Information</label>
+      <input
+        class="add-input"
+        type="text"
+        name="shipping"
+        id="shipping"
+        placeholder="Additional shipping info"
+        formControlName="shipping_information"
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="image">Image</label>
+      <input
+        class="add-input"
+        type="text"
+        name="image"
+        id="image"
+        placeholder="Link to image"
+        formControlName="image"
+      />
+    </div>
+  </form>
+
+  <div class="w-full flex items-center justify-between lg:w-1/2">
+    <button
+      class="border border-light py-2 px-4 rounded-full hover:bg-e-com-accent transition-colors duration-300 disabled:text-gray-500 disabled:border-gray-500 disabled:bg-transparent"
+      (click)="resetForm()"
+      [disabled]="addProductForm.pristine"
+    >
+      Reset
+    </button>
+    <button
+      class="border border-light py-2 px-4 rounded-full bg-e-com-secondary-variant hover:bg-e-com-accent transition-colors duration-300 disabled:text-gray-500 disabled:border-gray-500 disabled:bg-transparent"
+      (click)="addProduct()"
+      [disabled]="addProductForm.invalid"
+    >
+      Add Product
+    </button>
+  </div>
+</main>
+
+<!-- id: number;
+brand: number;
+brands: BrandInterface;
+categories: CategoryInterface;
+category: number;
+description: string;
+image: string;
+is_available: boolean;
+name: string;
+price: number;
+shipping_information: string; -->

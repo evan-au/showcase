@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+// Components - Angular material dialog
 import { MatDialog } from '@angular/material/dialog';
-import { ClientFacade } from '../../data/client.facade';
 import { UiCartComponent } from '../ui-cart/ui-cart.component';
+
+// Facade
+import { ClientFacade } from '../../../data/client.facade';
 
 @Component({
   selector: 'ui-layout',

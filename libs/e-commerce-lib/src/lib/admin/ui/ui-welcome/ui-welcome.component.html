@@ -7,9 +7,24 @@
         [config]="config"
         class="w-full h-full bg-e-com-secondary-variant bg-opacity-10"
       >
-        <ng-template swiperSlide>Questionnaire 1</ng-template>
-        <ng-template swiperSlide>Questionnaire 2 </ng-template>
-        <ng-template swiperSlide>Questionnaire 3 </ng-template>
+        <ng-template swiperSlide>
+          <div class="w-full h-full grid place-items-center">
+            <p>Questionnaire 1</p>
+            <p>In Progress...</p>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="w-full h-full grid place-items-center">
+            <p>Questionnaire 2</p>
+            <p>In Progress...</p>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="w-full h-full grid place-items-center">
+            <p>Questionnaire 3</p>
+            <p>In Progress...</p>
+          </div>
+        </ng-template>
       </swiper>
     </div>
     <div>

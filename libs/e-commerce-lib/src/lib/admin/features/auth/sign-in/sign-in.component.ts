@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { AuthFacade } from '../../../data/auth.facade';
+
+// Facade
+import { AuthFacade } from '../../../../data/auth.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({

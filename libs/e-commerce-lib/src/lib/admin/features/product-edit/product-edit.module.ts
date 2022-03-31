@@ -3,28 +3,28 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 // Modules
-import { SharedUiModule } from '@showcase-ws/shared-ui';
 import { UiModule } from '../../ui/ui.module';
+import { SharedUiModule } from '@showcase-ws/shared-ui';
 import { UtilsModule } from '@showcase-ws/utils';
 
 // Components
-import { ProductDetailComponent } from './product-detail.component';
+import { ProductEditComponent } from './product-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductDetailComponent,
+    component: ProductEditComponent,
   },
 ];
 
 @NgModule({
-  declarations: [ProductDetailComponent],
+  declarations: [ProductEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedUiModule,
     UiModule,
+    SharedUiModule,
     UtilsModule,
   ],
 })
-export class ProductDetailModule {}
+export class ProductEditModule {}

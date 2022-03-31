@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthFacade } from '../../data/auth.facade';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+// Facade
+import { AuthFacade } from '../../../data/auth.facade';
 
 @Component({
   selector: 'ui-layout',
@@ -8,6 +10,7 @@ import { AuthFacade } from '../../data/auth.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiLayoutComponent {
+  @Input() inputEditMode = false;
   isAdminAuthenticated$ = this._facade.isAdminAuthenticated$;
 
   constructor(private _facade: AuthFacade) {}

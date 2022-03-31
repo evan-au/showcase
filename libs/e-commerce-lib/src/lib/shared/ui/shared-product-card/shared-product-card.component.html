@@ -15,7 +15,11 @@
     </div>
     <div>
       <ng-container *ngIf="inputMode === 'edit'; else showDefault">
-        <button mat-raised-button class="bg-e-com-secondary-variant text-light">
+        <button
+          [routerLink]="['product/' + inputProductID]"
+          mat-raised-button
+          class="bg-e-com-secondary-variant text-light"
+        >
           Edit
         </button>
       </ng-container>

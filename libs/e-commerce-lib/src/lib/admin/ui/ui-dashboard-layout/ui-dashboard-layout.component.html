@@ -24,24 +24,22 @@
         </ng-container>
         <button
           (click)="handleMenuClick('inventory')"
-          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
+          class="flex items-center w-fit p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
           [ngClass]="{
-            'bg-e-com-secondary bg-opacity-70  rounded-md':
+            'bg-e-com-secondary bg-opacity-70 rounded-md':
               content === 'inventory'
           }"
         >
-          <mat-icon class="text-e-com-secondary-variant">inventory</mat-icon>
           Manage inventory
         </button>
         <button
-          (click)="handleMenuClick('orders')"
-          class="flex items-center gap-4 p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
+          (click)="handleMenuClick('add')"
+          class="flex items-center w-fit p-2 text-sm lg:text-base hover:text-e-com-accent transition-colors duration-300"
           [ngClass]="{
-            'bg-e-com-secondary bg-opacity-70  rounded-md': content === 'orders'
+            'bg-e-com-secondary bg-opacity-70 rounded-md': content === 'add'
           }"
         >
-          <mat-icon class="text-e-com-secondary-variant">view_list</mat-icon>
-          View orders
+          Add Product
         </button>
       </section>
     </mat-drawer>
@@ -54,7 +52,7 @@
           </ng-container>
         </button>
         <ng-container *ngIf="!isViewOnMobile || !drawer.opened">
-          {{ content | titlecase }}
+          {{ content === 'add' ? 'Add new Product' : (content | titlecase) }}
         </ng-container>
       </div>
 
@@ -71,14 +69,14 @@
               </cdk-virtual-scroll-viewport>
             </div>
           </ng-container>
-          <ng-container *ngSwitchCase="'orders'">
+          <ng-container *ngSwitchCase="'add'">
             <div class="w-full">
               <cdk-virtual-scroll-viewport
                 appendOnly
                 itemSize="50"
                 class="w-full h-full"
               >
-                <ng-content select="[orders]"></ng-content>
+                <ng-content select="[add]"></ng-content>
               </cdk-virtual-scroll-viewport>
             </div>
           </ng-container>

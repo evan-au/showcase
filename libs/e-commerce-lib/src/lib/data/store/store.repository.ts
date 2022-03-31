@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
+import { distinctUntilChanged, filter, map, mergeWith, switchMap } from 'rxjs';
 
+// BAAS - Supabase
+import { PostgrestError } from '@supabase/supabase-js';
+
+// Elf state management
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
   deleteEntities,
@@ -22,47 +27,44 @@ import {
   selectRequestStatus,
   selectIsRequestPending,
 } from '@ngneat/elf-requests';
-import { PostgrestError } from '@supabase/supabase-js';
-import { distinctUntilChanged, filter, map, mergeWith, switchMap } from 'rxjs';
-import { ProductInterface } from '../../../backend/interfaces/product.interface';
 
+// Local storage strategy
 import * as localforage from 'localforage';
-import { BrandInterface } from '../../../backend/interfaces/brand.interface';
-import { CategoryInterface } from '../../../backend/interfaces/category.interface';
 
+// Interfaces
+import { BrandInterface } from '../interfaces/brand.interface';
+import { CategoryInterface } from '../interfaces/category.interface';
+import { ProductInterface } from '../interfaces/product.interface';
+
+// Private properties
 interface GeneralErrorProps {
   generalError: PostgrestError | null;
 }
+
 interface CategoriesProps {
   categories: CategoryInterface[] | null;
 }
 interface BrandsProps {
   brands: BrandInterface[] | null;
 }
+
 interface FilterProps {
   filterBrands: BrandInterface['name'] | null;
   filterCategories: CategoryInterface['name'] | null;
 }
 
 const store = createStore(
-  { name: 'client-store' },
+  { name: 'app-store' },
   withEntities<ProductInterface>(),
   withProps<BrandsProps>({ brands: null }),
   withProps<CategoriesProps>({ categories: null }),
-  withProps<GeneralErrorProps>({ generalError: null }),
   withProps<FilterProps>({ filterBrands: null, filterCategories: null }),
+  withProps<GeneralErrorProps>({ generalError: null }),
   withRequestsStatus<'products'>()
 );
 
-localforage.config({
-  driver: localforage.INDEXEDDB,
-  name: 'ECommerceApp',
-  version: 1.0,
-  storeName: 'e-commerce-store',
-});
-
-export const indexDBInstance = persistState(store, {
-  key: 'e-commerce-store',
+export const localStateInstance = persistState(store, {
+  key: 'expo-e-commerce-app-store',
   storage: localforage as unknown as StateStorage,
   source: () =>
     store.pipe(
@@ -78,11 +80,38 @@ export const indexDBInstance = persistState(store, {
 export const trackProductsRequestsStatus = createRequestsStatusOperator(store);
 
 @Injectable({ providedIn: 'root' })
-export class ClientStoreRepository {
+export class StoreRepository {
   // Streams
-  allProducts$ = store.pipe(selectAll());
-  filterBrands$ = store.pipe(select((state) => state.filterBrands));
-  filterCategories$ = store.pipe(select((state) => state.filterCategories));
+  allProducts$ = store.pipe(selectAll(), distinctUntilChanged());
+  allBrands$ = store.pipe(
+    select((state) => state.brands),
+    distinctUntilChanged()
+  );
+  allCategories$ = store.pipe(
+    select((state) => state.categories),
+    distinctUntilChanged()
+  );
+  productsError$ = store.pipe(
+    selectRequestStatus('products'),
+    filter((status) => status.value === 'error'),
+    distinctUntilChanged()
+  );
+  generalErrors$ = store.pipe(
+    map((state) => state.generalError),
+    distinctUntilChanged()
+  );
+  isPending$ = store.pipe(
+    selectIsRequestPending('products'),
+    distinctUntilChanged()
+  );
+  filterBrands$ = store.pipe(
+    select((state) => state.filterBrands),
+    distinctUntilChanged()
+  );
+  filterCategories$ = store.pipe(
+    select((state) => state.filterCategories),
+    distinctUntilChanged()
+  );
 
   private _visibleBrands$ = this.filterBrands$.pipe(
     switchMap((filterBrands) => {
@@ -111,27 +140,9 @@ export class ClientStoreRepository {
     })
   );
   visibleProducts$ = this._visibleBrands$.pipe(
-    mergeWith(this._visibleCategories$)
-  );
-
-  allCategories$ = store.pipe(
-    map((state) => state.categories),
+    mergeWith(this._visibleCategories$),
     distinctUntilChanged()
   );
-  allBrands$ = store.pipe(
-    map((state) => state.brands),
-    distinctUntilChanged()
-  );
-  productsError$ = store.pipe(
-    selectRequestStatus('products'),
-    filter((status) => status.value === 'error'),
-    distinctUntilChanged()
-  );
-  generalErrors$ = store.pipe(
-    map((state) => state.generalError),
-    distinctUntilChanged()
-  );
-  isPending$ = store.pipe(selectIsRequestPending('products'));
 
   // Actions
   loadAllProductsSuccess(products: ProductInterface[]) {
@@ -143,6 +154,13 @@ export class ClientStoreRepository {
 
   loadAllProductsFailure(error: PostgrestError) {
     store.update(updateRequestStatus('products', 'error', error.message));
+  }
+
+  addProductFailure(error: PostgrestError) {
+    store.update((state) => ({
+      ...state,
+      generalError: error,
+    }));
   }
 
   updateProductsRT(id: ProductInterface['id'], newProduct: ProductInterface) {
@@ -179,12 +197,14 @@ export class ClientStoreRepository {
       filterBrands: payload,
     }));
   }
+
   updateFilterCategories(payload: CategoryInterface['name']) {
     store.update((state) => ({
       ...state,
       filterCategories: payload,
     }));
   }
+
   updateFilterAll() {
     store.update((state) => ({
       ...state,

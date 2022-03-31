@@ -4,28 +4,31 @@
 
 <ng-template #showDashboard>
   <ui-dashboard-layout>
-    <section
-      inventory
-      class="p-4 grid grid-cols-1 gap-4 place-items-center lg:grid-cols-3"
-    >
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
-      <e-commerce-shared-product-card></e-commerce-shared-product-card>
+    <section inventory>
+      <shared-ui-loader [inputIsLoading$]="isPending$">
+        <ng-container *ngIf="products$ | async as products">
+          <section
+            class="p-4 grid grid-cols-1 gap-4 place-items-center lg:grid-cols-3"
+          >
+            <e-commerce-shared-product-card
+              *ngFor="let product of products"
+              [inputImage]="product.image"
+              [inputProductName]="product.name"
+              [inputProductPrice]="product.price"
+              [inputProductBrand]="product.brand"
+              [inputProductID]="product.id"
+            ></e-commerce-shared-product-card>
+          </section>
+        </ng-container>
+      </shared-ui-loader>
     </section>
 
-    <section orders class="p-4 gap-4 grid grid-flow-row">
-      <ui-order></ui-order>
-      <ui-order></ui-order>
-      <ui-order></ui-order>
-      <ui-order></ui-order>
-      <ui-order></ui-order>
-      <ui-order></ui-order>
-      <ui-order></ui-order>
+    <section add>
+      <ui-add-product
+        [inputBrands]="brands$ | async"
+        [inputCategories]="categories$ | async"
+        (outputAddProduct)="addProduct($event)"
+      ></ui-add-product>
     </section>
   </ui-dashboard-layout>
 </ng-template>

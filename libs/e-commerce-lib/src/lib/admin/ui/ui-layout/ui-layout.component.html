@@ -1,8 +1,23 @@
 <main class="h-full grid grid-rows-[8%_1fr_8%] bg-e-com-primary text-light">
   <header class="bg-e-com-secondary flex items-center justify-between px-4">
-    <div class="flex items-center gap-4">
+    <!-- <div class="flex items-center gap-4">
       <img src="assets/e-commerce/logo.svg" width="30" alt="E-commerce logo" />
       <span class="text-lg lg:text-2lg"> Shopo </span>
+    </div> -->
+    <div class="flex items-center gap-4">
+      <ng-container *ngIf="inputEditMode">
+        <button mat-icon-button utilsBackButton>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </ng-container>
+      <div class="flex items-center gap-4">
+        <img
+          src="assets/e-commerce/logo.svg"
+          width="30"
+          alt="E-commerce logo"
+        />
+        <span class="text-lg lg:text-2lg"> Shopo </span>
+      </div>
     </div>
 
     <div class="text-sm lg:text-base">
@@ -22,7 +37,7 @@
   <footer class="flex items-center justify-center">
     <a
       class="underline hover:text-e-com-accent transition-colors duration-500"
-      routerLink="../../"
+      routerLink="../../products"
       >View online shop</a
     >
   </footer>

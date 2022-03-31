@@ -6,9 +6,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+
+// Components - Angular material sidenav
 import { MatDrawer } from '@angular/material/sidenav';
-import { BrandInterface } from '../../../backend/interfaces/brand.interface';
-import { CategoryInterface } from '../../../backend/interfaces/category.interface';
+
+// Interfaces
+import { BrandInterface } from '../../../data/interfaces/brand.interface';
+import { CategoryInterface } from '../../../data/interfaces/category.interface';
 
 @Component({
   selector: 'ui-products-layout',

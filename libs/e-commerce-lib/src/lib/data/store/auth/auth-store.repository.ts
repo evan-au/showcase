@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
+
+// Components - Angular material snackbar
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedSnackbarComponent } from '../../../shared/ui/shared-snackbar/shared-snackbar.component';
+
+// BAAS - Supabase
 import { ApiError } from '@supabase/supabase-js';
 
+// Elf state management
 import { createStore, withProps } from '@ngneat/elf';
 import {
   excludeKeys,
@@ -10,13 +17,11 @@ import {
   persistState,
 } from '@ngneat/elf-persist-state';
 
-import { AdminUserInterface } from '../../../backend/interfaces/admin-user.interface';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedSnackbarComponent } from '../../../shared/ui/shared-snackbar/shared-snackbar.component';
+// Interfaces
+import { AdminUserInterface } from '../../interfaces/admin-user.interface';
 
 const authStore = createStore(
-  { name: 'admin-store' },
+  { name: 'auth-store' },
   withProps<AdminUserInterface>({
     data: null,
     user: null,
@@ -26,7 +31,7 @@ const authStore = createStore(
 );
 
 export const LocalStorageInstance = persistState(authStore, {
-  key: 'admin-auth-e-commerce',
+  key: 'expo-e-commerce-auth-store',
   storage: localStorageStrategy,
   source: () => authStore.pipe(excludeKeys(['error'])),
 });
@@ -38,12 +43,10 @@ export class AuthStoreRepository {
     map((state) => state.user),
     distinctUntilChanged()
   );
-
   authError$ = authStore.pipe(
     map((state) => state.error),
     distinctUntilChanged()
   );
-
   isAdminAuthenticated$ = authStore.pipe(
     map((state) => {
       if (state.user?.aud === 'authenticated') {
@@ -53,7 +56,6 @@ export class AuthStoreRepository {
     }),
     distinctUntilChanged()
   );
-
   isAdminNew$ = authStore.pipe(
     map((authData) => {
       if (!authData.data) {

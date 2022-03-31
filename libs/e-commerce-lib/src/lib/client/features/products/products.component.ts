@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BrandInterface } from '../../../backend/interfaces/brand.interface';
-import { CategoryInterface } from '../../../backend/interfaces/category.interface';
-import { ClientFacade } from '../../data/client.facade';
+
+// Interfaces
+import { BrandInterface } from '../../../data/interfaces/brand.interface';
+import { CategoryInterface } from '../../../data/interfaces/category.interface';
+
+// Facade
+import { ClientFacade } from '../../../data/client.facade';
 
 @Component({
   templateUrl: './products.component.html',

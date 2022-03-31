@@ -15,6 +15,7 @@ import { UiSignInComponent } from './ui-sign-in/ui-sign-in.component';
 import { UiDashboardLayoutComponent } from './ui-dashboard-layout/ui-dashboard-layout.component';
 import { UiWelcomeComponent } from './ui-welcome/ui-welcome.component';
 import { UiOrderComponent } from './ui-order/ui-order.component';
+import { UiAddProductComponent } from './ui-add-product/ui-add-product.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UiOrderComponent } from './ui-order/ui-order.component';
     UiDashboardLayoutComponent,
     UiWelcomeComponent,
     UiOrderComponent,
+    UiAddProductComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { UiOrderComponent } from './ui-order/ui-order.component';
     UiDashboardLayoutComponent,
     UiWelcomeComponent,
     UiOrderComponent,
+    UiAddProductComponent,
   ],
 })
 export class UiModule {}

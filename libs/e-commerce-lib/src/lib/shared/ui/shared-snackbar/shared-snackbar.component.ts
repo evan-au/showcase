@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBarRef } from '@angular/material/snack-bar';
-import { AuthFacade } from '../../../admin/data/auth.facade';
+
+// Facades
+import { AuthFacade } from '../../../data/auth.facade';
 
 @Component({
   templateUrl: './shared-snackbar.component.html',

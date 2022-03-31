@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthFacade } from '../../../data/auth.facade';
+
+// Facade
+import { AuthFacade } from '../../../../data/auth.facade';
 
 @Component({
   templateUrl: './sign-up.component.html',

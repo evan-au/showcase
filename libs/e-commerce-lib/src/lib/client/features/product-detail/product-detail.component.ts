@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, switchMap } from 'rxjs';
-import { ProductInterface } from '../../../backend/interfaces/product.interface';
-import { ClientFacade } from '../../data/client.facade';
+
+// Interfaces
+import { ProductInterface } from '../../../data/interfaces/product.interface';
+
+// Facade
+import { ClientFacade } from '../../../data/client.facade';
 
 @Component({
   templateUrl: './product-detail.component.html',

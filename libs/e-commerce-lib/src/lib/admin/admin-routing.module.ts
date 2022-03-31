@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// Guards
 import { UserSignedInGuard } from './utils/guards/user-signed-in.guard';
 import { UserNotSignedInGuard } from './utils/guards/user-not-signed-in.guard';
 
@@ -26,6 +28,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/dashboard/dashboard-home.module').then(
         (m) => m.DashboardHomeModule
+      ),
+  },
+  {
+    path: 'dashboard/product/:id',
+    canActivate: [UserSignedInGuard],
+    loadChildren: () =>
+      import('./features/product-edit/product-edit.module').then(
+        (m) => m.ProductEditModule
       ),
   },
 ];

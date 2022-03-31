@@ -1,4 +1,4 @@
-<ui-layout [inputCartMode]="true">
+<ui-layout [inputEditMode]="true">
   <shared-ui-loader [inputIsLoading$]="isPending$">
     <ng-container *ngIf="product$ | async as product; else productNotFound">
       <section class="h-full w-full flex flex-col lg:flex-row">
@@ -7,7 +7,7 @@
             <img [src]="product.image" />
           </div>
         </div>
-        <div class="w-full h-full lg:w-1/2 p-2 lg:p-14">
+        <div class="w-full h-full lg:w-1/2 px-4 lg:p-14">
           <cdk-virtual-scroll-viewport
             appendOnly
             itemSize="50"
@@ -36,9 +36,9 @@
                 <span>{{ product.price }} PLN </span>
                 <button
                   mat-raised-button
-                  class="bg-e-com-front-secondary-variant"
+                  class="bg-e-com-secondary-variant text-light"
                 >
-                  Add to cart
+                  Save
                 </button>
               </div>
             </div>
@@ -64,7 +64,6 @@
       <div class="flex gap-14">
         <button
           utilsBackButton
-          (click)="resetProductsView()"
           class="border border-dark hover:bg-accent transition-colors duration-300 rounded-full py-2 px-4"
         >
           Go back

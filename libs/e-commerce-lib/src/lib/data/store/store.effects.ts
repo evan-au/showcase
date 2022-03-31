@@ -1,24 +1,36 @@
 import { Injectable } from '@angular/core';
-import { createEffect, ofType } from '@ngneat/effects';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { PostgrestError } from '@supabase/supabase-js';
 import { catchError, from, map, of, switchMap, tap } from 'rxjs';
-import { SupabaseService } from '../../../backend/services/supabase.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+
+// Elf state management
+import { createEffect, ofType } from '@ngneat/effects';
+
+// BAAS - Supabase
+import { PostgrestError } from '@supabase/supabase-js';
+
+// Services
+import { SupabaseService } from '../services/supabase.service';
+
+// Actions
 import {
+  loadAllProducts,
+  addProduct,
   loadAllBrands,
   loadAllCategories,
-  loadAllProducts,
-} from './client-store.actions';
+} from './store.actions';
+
+// Store
 import {
-  ClientStoreRepository,
+  StoreRepository,
   trackProductsRequestsStatus,
-} from './client-store.repository';
+} from './store.repository';
+
 @UntilDestroy({ checkProperties: true })
 @Injectable({ providedIn: 'root' })
-export class ClientStoreEffects {
+export class StoreEffects {
   constructor(
     private _supabaseService: SupabaseService,
-    private _repo: ClientStoreRepository
+    private _repo: StoreRepository
   ) {}
 
   loadAllProducts$ = createEffect((actions) =>
@@ -48,6 +60,19 @@ export class ClientStoreEffects {
           }),
           catchError((error: PostgrestError) =>
             of(this._repo.loadAllProductsFailure(error))
+          )
+        )
+      )
+    )
+  );
+
+  addProduct$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(addProduct),
+      switchMap(({ product }) =>
+        from(this._supabaseService.addProduct(product)).pipe(
+          catchError((error: PostgrestError) =>
+            of(this._repo.addProductFailure(error))
           )
         )
       )
