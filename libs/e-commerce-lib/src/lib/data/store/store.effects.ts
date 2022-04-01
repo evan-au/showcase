@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { catchError, from, map, of, switchMap, tap } from 'rxjs';
+import { from, map, switchMap, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 // Elf state management
 import { createEffect, ofType } from '@ngneat/effects';
-
-// BAAS - Supabase
-import { PostgrestError } from '@supabase/supabase-js';
 
 // Services
 import { SupabaseService } from '../services/supabase.service';
@@ -39,7 +36,11 @@ export class StoreEffects {
       switchMap(() =>
         from(this._supabaseService.getAllProducts()).pipe(
           trackProductsRequestsStatus('products'),
-          map(({ products }) => this._repo.loadAllProductsSuccess(products)),
+          map(({ products, error }) => {
+            this._repo.loadAllProductsSuccess(products);
+            this._repo.loadAllProductsFailure(error);
+          }),
+
           tap(() => {
             this._supabaseService.supabase
               .from('products')
@@ -49,7 +50,6 @@ export class StoreEffects {
               })
               .on('INSERT', (payload) => {
                 this._repo.addProductsRT(payload.new);
-
                 console.log('Product ADDED =>', payload.new);
               })
               .on('DELETE', (payload) => {
@@ -57,10 +57,7 @@ export class StoreEffects {
                 console.log('Product DELETED =>', payload.old.id);
               })
               .subscribe();
-          }),
-          catchError((error: PostgrestError) =>
-            of(this._repo.loadAllProductsFailure(error))
-          )
+          })
         )
       )
     )
@@ -71,9 +68,8 @@ export class StoreEffects {
       ofType(addProduct),
       switchMap(({ product }) =>
         from(this._supabaseService.addProduct(product)).pipe(
-          catchError((error: PostgrestError) =>
-            of(this._repo.addProductFailure(error))
-          )
+          trackProductsRequestsStatus('products'),
+          map(({ error }) => this._repo.addProductFailure(error))
         )
       )
     )

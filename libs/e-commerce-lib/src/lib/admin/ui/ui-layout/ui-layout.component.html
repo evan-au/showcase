@@ -1,30 +1,30 @@
 <main class="h-full grid grid-rows-[8%_1fr_8%] bg-e-com-primary text-light">
   <header class="bg-e-com-secondary flex items-center justify-between px-4">
-    <!-- <div class="flex items-center gap-4">
-      <img src="assets/e-commerce/logo.svg" width="30" alt="E-commerce logo" />
-      <span class="text-lg lg:text-2lg"> Shopo </span>
-    </div> -->
     <div class="flex items-center gap-4">
       <ng-container *ngIf="inputEditMode">
         <button mat-icon-button utilsBackButton>
           <mat-icon>arrow_back</mat-icon>
         </button>
       </ng-container>
-      <div class="flex items-center gap-4">
+      <a
+        title="E-Commerce Home"
+        routerLink="/e-commerce-app"
+        class="flex items-center gap-4"
+      >
         <img
           src="assets/e-commerce/logo.svg"
           width="30"
           alt="E-commerce logo"
         />
         <span class="text-lg lg:text-2lg"> Shopo </span>
-      </div>
+      </a>
     </div>
 
     <div class="text-sm lg:text-base">
       <span> Admin portal </span>
       <ng-container *ngIf="isAdminAuthenticated$ | async">
         <span>
-          <button mat-icon-button (click)="signOut()">
+          <button title="Sign Out" mat-icon-button (click)="signOut()">
             <mat-icon>logout</mat-icon>
           </button>
         </span>

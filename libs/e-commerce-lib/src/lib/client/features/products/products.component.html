@@ -1,12 +1,13 @@
 <ui-products-layout
+  [inputIsPending$]="isPending$"
   [inputBrands]="brands$ | async"
   [inputCategories]="categories$ | async"
   (outputUpdateFilterBrands)="updateFilterBrands($event)"
   (outputUpdateFilterCategories)="updateFilterCategories($event)"
   (outputUpdateFilterAll)="updateFilterAll()"
 >
-  <shared-ui-loader [inputIsLoading$]="isPending$">
-    <ng-container *ngIf="products$ | async as products">
+  <ng-container *ngIf="products$ | async as products">
+    <ng-container *ngIf="products.length > 0; else noProducts">
       <section
         class="p-4 grid grid-cols-1 gap-4 place-items-center lg:grid-cols-3"
       >
@@ -21,5 +22,26 @@
         ></e-commerce-shared-product-card>
       </section>
     </ng-container>
-  </shared-ui-loader>
+  </ng-container>
 </ui-products-layout>
+
+<ng-template #noProducts>
+  <section class="flex flex-col gap-12 px-12 py-20 lg:py-14">
+    <div class="w-full grid place-items-center">
+      <div class="lg:w-3/5">
+        <img src="assets/e-commerce/no-products.svg" alt="No products yet" />
+      </div>
+    </div>
+    <div class="h-2/5 lg:h-1/5 w-full gap-6 grid place-items-center">
+      <div class="text-xl text-center">No products available yet.</div>
+      <div>
+        <button
+          routerLink="/e-commerce-app"
+          class="border border-dark hover:bg-e-com-front-secondary-variant transition-colors duration-300 rounded-full py-2 px-4"
+        >
+          Go Home
+        </button>
+      </div>
+    </div>
+  </section>
+</ng-template>

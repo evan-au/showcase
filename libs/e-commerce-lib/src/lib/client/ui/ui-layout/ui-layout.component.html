@@ -6,21 +6,30 @@
   >
     <div class="flex items-center gap-4">
       <ng-container *ngIf="inputCartMode">
-        <button (click)="resetProductsView()" mat-icon-button utilsBackButton>
+        <button
+          title="Go Back"
+          (click)="resetProductsView()"
+          mat-icon-button
+          utilsBackButton
+        >
           <mat-icon>arrow_back</mat-icon>
         </button>
       </ng-container>
-      <div class="flex items-center gap-4">
+      <a
+        title="E-Commerce Home"
+        routerLink="/e-commerce-app"
+        class="flex items-center gap-4"
+      >
         <img
           src="assets/e-commerce/logo.svg"
           width="30"
           alt="E-commerce logo"
         />
         <span class="text-lg lg:text-2lg"> Shopo </span>
-      </div>
+      </a>
     </div>
     <ng-container *ngIf="inputCartMode">
-      <button (click)="openCart()" mat-icon-button>
+      <button title="Cart" (click)="openCart()" mat-icon-button>
         <mat-icon>shopping_bag</mat-icon>
       </button>
     </ng-container>

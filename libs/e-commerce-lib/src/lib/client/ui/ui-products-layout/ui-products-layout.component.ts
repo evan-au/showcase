@@ -6,6 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // Components - Angular material sidenav
 import { MatDrawer } from '@angular/material/sidenav';
@@ -21,6 +22,7 @@ import { CategoryInterface } from '../../../data/interfaces/category.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiProductsLayoutComponent {
+  @Input() inputIsPending$!: Observable<boolean>;
   @Input() inputCategories!: CategoryInterface[] | null;
   @Input() inputBrands!: BrandInterface[] | null;
   @Output() outputUpdateFilterBrands: EventEmitter<BrandInterface['name']> =

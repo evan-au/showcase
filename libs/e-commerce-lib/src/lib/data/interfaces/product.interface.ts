@@ -4,8 +4,8 @@ import { CategoryInterface } from './category.interface';
 export interface ProductInterface {
   id: number;
   brand: number;
-  brands: BrandInterface;
-  categories: CategoryInterface;
+  brands?: BrandInterface;
+  categories?: CategoryInterface;
   category: number;
   description: string;
   image: string;

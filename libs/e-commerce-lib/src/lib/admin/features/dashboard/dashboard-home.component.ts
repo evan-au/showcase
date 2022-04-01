@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { AddProductInterface } from '../../../data/interfaces/add-product.interface';
+import { ProductInterface } from '../../../data/interfaces/product.interface';
 
 // Facades
 import { AdminFacade } from '../../../data/admin.facade';
@@ -14,11 +14,13 @@ import { AuthFacade } from '../../../data/auth.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeComponent implements OnInit {
+  isPending$ = this._adminFacade.isPending$;
   products$ = this._adminFacade.allProducts$;
   brands$ = this._adminFacade.allBrands$;
   categories$ = this._adminFacade.allCategories$;
-  isPending$ = this._adminFacade.isPending$;
   isAdminNew$ = this._authFacade.isAdminNew$;
+
+  content: 'inventory' | 'add' = 'inventory';
 
   constructor(
     private _authFacade: AuthFacade,
@@ -35,7 +37,11 @@ export class DashboardHomeComponent implements OnInit {
     this._authFacade.skipWelcomeIntro();
   }
 
-  addProduct(payload: AddProductInterface) {
+  addProduct(payload: ProductInterface) {
     this._adminFacade.addProduct(payload);
+  }
+
+  handleMenuClick(payload: 'inventory' | 'add') {
+    this.content = payload;
   }
 }

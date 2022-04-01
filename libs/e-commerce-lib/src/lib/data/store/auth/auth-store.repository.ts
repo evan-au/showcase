@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
-
-// Components - Angular material snackbar
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedSnackbarComponent } from '../../../shared/ui/shared-snackbar/shared-snackbar.component';
 
 // BAAS - Supabase
 import { ApiError } from '@supabase/supabase-js';
@@ -66,8 +61,6 @@ export class AuthStoreRepository {
     distinctUntilChanged()
   );
 
-  constructor(private _router: Router, private _snackbar: MatSnackBar) {}
-
   // Actions
   handleAuth(payload: AdminUserInterface) {
     authStore.update((state) => ({
@@ -77,9 +70,6 @@ export class AuthStoreRepository {
       session: payload.session,
       error: payload.error,
     }));
-
-    this._handleRedirect(payload);
-    this._handleError(payload.error);
   }
 
   signOutAdmin(payload: ApiError | null) {
@@ -89,9 +79,6 @@ export class AuthStoreRepository {
       session: null,
       error: payload,
     }));
-
-    this._router.navigate(['e-commerce-app/admin']);
-    this._handleError(payload);
   }
 
   skipWelcomeIntro() {
@@ -99,20 +86,5 @@ export class AuthStoreRepository {
       ...state,
       data: state.session,
     }));
-  }
-
-  private _handleRedirect(payload: AdminUserInterface) {
-    if (payload.user?.aud === 'authenticated')
-      this._router.navigate(['e-commerce-app/admin/dashboard']);
-  }
-
-  private _handleError(payload: ApiError | null) {
-    if (payload) {
-      this._snackbar.openFromComponent(SharedSnackbarComponent, {
-        panelClass: 'e-commerce-error-snackbar',
-      });
-    } else {
-      this._snackbar.dismiss();
-    }
   }
 }

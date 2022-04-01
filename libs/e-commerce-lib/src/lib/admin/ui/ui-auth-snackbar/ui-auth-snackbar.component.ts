@@ -5,16 +5,16 @@ import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { AuthFacade } from '../../../data/auth.facade';
 
 @Component({
-  templateUrl: './shared-snackbar.component.html',
-  styleUrls: ['./shared-snackbar.component.scss'],
+  templateUrl: './ui-auth-snackbar.component.html',
+  styleUrls: ['./ui-auth-snackbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SharedSnackbarComponent {
+export class UiAuthSnackbarComponent {
   authError$ = this._authFacade.authError$;
 
   constructor(
     private _authFacade: AuthFacade,
-    private _snackbarRef: MatSnackBarRef<SharedSnackbarComponent>
+    private _snackbarRef: MatSnackBarRef<UiAuthSnackbarComponent>
   ) {}
 
   dismissSnackbar() {

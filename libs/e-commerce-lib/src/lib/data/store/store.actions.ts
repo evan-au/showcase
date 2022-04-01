@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngneat/effects';
-import { AddProductInterface } from '../interfaces/add-product.interface';
+import { ProductInterface } from '../interfaces/product.interface';
 
 // Products
 export const loadAllProducts = createAction(
@@ -12,5 +12,5 @@ export const loadAllBrands = createAction('[Landing page] Load All Brands');
 
 export const addProduct = createAction(
   '[Dashboard page] Add Product',
-  props<{ product: AddProductInterface }>()
+  props<{ product: ProductInterface }>()
 );

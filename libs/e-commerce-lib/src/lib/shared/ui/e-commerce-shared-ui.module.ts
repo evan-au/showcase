@@ -7,10 +7,9 @@ import { SharedUiModule } from '@showcase-ws/shared-ui';
 
 // Components
 import { SharedProductCardComponent } from './shared-product-card/shared-product-card.component';
-import { SharedSnackbarComponent } from './shared-snackbar/shared-snackbar.component';
 
 @NgModule({
-  declarations: [SharedProductCardComponent, SharedSnackbarComponent],
+  declarations: [SharedProductCardComponent],
   imports: [CommonModule, SharedUiModule, RouterModule],
   exports: [SharedProductCardComponent],
 })

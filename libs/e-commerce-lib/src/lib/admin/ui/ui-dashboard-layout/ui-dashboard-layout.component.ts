@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Observable } from 'rxjs';
 
 // Components - Angular material sidenav
 import { MatDrawer } from '@angular/material/sidenav';
@@ -10,17 +18,21 @@ import { MatDrawer } from '@angular/material/sidenav';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiDashboardLayoutComponent {
+  @Input() inputIsPending$!: Observable<boolean>;
+  @Input() inputContent: 'inventory' | 'add' = 'inventory';
+  @Output() outputHandleMenuclick: EventEmitter<'inventory' | 'add'> =
+    new EventEmitter();
   @ViewChild('drawer') private _drawer!: MatDrawer;
 
   isViewOnMobile!: boolean;
-  content: 'inventory' | 'add' = 'inventory';
 
   isBreakpointMatching(payload: boolean) {
     this.isViewOnMobile = payload;
   }
 
   handleMenuClick(payload: 'inventory' | 'add') {
-    this.content = payload;
+    this.inputContent = payload;
+    this.outputHandleMenuclick.emit(payload);
     if (this.isViewOnMobile) this._drawer.close();
   }
 }

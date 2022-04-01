@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { distinctUntilChanged, filter, map, mergeWith, switchMap } from 'rxjs';
+import { distinctUntilChanged, filter, mergeWith, switchMap } from 'rxjs';
 
 // BAAS - Supabase
 import { PostgrestError } from '@supabase/supabase-js';
@@ -37,17 +37,12 @@ import { CategoryInterface } from '../interfaces/category.interface';
 import { ProductInterface } from '../interfaces/product.interface';
 
 // Private properties
-interface GeneralErrorProps {
-  generalError: PostgrestError | null;
-}
-
 interface CategoriesProps {
   categories: CategoryInterface[] | null;
 }
 interface BrandsProps {
   brands: BrandInterface[] | null;
 }
-
 interface FilterProps {
   filterBrands: BrandInterface['name'] | null;
   filterCategories: CategoryInterface['name'] | null;
@@ -59,7 +54,6 @@ const store = createStore(
   withProps<BrandsProps>({ brands: null }),
   withProps<CategoriesProps>({ categories: null }),
   withProps<FilterProps>({ filterBrands: null, filterCategories: null }),
-  withProps<GeneralErrorProps>({ generalError: null }),
   withRequestsStatus<'products'>()
 );
 
@@ -68,12 +62,7 @@ export const localStateInstance = persistState(store, {
   storage: localforage as unknown as StateStorage,
   source: () =>
     store.pipe(
-      excludeKeys([
-        'requestsStatus',
-        'generalError',
-        'filterBrands',
-        'filterCategories',
-      ])
+      excludeKeys(['requestsStatus', 'filterBrands', 'filterCategories'])
     ),
 });
 
@@ -83,6 +72,7 @@ export const trackProductsRequestsStatus = createRequestsStatusOperator(store);
 export class StoreRepository {
   // Streams
   allProducts$ = store.pipe(selectAll(), distinctUntilChanged());
+
   allBrands$ = store.pipe(
     select((state) => state.brands),
     distinctUntilChanged()
@@ -91,13 +81,13 @@ export class StoreRepository {
     select((state) => state.categories),
     distinctUntilChanged()
   );
-  productsError$ = store.pipe(
+  productsStatusState$ = store.pipe(
     selectRequestStatus('products'),
-    filter((status) => status.value === 'error'),
     distinctUntilChanged()
   );
-  generalErrors$ = store.pipe(
-    map((state) => state.generalError),
+  errorsStatusState$ = store.pipe(
+    selectRequestStatus('products'),
+    filter((state) => state.value === 'error'),
     distinctUntilChanged()
   );
   isPending$ = store.pipe(
@@ -119,7 +109,7 @@ export class StoreRepository {
         selectAllApply({
           filterEntity({ brands }) {
             if (filterBrands === null) return true;
-            return filterBrands !== brands['name'] ? false : true;
+            return filterBrands !== brands?.['name'] ? false : true;
           },
         }),
         distinctUntilChanged()
@@ -132,7 +122,7 @@ export class StoreRepository {
         selectAllApply({
           filterEntity({ categories }) {
             if (filterCategories === null) return true;
-            return filterCategories !== categories['name'] ? false : true;
+            return filterCategories !== categories?.['name'] ? false : true;
           },
         }),
         distinctUntilChanged()
@@ -153,18 +143,18 @@ export class StoreRepository {
   }
 
   loadAllProductsFailure(error: PostgrestError) {
-    store.update(updateRequestStatus('products', 'error', error.message));
+    store.update(updateRequestStatus('products', 'error', error));
   }
 
   addProductFailure(error: PostgrestError) {
-    store.update((state) => ({
-      ...state,
-      generalError: error,
-    }));
+    store.update(updateRequestStatus('products', 'error', error));
   }
 
   updateProductsRT(id: ProductInterface['id'], newProduct: ProductInterface) {
-    store.update(updateEntities(id, newProduct));
+    store.update(
+      updateEntities(id, newProduct),
+      updateRequestStatus('products', 'success')
+    );
   }
 
   deleteProductsRT(id: ProductInterface['id']) {
@@ -172,23 +162,30 @@ export class StoreRepository {
   }
 
   addProductsRT(product: ProductInterface) {
-    store.update(upsertEntities(product));
+    store.update(
+      upsertEntities(product),
+      updateRequestStatus('products', 'success')
+    );
   }
 
   loadAllBrands(brands: BrandInterface[], error: PostgrestError) {
-    store.update((state) => ({
-      ...state,
-      brands,
-      generalError: error,
-    }));
+    store.update(
+      (state) => ({
+        ...state,
+        brands,
+      }),
+      updateRequestStatus('products', 'error', error)
+    );
   }
 
   loadAllCategories(categories: CategoryInterface[], error: PostgrestError) {
-    store.update((state) => ({
-      ...state,
-      categories,
-      generalError: error,
-    }));
+    store.update(
+      (state) => ({
+        ...state,
+        categories,
+      }),
+      updateRequestStatus('products', 'error', error)
+    );
   }
 
   updateFilterBrands(payload: BrandInterface['name']) {

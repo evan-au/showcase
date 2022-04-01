@@ -91,14 +91,19 @@
         </ng-container>
       </div>
 
-      <section class="h-full">
-        <cdk-virtual-scroll-viewport
-          appendOnly
-          itemSize="50"
-          class="w-full h-full"
+      <section class="w-full h-full">
+        <shared-ui-loader
+          [inputLoaderStyle]="'spinner'"
+          [inputIsLoading$]="inputIsPending$"
         >
-          <ng-content></ng-content>
-        </cdk-virtual-scroll-viewport>
+          <cdk-virtual-scroll-viewport
+            appendOnly
+            itemSize="50"
+            class="w-full h-full"
+          >
+            <ng-content></ng-content>
+          </cdk-virtual-scroll-viewport>
+        </shared-ui-loader>
       </section>
     </section>
   </mat-drawer-container>

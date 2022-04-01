@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { environment } from '../environments/environment';
+import { environment } from '../environments/environment';
 
 // BAAS - Supabase
 import {
@@ -9,7 +9,6 @@ import {
 } from '@supabase/supabase-js';
 
 // Interfaces
-import { AddProductInterface } from '../interfaces/add-product.interface';
 import { BrandInterface } from '../interfaces/brand.interface';
 import { CategoryInterface } from '../interfaces/category.interface';
 import { ProductInterface } from '../interfaces/product.interface';
@@ -22,8 +21,8 @@ export class SupabaseService {
 
   constructor() {
     this.supabase = createClient(
-      'https://priehnestgjdhjczgyta.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByaWVobmVzdGdqZGhqY3pneXRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc4MTgxMzYsImV4cCI6MTk2MzM5NDEzNn0.f5Njr02kBQhZf_QWl_RfH1xrqxf6VQjue9mnWnfYe1I'
+      environment.supabaseUrl,
+      environment.supabaseKey
     );
   }
 
@@ -39,13 +38,17 @@ export class SupabaseService {
     };
   }
 
-  async addProduct(payload: AddProductInterface) {
+  async addProduct(payload: ProductInterface) {
     const { data: products, error } = await this.supabase
-      .from<AddProductInterface>('products')
-      .insert({ ...payload }, { returning: 'minimal' });
+      .from<ProductInterface>('products')
+      .upsert([{ ...payload }], {
+        returning: 'minimal',
+        ignoreDuplicates: true,
+        onConflict: 'name',
+      });
 
     return {
-      products,
+      products: products as ProductInterface[],
       error: error as PostgrestError,
     };
   }

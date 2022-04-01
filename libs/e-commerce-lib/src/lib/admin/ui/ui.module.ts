@@ -16,6 +16,8 @@ import { UiDashboardLayoutComponent } from './ui-dashboard-layout/ui-dashboard-l
 import { UiWelcomeComponent } from './ui-welcome/ui-welcome.component';
 import { UiOrderComponent } from './ui-order/ui-order.component';
 import { UiAddProductComponent } from './ui-add-product/ui-add-product.component';
+import { UiSnackbarComponent } from './ui-snackbar/ui-snackbar.component';
+import { UiAuthSnackbarComponent } from './ui-auth-snackbar/ui-auth-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { UiAddProductComponent } from './ui-add-product/ui-add-product.component
     UiWelcomeComponent,
     UiOrderComponent,
     UiAddProductComponent,
+    UiSnackbarComponent,
+    UiAuthSnackbarComponent,
   ],
   imports: [
     CommonModule,
