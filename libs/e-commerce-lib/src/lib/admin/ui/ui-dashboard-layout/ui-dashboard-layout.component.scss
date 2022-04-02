@@ -9,3 +9,11 @@
 .mat-drawer-side {
   @apply lg:border-e-com-secondary lg:mt-10 bg-e-com-primary text-light;
 }
+
+::-webkit-scrollbar-thumb {
+  @apply bg-e-com-secondary-variant;
+  -webkit-border-radius: 2rem;
+}
+::-webkit-scrollbar-corner {
+  border-radius: 50%;
+}

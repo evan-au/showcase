@@ -87,7 +87,9 @@
           </ng-container>
         </button>
         <ng-container *ngIf="!isViewOnMobile || !drawer.opened">
-          {{ content }}
+          <span class="font-semibold">
+            {{ content }}
+          </span>
         </ng-container>
       </div>
 

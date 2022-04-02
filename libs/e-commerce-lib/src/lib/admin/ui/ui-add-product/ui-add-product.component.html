@@ -1,9 +1,11 @@
-<main class="p-4 flex flex-col gap-6 lg:items-center">
+<main class="mx-4 py-4 flex flex-col gap-6 lg:items-center">
   <form [formGroup]="addProductForm" class="flex flex-col gap-6 lg:w-3/5">
     <div class="flex flex-col gap-2">
-      <label for="name">Name</label>
+      <label class="text-sm underline underline-offset-2" for="name"
+        >Name</label
+      >
       <input
-        class="add-input"
+        class="add-text-input"
         type="text"
         name="name"
         id="name"
@@ -12,18 +14,22 @@
       />
     </div>
     <div class="flex flex-col gap-2">
-      <label for="price">Price</label>
+      <label class="text-sm underline underline-offset-2" for="price"
+        >Price</label
+      >
       <input
-        class="add-input"
+        class="add-text-input"
         type="number"
         name="price"
         id="price"
-        placeholder="100 PLN"
+        placeholder="Amount in PLN"
         formControlName="price"
       />
     </div>
     <div class="flex flex-col gap-2">
-      <label for="description">Description</label>
+      <label class="text-sm underline underline-offset-2" for="description"
+        >Description</label
+      >
       <textarea
         rows="5"
         name="description"
@@ -34,18 +40,21 @@
  {{ addProductForm.value.description }}</textarea
       >
     </div>
-    <div class="flex items-center justify-between lg:justify-start lg:gap-6">
+    <div class="flex flex-col gap-6 lg:flex-row">
       <div class="flex flex-col gap-2">
-        <label for="brands" class="text-sm lg:text-base">Choose a brand</label>
+        <label for="brands" class="text-sm underline underline-offset-2"
+          >Brand</label
+        >
         <select
-          class="add-input"
+          class="add-select"
           name="brands"
           id="brands"
           formControlName="brand"
         >
           <ng-container *ngIf="inputBrands as brands">
+            <option value="" selected disabled hidden>Choose a brand</option>
             <option
-              class="add-input"
+              class="bg-e-com-primary"
               *ngFor="let brand of brands"
               [value]="brand.name"
             >
@@ -55,18 +64,19 @@
         </select>
       </div>
       <div class="flex flex-col gap-2">
-        <label for="categories" class="text-sm lg:text-base"
-          >Choose a category</label
+        <label for="categories" class="text-sm underline underline-offset-2"
+          >Category</label
         >
         <select
-          class="add-input"
+          class="add-select"
           name="categories"
           id="categories"
           formControlName="category"
         >
           <ng-container *ngIf="inputCategories as categories">
+            <option value="" selected disabled hidden>Choose a category</option>
             <option
-              class="add-input"
+              class="bg-e-com-primary"
               *ngFor="let category of categories"
               [value]="category.name"
             >
@@ -77,7 +87,9 @@
       </div>
     </div>
     <div class="flex flex-col gap-2">
-      <label for="shipping">Shipping Information</label>
+      <label class="text-sm underline underline-offset-2" for="shipping"
+        >Shipping Information</label
+      >
       <textarea
         rows="4"
         name="shipping"
@@ -90,9 +102,11 @@
       >
     </div>
     <div class="flex flex-col gap-2">
-      <label for="image">Image</label>
+      <label class="text-sm underline underline-offset-2" for="image"
+        >Image</label
+      >
       <input
-        class="add-input"
+        class="add-text-input"
         type="text"
         name="image"
         id="image"
@@ -102,16 +116,18 @@
     </div>
   </form>
 
-  <div class="w-full flex items-center justify-between lg:w-1/2">
+  <div class="w-full flex items-center gap-4 lg:w-3/5">
     <button
-      class="border border-light py-2 px-4 rounded-full hover:bg-e-com-accent transition-colors duration-300 disabled:text-gray-500 disabled:border-gray-500 disabled:bg-transparent"
+      mat-raised-button
+      class="bg-orange-700 w-full text-light"
       (click)="resetForm()"
       [disabled]="addProductForm.pristine"
     >
       Reset
     </button>
     <button
-      class="border border-light py-2 px-4 rounded-full bg-e-com-secondary-variant hover:bg-e-com-accent transition-colors duration-300 disabled:text-gray-500 disabled:border-gray-500 disabled:bg-transparent"
+      mat-raised-button
+      class="bg-green-700 w-full text-light disabled:text-gray-500"
       (click)="addProduct()"
       [disabled]="addProductForm.invalid"
     >

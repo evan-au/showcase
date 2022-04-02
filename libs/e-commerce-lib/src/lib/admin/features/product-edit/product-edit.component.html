@@ -7,43 +7,173 @@
             <img [src]="product.image" />
           </div>
         </div>
-        <div class="w-full h-full lg:w-1/2 px-4 lg:p-14">
+        <form
+          [formGroup]="editedProductForm"
+          class="w-full h-full lg:w-1/2 px-4 lg:p-14"
+        >
           <cdk-virtual-scroll-viewport
             appendOnly
             itemSize="50"
             class="w-full h-full"
           >
-            <div class="h-full flex flex-col gap-8">
-              <div class="flex items-center justify-between text-lg">
-                {{ product.brand }}
-              </div>
-              <div class="text-lg font-semibold">{{ product.name }}</div>
+            <div class="h-full flex flex-col gap-6 p-1 lg:p-2">
               <div class="flex flex-col gap-2">
-                <span class="text-sm underline underline-offset-2"
-                  >Description</span
+                <label
+                  class="text-gray-500 text-sm underline underline-offset-2"
+                  >Name</label
                 >
-                {{ product.description }}
+                <input
+                  class="edit-text-input text-lg font-semibold"
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Product name"
+                  formControlName="name"
+                />
               </div>
-              <div class="text-sm flex flex-col gap-2">
-                <span class="underline underline-offset-2"
-                  >Shipping information</span
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-gray-500 text-sm underline underline-offset-2"
+                  >Description</label
                 >
-                {{ product.shipping_information }}
+                <textarea
+                  rows="5"
+                  name="description"
+                  id="description"
+                  placeholder="Product description"
+                  formControlName="description"
+                  >{{ product.description }}</textarea
+                >
               </div>
               <div
-                class="text-lg font-semibold flex justify-between items-center p-2"
+                class="flex items-center justify-between text-lg lg:justify-start gap-4"
               >
-                <span>{{ product.price }} PLN </span>
+                <span class="flex flex-col gap-2">
+                  <label
+                    for="brands"
+                    class="text-gray-500 text-sm underline underline-offset-2"
+                    >Brand</label
+                  >
+                  <select
+                    class="edit-select"
+                    name="brands"
+                    id="brands"
+                    formControlName="brand"
+                  >
+                    <ng-container *ngIf="brands$ | async as brands">
+                      <option value="" selected disabled hidden>
+                        {{ product.brand }}
+                      </option>
+                      <option
+                        *ngFor="let brand of brands"
+                        [value]="brand.name"
+                        [ngClass]="{
+                          'text-e-com-accent':
+                            brand.name === product.brands?.name,
+                          'bg-e-com-primary': true
+                        }"
+                      >
+                        {{ brand.name }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </span>
+                <span class="flex flex-col gap-2">
+                  <label
+                    for="brands"
+                    class="text-gray-500 text-sm underline underline-offset-2"
+                    >Category</label
+                  >
+                  <select
+                    class="edit-select"
+                    name="categories"
+                    id="categories"
+                    formControlName="category"
+                  >
+                    <ng-container *ngIf="categories$ | async as categories">
+                      <option value="" selected disabled hidden>
+                        {{ product.category }}
+                      </option>
+                      <option
+                        *ngFor="let category of categories"
+                        [value]="category.name"
+                        [ngClass]="{
+                          'text-e-com-accent':
+                            category.name === product.categories?.name,
+                          'bg-e-com-primary': true
+                        }"
+                      >
+                        {{ category.name }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </span>
+              </div>
+              <div class="text-sm flex flex-col gap-2">
+                <label class="text-gray-500 underline underline-offset-2"
+                  >Shipping information</label
+                >
+                <textarea
+                  rows="4"
+                  name="shipping"
+                  id="shipping"
+                  placeholder="Provide shipping information if any"
+                  formControlName="shipping_information"
+                  >{{ product.shipping_information }}</textarea
+                >
+              </div>
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-gray-500 text-sm underline underline-offset-2"
+                  >Price in PLN</label
+                >
+                <input
+                  class="edit-number-input"
+                  type="number"
+                  name="price"
+                  id="price"
+                  placeholder="Amount in PLN"
+                  formControlName="price"
+                />
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label
+                  class="text-gray-500 text-sm underline underline-offset-2"
+                  >Image link</label
+                >
+                <input
+                  class="edit-text-input"
+                  type="text"
+                  name="image"
+                  id="image"
+                  placeholder="Link to image"
+                  formControlName="image"
+                />
+              </div>
+
+              <div
+                class="text-lg font-semibold flex items-center lg:w-1/2 lg:justify-start gap-4"
+              >
                 <button
+                  (click)="handleProductDeletion(product.id)"
                   mat-raised-button
-                  class="bg-e-com-secondary-variant text-light"
+                  class="bg-red-900 w-full text-light"
+                >
+                  Delete
+                </button>
+                <button
+                  [disabled]="editedProductForm.pristine"
+                  (click)="saveProduct(product.id)"
+                  mat-raised-button
+                  class="bg-green-700 w-full text-light"
                 >
                   Save
                 </button>
               </div>
             </div>
           </cdk-virtual-scroll-viewport>
-        </div>
+        </form>
       </section>
     </ng-container>
   </shared-ui-loader>

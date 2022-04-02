@@ -55,6 +55,8 @@ export class UiAddProductComponent implements OnInit {
 
   resetForm() {
     this.addProductForm.reset({
+      brand: '',
+      category: '',
       description:
         'Use this introductory paragraph to set the scene and entice the viewer to explore your range of products. Don’t forget to mention the unique selling point of the product.',
       shipping_information:

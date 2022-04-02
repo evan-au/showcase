@@ -9,6 +9,7 @@ import { UtilsModule } from '@showcase-ws/utils';
 
 // Components
 import { ProductEditComponent } from './product-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
     UiModule,
     SharedUiModule,
     UtilsModule,

@@ -1,7 +1,23 @@
-.add-input {
-  @apply text-dark rounded-sm py-1 lg:text-lg lg:h-10 px-2 bg-light focus:outline-e-com-accent;
+.add-text-input {
+  @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:h-10 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+}
+
+.add-select {
+  @apply text-light rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light lg:text-lg lg:h-10;
 }
 
 textarea {
-  @apply text-dark rounded-sm py-1 lg:text-lg px-2 bg-light focus:outline-e-com-accent;
+  @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-e-com-secondary-variant;
+  -webkit-border-radius: 2rem;
+}
+::-webkit-scrollbar-corner {
+  border-radius: 50%;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled {
+  @apply text-gray-500;
 }

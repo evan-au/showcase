@@ -1,0 +1,26 @@
+.edit-select {
+  @apply text-light rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light lg:text-lg lg:h-10;
+}
+
+.edit-text-input {
+  @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:h-10 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+}
+
+.edit-number-input {
+  @apply w-2/5 rounded-sm py-1 px-2 text-lg bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:h-10 lg:bg-transparent;
+}
+textarea {
+  @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-e-com-secondary-variant;
+  -webkit-border-radius: 2rem;
+}
+::-webkit-scrollbar-corner {
+  border-radius: 50%;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled {
+  @apply text-gray-500;
+}

@@ -18,6 +18,7 @@ import { UiOrderComponent } from './ui-order/ui-order.component';
 import { UiAddProductComponent } from './ui-add-product/ui-add-product.component';
 import { UiSnackbarComponent } from './ui-snackbar/ui-snackbar.component';
 import { UiAuthSnackbarComponent } from './ui-auth-snackbar/ui-auth-snackbar.component';
+import { UiDeleteDialogComponent } from './ui-delete-dialog/ui-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UiAuthSnackbarComponent } from './ui-auth-snackbar/ui-auth-snackbar.com
     UiAddProductComponent,
     UiSnackbarComponent,
     UiAuthSnackbarComponent,
+    UiDeleteDialogComponent,
   ],
   imports: [
     CommonModule,
