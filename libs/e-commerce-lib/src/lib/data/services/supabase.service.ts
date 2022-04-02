@@ -53,6 +53,18 @@ export class SupabaseService {
     };
   }
 
+  async deleteProduct(payload: ProductInterface['id']) {
+    const { data, error } = await this.supabase
+      .from('products')
+      .delete({ returning: 'minimal' })
+      .match({ id: payload });
+
+    return {
+      data,
+      error: error as PostgrestError,
+    };
+  }
+
   // Categories
   async getAllCategories() {
     const { data: categories, error } = await this.supabase

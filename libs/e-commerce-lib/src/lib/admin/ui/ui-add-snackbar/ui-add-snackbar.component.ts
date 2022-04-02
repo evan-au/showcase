@@ -5,16 +5,16 @@ import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { AdminFacade } from '../../../data/admin.facade';
 
 @Component({
-  templateUrl: './ui-snackbar.component.html',
-  styleUrls: ['./ui-snackbar.component.scss'],
+  templateUrl: './ui-add-snackbar.component.html',
+  styleUrls: ['./ui-add-snackbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiSnackbarComponent {
+export class UiAddSnackbarComponent {
   productsStatusState$ = this._adminFacade.productsStatusState$;
 
   constructor(
     private _adminFacade: AdminFacade,
-    private _snackbarRef: MatSnackBarRef<UiSnackbarComponent>
+    private _snackbarRef: MatSnackBarRef<UiAddSnackbarComponent>
   ) {}
 
   dismissSnackbar() {

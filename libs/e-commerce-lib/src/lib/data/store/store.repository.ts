@@ -150,6 +150,13 @@ export class StoreRepository {
     store.update(updateRequestStatus('products', 'error', error));
   }
 
+  // deleteProductSuccess(id: ProductInterface['id']) {
+  //   store.update(updateRequestStatus('products', 'error', error));
+  // }
+  deleteProductFailure(error: PostgrestError) {
+    store.update(updateRequestStatus('products', 'error', error));
+  }
+
   updateProductsRT(id: ProductInterface['id'], newProduct: ProductInterface) {
     store.update(
       updateEntities(id, newProduct),
@@ -158,7 +165,10 @@ export class StoreRepository {
   }
 
   deleteProductsRT(id: ProductInterface['id']) {
-    store.update(deleteEntities(id));
+    store.update(
+      deleteEntities(id),
+      updateRequestStatus('products', 'success')
+    );
   }
 
   addProductsRT(product: ProductInterface) {

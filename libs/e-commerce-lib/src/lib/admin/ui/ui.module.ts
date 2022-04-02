@@ -16,9 +16,11 @@ import { UiDashboardLayoutComponent } from './ui-dashboard-layout/ui-dashboard-l
 import { UiWelcomeComponent } from './ui-welcome/ui-welcome.component';
 import { UiOrderComponent } from './ui-order/ui-order.component';
 import { UiAddProductComponent } from './ui-add-product/ui-add-product.component';
-import { UiSnackbarComponent } from './ui-snackbar/ui-snackbar.component';
+import { UiAddSnackbarComponent } from './ui-add-snackbar/ui-add-snackbar.component';
 import { UiAuthSnackbarComponent } from './ui-auth-snackbar/ui-auth-snackbar.component';
 import { UiDeleteDialogComponent } from './ui-delete-dialog/ui-delete-dialog.component';
+import { UiDeleteSnackbarComponent } from './ui-delete-snackbar/ui-delete-snackbar.component';
+import { UiUpdateSnackbarComponent } from './ui-update-snackbar/ui-update-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { UiDeleteDialogComponent } from './ui-delete-dialog/ui-delete-dialog.com
     UiWelcomeComponent,
     UiOrderComponent,
     UiAddProductComponent,
-    UiSnackbarComponent,
+    UiAddSnackbarComponent,
     UiAuthSnackbarComponent,
+    UiDeleteSnackbarComponent,
+    UiUpdateSnackbarComponent,
     UiDeleteDialogComponent,
   ],
   imports: [

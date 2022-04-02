@@ -14,6 +14,7 @@ import {
   addProduct,
   loadAllBrands,
   loadAllCategories,
+  deleteProduct,
 } from './store.actions';
 
 // Store
@@ -70,6 +71,18 @@ export class StoreEffects {
         from(this._supabaseService.addProduct(product)).pipe(
           trackProductsRequestsStatus('products'),
           map(({ error }) => this._repo.addProductFailure(error))
+        )
+      )
+    )
+  );
+
+  deleteProduct$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(deleteProduct),
+      switchMap(({ id }) =>
+        from(this._supabaseService.deleteProduct(id)).pipe(
+          trackProductsRequestsStatus('products'),
+          map(({ error }) => this._repo.deleteProductFailure(error))
         )
       )
     )

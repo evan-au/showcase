@@ -3,7 +3,7 @@ import { Actions } from '@ngneat/effects-ng';
 
 // Components
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UiSnackbarComponent } from '../admin/ui/ui-snackbar/ui-snackbar.component';
+import { UiAddSnackbarComponent } from '../admin/ui/ui-add-snackbar/ui-add-snackbar.component';
 
 // Interfaces
 import { ProductInterface } from './interfaces/product.interface';
@@ -14,11 +14,16 @@ import {
   loadAllBrands,
   loadAllCategories,
   addProduct,
+  deleteProduct,
+  updateProduct,
 } from './store/store.actions';
 
 // Store
 import { StoreRepository } from './store/store.repository';
-
+import { Router } from '@angular/router';
+import { UiDeleteSnackbarComponent } from '../admin/ui/ui-delete-snackbar/ui-delete-snackbar.component';
+import { UntilDestroy } from '@ngneat/until-destroy';
+@UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
@@ -34,7 +39,8 @@ export class AdminFacade {
   constructor(
     private _repo: StoreRepository,
     private _actions: Actions,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router: Router
   ) {}
 
   // Actions
@@ -50,13 +56,35 @@ export class AdminFacade {
   }
   addProduct(payload: ProductInterface) {
     this._actions.dispatch(addProduct({ product: payload }));
-    this.triggerSnackbar();
+    this.triggerAddProductSnackbar();
   }
 
-  triggerSnackbar() {
-    this._snackbar.openFromComponent(UiSnackbarComponent, {
+  deleteProduct(payload: ProductInterface['id']) {
+    this._actions.dispatch(deleteProduct({ id: payload }));
+    this.triggerDeleteProductSnackbar()
+      .afterDismissed()
+      .subscribe(() =>
+        this._router.navigate(['e-commerce-app/admin/dashboard'])
+      );
+  }
+
+  updateProduct(payload: {
+    id: ProductInterface['id'];
+    product: Partial<ProductInterface>;
+  }) {
+    this._actions.dispatch(updateProduct(payload));
+  }
+
+  triggerAddProductSnackbar() {
+    this._snackbar.openFromComponent(UiAddSnackbarComponent, {
       panelClass: 'e-commerce-snackbar',
       duration: 5000,
+    });
+  }
+  triggerDeleteProductSnackbar() {
+    return this._snackbar.openFromComponent(UiDeleteSnackbarComponent, {
+      panelClass: 'e-commerce-snackbar',
+      duration: 3000,
     });
   }
 }

@@ -59,13 +59,13 @@ export class ProductEditComponent implements OnInit {
       .pipe(
         map((product) => {
           this.editedProductForm.setValue({
-            brand: product?.brand,
-            category: product?.category,
-            name: product?.name,
-            price: product?.price,
-            description: product?.description,
-            shipping_information: product?.shipping_information,
-            image: product?.image,
+            brand: product?.brand || null,
+            category: product?.category || null,
+            name: product?.name || null,
+            price: product?.price || null,
+            description: product?.description || null,
+            shipping_information: product?.shipping_information || null,
+            image: product?.image || null,
           });
         })
       )
@@ -82,7 +82,9 @@ export class ProductEditComponent implements OnInit {
       .afterClosed();
 
     confirmDeletion$.subscribe((value) => {
-      if (value === 'Confirm') console.log('PRODUCT ID =>', payload);
+      if (value === 'Confirm') {
+        this._facade.deleteProduct(payload);
+      }
     });
   }
 }
