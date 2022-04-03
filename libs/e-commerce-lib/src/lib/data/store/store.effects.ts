@@ -15,6 +15,7 @@ import {
   loadAllBrands,
   loadAllCategories,
   deleteProduct,
+  updateProduct,
 } from './store.actions';
 
 // Store
@@ -39,22 +40,22 @@ export class StoreEffects {
           trackProductsRequestsStatus('products'),
           map(({ products, error }) => {
             this._repo.loadAllProductsSuccess(products);
-            this._repo.loadAllProductsFailure(error);
+            this._repo.databaseFailure(error);
           }),
 
           tap(() => {
             this._supabaseService.supabase
               .from('products')
               .on('UPDATE', (payload) => {
-                this._repo.updateProductsRT(payload.new.id, payload.new);
+                this._repo.updateProduct(payload.new.id, payload.new);
                 console.log('Product UPDATED =>', payload.new.id, payload.new);
               })
               .on('INSERT', (payload) => {
-                this._repo.addProductsRT(payload.new);
+                this._repo.addProduct(payload.new);
                 console.log('Product ADDED =>', payload.new);
               })
               .on('DELETE', (payload) => {
-                this._repo.deleteProductsRT(payload.old.id);
+                this._repo.deleteProduct(payload.old.id);
                 console.log('Product DELETED =>', payload.old.id);
               })
               .subscribe();
@@ -70,7 +71,7 @@ export class StoreEffects {
       switchMap(({ product }) =>
         from(this._supabaseService.addProduct(product)).pipe(
           trackProductsRequestsStatus('products'),
-          map(({ error }) => this._repo.addProductFailure(error))
+          map(({ error }) => this._repo.databaseFailure(error))
         )
       )
     )
@@ -82,7 +83,19 @@ export class StoreEffects {
       switchMap(({ id }) =>
         from(this._supabaseService.deleteProduct(id)).pipe(
           trackProductsRequestsStatus('products'),
-          map(({ error }) => this._repo.deleteProductFailure(error))
+          map(({ error }) => this._repo.databaseFailure(error))
+        )
+      )
+    )
+  );
+
+  updateProduct$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(updateProduct),
+      switchMap((payload) =>
+        from(this._supabaseService.updateProduct(payload)).pipe(
+          trackProductsRequestsStatus('products'),
+          map(({ error }) => this._repo.databaseFailure(error))
         )
       )
     )

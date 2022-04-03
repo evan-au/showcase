@@ -65,6 +65,21 @@ export class SupabaseService {
     };
   }
 
+  async updateProduct(payload: {
+    id: ProductInterface['id'];
+    product: Partial<ProductInterface>;
+  }) {
+    const { data, error } = await this.supabase
+      .from('products')
+      .update({ ...payload.product })
+      .match({ id: payload.id });
+
+    return {
+      data,
+      error: error as PostgrestError,
+    };
+  }
+
   // Categories
   async getAllCategories() {
     const { data: categories, error } = await this.supabase

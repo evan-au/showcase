@@ -23,6 +23,7 @@ import { StoreRepository } from './store/store.repository';
 import { Router } from '@angular/router';
 import { UiDeleteSnackbarComponent } from '../admin/ui/ui-delete-snackbar/ui-delete-snackbar.component';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { UiUpdateSnackbarComponent } from '../admin/ui/ui-update-snackbar/ui-update-snackbar.component';
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,6 @@ export class AdminFacade {
   // Streams
   allProducts$ = this._repo.allProducts$;
   productsStatusState$ = this._repo.productsStatusState$;
-  errorsStatusState$ = this._repo.errorsStatusState$;
   allBrands$ = this._repo.allBrands$;
   allCategories$ = this._repo.allCategories$;
   isPending$ = this._repo.isPending$;
@@ -73,6 +73,11 @@ export class AdminFacade {
     product: Partial<ProductInterface>;
   }) {
     this._actions.dispatch(updateProduct(payload));
+    this.triggerUpdateProductSnackbar();
+    // .afterDismissed()
+    // .subscribe(() =>
+    //   this._router.navigate(['e-commerce-app/admin/dashboard'])
+    // );
   }
 
   triggerAddProductSnackbar() {
@@ -81,10 +86,18 @@ export class AdminFacade {
       duration: 5000,
     });
   }
+
   triggerDeleteProductSnackbar() {
     return this._snackbar.openFromComponent(UiDeleteSnackbarComponent, {
       panelClass: 'e-commerce-snackbar',
-      duration: 3000,
+      duration: 3500,
+    });
+  }
+
+  triggerUpdateProductSnackbar() {
+    return this._snackbar.openFromComponent(UiUpdateSnackbarComponent, {
+      panelClass: 'e-commerce-snackbar',
+      duration: 3500,
     });
   }
 }

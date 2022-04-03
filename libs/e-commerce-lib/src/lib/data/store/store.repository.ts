@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { distinctUntilChanged, filter, mergeWith, switchMap } from 'rxjs';
+import { distinctUntilChanged, mergeWith, switchMap } from 'rxjs';
 
 // BAAS - Supabase
 import { PostgrestError } from '@supabase/supabase-js';
@@ -85,11 +85,7 @@ export class StoreRepository {
     selectRequestStatus('products'),
     distinctUntilChanged()
   );
-  errorsStatusState$ = store.pipe(
-    selectRequestStatus('products'),
-    filter((state) => state.value === 'error'),
-    distinctUntilChanged()
-  );
+
   isPending$ = store.pipe(
     selectIsRequestPending('products'),
     distinctUntilChanged()
@@ -142,36 +138,28 @@ export class StoreRepository {
     );
   }
 
-  loadAllProductsFailure(error: PostgrestError) {
+  databaseFailure(error: PostgrestError) {
     store.update(updateRequestStatus('products', 'error', error));
   }
 
-  addProductFailure(error: PostgrestError) {
-    store.update(updateRequestStatus('products', 'error', error));
-  }
-
-  // deleteProductSuccess(id: ProductInterface['id']) {
-  //   store.update(updateRequestStatus('products', 'error', error));
-  // }
-  deleteProductFailure(error: PostgrestError) {
-    store.update(updateRequestStatus('products', 'error', error));
-  }
-
-  updateProductsRT(id: ProductInterface['id'], newProduct: ProductInterface) {
+  updateProduct(
+    id: ProductInterface['id'],
+    updatedProduct: Partial<ProductInterface>
+  ) {
     store.update(
-      updateEntities(id, newProduct),
+      updateEntities(id, updatedProduct),
       updateRequestStatus('products', 'success')
     );
   }
 
-  deleteProductsRT(id: ProductInterface['id']) {
+  deleteProduct(id: ProductInterface['id']) {
     store.update(
       deleteEntities(id),
       updateRequestStatus('products', 'success')
     );
   }
 
-  addProductsRT(product: ProductInterface) {
+  addProduct(product: ProductInterface) {
     store.update(
       upsertEntities(product),
       updateRequestStatus('products', 'success')

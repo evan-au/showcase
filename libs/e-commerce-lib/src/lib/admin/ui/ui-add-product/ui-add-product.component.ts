@@ -31,11 +31,11 @@ export class UiAddProductComponent implements OnInit {
     name: ['', Validators.required],
     price: ['', Validators.required],
     description: [
-      'Use this introductory paragraph to set the scene and entice the viewer to explore your range of products. Don’t forget to mention the unique selling point of the product.',
+      'Use this introductory paragraph to set the scene and entice the viewer to explore your range of products.',
       Validators.required,
     ],
     shipping_information: [
-      'Include any specific details about how this item is shipped in this area.',
+      'Include any specific details about how this item is shipped in your area.',
       Validators.required,
     ],
     image: ['', Validators.required],
@@ -58,9 +58,9 @@ export class UiAddProductComponent implements OnInit {
       brand: '',
       category: '',
       description:
-        'Use this introductory paragraph to set the scene and entice the viewer to explore your range of products. Don’t forget to mention the unique selling point of the product.',
+        'Use this introductory paragraph to set the scene and entice the viewer to explore your range of products.',
       shipping_information:
-        'Include any specific details about how this item is shipped in this area. You might make note of the weight or packaging etc.',
+        'Include any specific details about how this item is shipped in your area.',
     });
   }
 }

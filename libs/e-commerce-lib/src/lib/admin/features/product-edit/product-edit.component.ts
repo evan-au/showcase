@@ -72,8 +72,13 @@ export class ProductEditComponent implements OnInit {
       .subscribe();
   }
 
-  saveProduct(payload: ProductInterface['id']) {
-    console.log('PRODUCT ID =>', payload, this.editedProductForm.value);
+  saveProduct(id: ProductInterface['id']) {
+    const payload = {
+      id,
+      product: this.editedProductForm.value as Partial<ProductInterface>,
+    };
+    this._facade.updateProduct(payload);
+    // console.log('SAVE PRODUCT =>', payload);
   }
 
   handleProductDeletion(payload: ProductInterface['id']) {
