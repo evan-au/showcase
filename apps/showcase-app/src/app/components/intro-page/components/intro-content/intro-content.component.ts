@@ -132,6 +132,7 @@ export class IntroContentComponent implements OnInit {
       ease: 'sine.in',
       y: 300,
     });
+
     gsap.from(this.footer.nativeElement, {
       delay: 3,
       duration: 0.5,

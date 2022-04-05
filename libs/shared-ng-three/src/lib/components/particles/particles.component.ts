@@ -4,7 +4,7 @@ import { ThemeService } from '@showcase-ws/utils';
 import { map } from 'rxjs';
 import * as THREE from 'three';
 
-UntilDestroy({ checkProperties: true });
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'shared-ngt-particles',
   templateUrl: './particles.component.html',

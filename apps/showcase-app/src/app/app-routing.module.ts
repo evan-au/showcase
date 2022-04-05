@@ -25,16 +25,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('@showcase-ws/todo-lib').then((m) => m.TodoLibModule),
   },
-  // {
-  //   path: 'chat-app',
-  //   loadChildren: () =>
-  //     import('@showcase-ws/chat-lib').then((m) => m.ChatLibModule),
-  // },
-  // {
-  //   path: 'budget-app',
-  //   loadChildren: () =>
-  //     import('@showcase-ws/budget-lib').then((m) => m.BudgetLibModule),
-  // },
+
   {
     path: '**',
     loadChildren: () =>
