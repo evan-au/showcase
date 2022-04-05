@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "expo-app-evan-pl-angular-dev": {
+      "hosting": {
+        "showcase-app": [
+          "expo-app-evan-pl-angular-dev"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "expo-app-evan-pl-angular-dev"
+  }
+}

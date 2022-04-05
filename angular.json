@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/budget-data"],
+          "outputs": [
+            "dist/libs/budget-data"
+          ],
           "options": {
             "project": "libs/budget-data/ng-package.json"
           },
@@ -25,7 +27,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/budget-data"],
+          "outputs": [
+            "coverage/libs/budget-data"
+          ],
           "options": {
             "jestConfig": "libs/budget-data/jest.config.js",
             "passWithNoTests": true
@@ -51,7 +55,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/budget-lib"],
+          "outputs": [
+            "dist/libs/budget-lib"
+          ],
           "options": {
             "project": "libs/budget-lib/ng-package.json",
             "tailwindConfig": "libs/budget-lib/tailwind.config.js"
@@ -68,7 +74,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/budget-lib"],
+          "outputs": [
+            "coverage/libs/budget-lib"
+          ],
           "options": {
             "jestConfig": "libs/budget-lib/jest.config.js",
             "passWithNoTests": true
@@ -94,7 +102,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/chat-data"],
+          "outputs": [
+            "dist/libs/chat-data"
+          ],
           "options": {
             "project": "libs/chat-data/ng-package.json"
           },
@@ -110,7 +120,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/chat-data"],
+          "outputs": [
+            "coverage/libs/chat-data"
+          ],
           "options": {
             "jestConfig": "libs/chat-data/jest.config.js",
             "passWithNoTests": true
@@ -136,7 +148,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/chat-lib"],
+          "outputs": [
+            "dist/libs/chat-lib"
+          ],
           "options": {
             "project": "libs/chat-lib/ng-package.json",
             "tailwindConfig": "libs/chat-lib/tailwind.config.js"
@@ -153,7 +167,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/chat-lib"],
+          "outputs": [
+            "coverage/libs/chat-lib"
+          ],
           "options": {
             "jestConfig": "libs/chat-lib/jest.config.js",
             "passWithNoTests": true
@@ -179,7 +195,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/e-commerce-data"],
+          "outputs": [
+            "dist/libs/e-commerce-data"
+          ],
           "options": {
             "project": "libs/e-commerce-data/ng-package.json"
           },
@@ -195,7 +213,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-commerce-data"],
+          "outputs": [
+            "coverage/libs/e-commerce-data"
+          ],
           "options": {
             "jestConfig": "libs/e-commerce-data/jest.config.js",
             "passWithNoTests": true
@@ -221,7 +241,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/e-commerce-lib"],
+          "outputs": [
+            "dist/libs/e-commerce-lib"
+          ],
           "options": {
             "project": "libs/e-commerce-lib/ng-package.json",
             "tailwindConfig": "libs/e-commerce-lib/tailwind.config.js"
@@ -238,7 +260,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-commerce-lib"],
+          "outputs": [
+            "coverage/libs/e-commerce-lib"
+          ],
           "options": {
             "jestConfig": "libs/e-commerce-lib/jest.config.js",
             "passWithNoTests": true
@@ -264,7 +288,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/music-player-data"],
+          "outputs": [
+            "dist/libs/music-player-data"
+          ],
           "options": {
             "project": "libs/music-player-data/ng-package.json"
           },
@@ -280,7 +306,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/music-player-data"],
+          "outputs": [
+            "coverage/libs/music-player-data"
+          ],
           "options": {
             "jestConfig": "libs/music-player-data/jest.config.js",
             "passWithNoTests": true
@@ -306,7 +334,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/music-player-lib"],
+          "outputs": [
+            "dist/libs/music-player-lib"
+          ],
           "options": {
             "project": "libs/music-player-lib/ng-package.json",
             "tailwindConfig": "libs/music-player-lib/tailwind.config.js"
@@ -323,7 +353,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/music-player-lib"],
+          "outputs": [
+            "coverage/libs/music-player-lib"
+          ],
           "options": {
             "jestConfig": "libs/music-player-lib/jest.config.js",
             "passWithNoTests": true
@@ -349,7 +381,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/shared-ng-three"],
+          "outputs": [
+            "dist/libs/shared-ng-three"
+          ],
           "options": {
             "project": "libs/shared-ng-three/ng-package.json"
           },
@@ -365,7 +399,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared-ng-three"],
+          "outputs": [
+            "coverage/libs/shared-ng-three"
+          ],
           "options": {
             "jestConfig": "libs/shared-ng-three/jest.config.js",
             "passWithNoTests": true
@@ -391,7 +427,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/shared-ui"],
+          "outputs": [
+            "dist/libs/shared-ui"
+          ],
           "options": {
             "project": "libs/shared-ui/ng-package.json"
           },
@@ -407,7 +445,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared-ui"],
+          "outputs": [
+            "coverage/libs/shared-ui"
+          ],
           "options": {
             "jestConfig": "libs/shared-ui/jest.config.js",
             "passWithNoTests": true
@@ -433,7 +473,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/showcase-app",
             "index": "apps/showcase-app/src/index.html",
@@ -445,12 +487,14 @@
               "apps/showcase-app/src/favicon.ico",
               "apps/showcase-app/src/assets"
             ],
-            "styles": ["apps/showcase-app/src/styles.scss"],
+            "styles": [
+              "apps/showcase-app/src/styles.scss"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "opentype.js", "websocket"
-           ]
-            
+              "opentype.js",
+              "websocket"
+            ]
           },
           "configurations": {
             "production": {
@@ -518,10 +562,22 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/showcase-app"],
+          "outputs": [
+            "coverage/apps/showcase-app"
+          ],
           "options": {
             "jestConfig": "apps/showcase-app/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "showcase-app:build:production",
+            "firebaseProject": "expo-app-evan-pl-angular-dev",
+            "firebaseHostingSite": "expo-app-evan-pl-angular-dev"
           }
         }
       },
@@ -546,14 +602,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/showcase-app-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/showcase-app-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["showcase-app"]
+      "implicitDependencies": [
+        "showcase-app"
+      ]
     },
     "spotify-nestjs-app": {
       "root": "apps/spotify-nestjs-app",
@@ -562,12 +624,16 @@
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/spotify-nestjs-app",
             "main": "apps/spotify-nestjs-app/src/main.ts",
             "tsConfig": "apps/spotify-nestjs-app/tsconfig.app.json",
-            "assets": ["apps/spotify-nestjs-app/src/assets"]
+            "assets": [
+              "apps/spotify-nestjs-app/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -591,14 +657,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/spotify-nestjs-app/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/spotify-nestjs-app/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/spotify-nestjs-app"],
+          "outputs": [
+            "coverage/apps/spotify-nestjs-app"
+          ],
           "options": {
             "jestConfig": "apps/spotify-nestjs-app/jest.config.js",
             "passWithNoTests": true
@@ -615,7 +687,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/todo-lib"],
+          "outputs": [
+            "dist/libs/todo-lib"
+          ],
           "options": {
             "project": "libs/todo-lib/ng-package.json",
             "tailwindConfig": "libs/todo-lib/tailwind.config.js"
@@ -632,7 +706,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/todo-lib"],
+          "outputs": [
+            "coverage/libs/todo-lib"
+          ],
           "options": {
             "jestConfig": "libs/todo-lib/jest.config.js",
             "passWithNoTests": true
@@ -658,7 +734,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/utils"],
+          "outputs": [
+            "dist/libs/utils"
+          ],
           "options": {
             "project": "libs/utils/ng-package.json"
           },
@@ -674,7 +752,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/utils"],
+          "outputs": [
+            "coverage/libs/utils"
+          ],
           "options": {
             "jestConfig": "libs/utils/jest.config.js",
             "passWithNoTests": true
