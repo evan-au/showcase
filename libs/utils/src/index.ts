@@ -25,3 +25,6 @@ export * from './lib/animations/custom-empty-list.animation';
 export * from './lib/helpers/random-numbers';
 export * from './lib/helpers/random-hex-color';
 export * from './lib/helpers/get-portion-of-day';
+
+// Pipes
+export * from './lib/pipes/character-slicer.pipe';

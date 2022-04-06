@@ -8,7 +8,7 @@
     <mat-drawer
       [opened]="!isViewOnMobile"
       #drawer
-      class="w-full lg:w-1/5 p-8"
+      class="client-drawer w-full lg:w-1/5 p-8"
       [mode]="isViewOnMobile ? 'over' : 'side'"
     >
       <section class="h-full flex flex-col gap-6 mx-4 lg:mr-2">
@@ -79,7 +79,7 @@
       </section>
     </mat-drawer>
 
-    <section class="h-full flex flex-col">
+    <section class="client-content h-full flex flex-col">
       <div class="p-2">
         <button mat-icon-button (click)="drawer.toggle()">
           <ng-container *ngIf="!drawer.opened; else showChevronIcon">

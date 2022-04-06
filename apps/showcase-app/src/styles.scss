@@ -114,3 +114,62 @@ html,
     border-radius: 50%;
   }
 }
+
+.mat-drawer-container {
+  @apply bg-gray-200 text-dark;
+}
+
+.mat-drawer-over {
+  @apply bg-gray-200 text-dark;
+}
+
+.mat-drawer-side {
+  @apply lg:mt-10 bg-gray-200 text-dark;
+}
+
+// Bucket client
+@layer components {
+  .auth-input {
+    @apply text-dark rounded-sm py-1 lg:text-lg lg:h-10 px-2 bg-light focus:outline-e-com-accent;
+  }
+
+  .view-menu {
+    @apply hover:bg-accent;
+  }
+  .view-dispatch {
+    @apply hover:bg-green-400;
+  }
+  .view-cancel {
+    @apply hover:bg-red-400;
+  }
+}
+
+// Bucket admin
+@layer components {
+  .add-text-input {
+    @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-80 focus:outline-dark transition-colors duration-300 lg:h-10 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-80 lg:bg-transparent;
+  }
+
+  .add-select {
+    @apply text-dark rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-80 focus:outline-dark lg:text-lg lg:h-10;
+  }
+
+  textarea {
+    @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-80 focus:outline-dark transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-80 lg:bg-transparent;
+  }
+
+  .edit-select {
+    @apply text-light rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light lg:text-lg lg:h-10;
+  }
+
+  .edit-text-input {
+    @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:h-10 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+  }
+
+  .edit-number-input {
+    @apply w-2/5 rounded-sm py-1 px-2 text-lg bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:h-10 lg:bg-transparent;
+  }
+  // textarea {
+  //   @apply w-full rounded-sm py-1 px-2 bg-e-com-secondary-variant bg-opacity-20 focus:outline-light transition-colors duration-300 lg:hover:bg-e-com-secondary-variant lg:hover:bg-opacity-20 lg:bg-transparent;
+  // }
+}
