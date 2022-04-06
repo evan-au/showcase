@@ -2,7 +2,7 @@
 
 Welcome to the Expo App.
 
-[Link to live app](https://nx.dev/getting-started/intro)
+[Live demo](https://expo-app-evan-pl-angular-dev.web.app/)
 
 ## Project purpose
 
@@ -17,9 +17,9 @@ I am currently seeking exciting adventures and opportunities in the frontend dev
 
 Useful links:
 
-[Personal flyer](https://nx.dev/angular)
+[Personal flyer](https://evan-pierrelouis.web.app)
 
-[Expo application](https://nx.dev/getting-started/intro)
+[Expo application](https://expo-app-evan-pl-angular-dev.web.app/)
 
 ## Build system
 
