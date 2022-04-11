@@ -48,15 +48,12 @@ export class StoreEffects {
               .from('products')
               .on('UPDATE', (payload) => {
                 this._repo.updateProduct(payload.new.id, payload.new);
-                console.log('Product UPDATED =>', payload.new.id, payload.new);
               })
               .on('INSERT', (payload) => {
                 this._repo.addProduct(payload.new);
-                console.log('Product ADDED =>', payload.new);
               })
               .on('DELETE', (payload) => {
                 this._repo.deleteProduct(payload.old.id);
-                console.log('Product DELETED =>', payload.old.id);
               })
               .subscribe();
           })
